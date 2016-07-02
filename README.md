@@ -20,5 +20,5 @@ with [node][node] and [browserify][browserify].
 
 ## License
 
-Copyright &copy; Maciej Chałapuk. Released under [MIT License](LICENSE).
+Copyright &copy; Maciej Chałapuk. Released under [MIT license](LICENSE).
 
