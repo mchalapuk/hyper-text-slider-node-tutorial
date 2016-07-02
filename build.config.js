@@ -1,8 +1,22 @@
 'use strict';
 
+/**
+ * This project is written in the spirit of literate programming.
+ */
 var dir = {
+  /**
+   * Documentation is handwritten.
+   */
   doc: 'doc/',
+
+  /**
+   * Sources are generated from the documentation.
+   */
   src: 'src/',
+
+  /**
+   * Vanilla HTML, CSS and JavaScript are built from sources.
+   */
   build: 'dist/',
 };
 
