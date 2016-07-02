@@ -20,7 +20,7 @@
     "url": "https://github.com/webfront-toolkit/hermes"
   },
   "author": "Maciej Chałapuk",
-  "license": "Apache-2.0",
+  "license": "MIT",
   "devDependencies": {
     "del": "~2.2.1",
     "fixme": "^0.4.0",
