@@ -5,7 +5,7 @@
 [david-image-dev]: https://david-dm.org/webfront-toolkit/hermes-node-example/dev-status.svg
 [david-url-dev]: https://david-dm.org/webfront-toolkit/hermes-node-example#info=devDependencies
 
-# [Hermes][hermes] Node Example
+# [Hermes][hermes] [Node][node] Example
 
 [![Build Status][travis-image]][travis-url]
 [![Dependency Status][david-image]][david-url]
