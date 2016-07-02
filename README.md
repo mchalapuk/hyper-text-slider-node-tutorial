@@ -7,11 +7,11 @@
 
 # [Hermes][hermes] Node Example
 
-[![Build Status][hermes-image]][hermes-url]
+[![Build Status][travis-image]][travis-url]
 [![Dependency Status][david-image]][david-url]
 [![devDependency Status][david-image-dev]][david-url-dev]
 
-A tutorial and an example project of using [Hermes Slider][hermes]
+A tutorial and an example project of using [hermes slider][hermes]
 with [node][node] and [browserify][browserify].
 
 [hermes]: https://github.com/webfront-toolkit/hermes
