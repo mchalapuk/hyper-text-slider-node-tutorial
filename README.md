@@ -1,5 +1,5 @@
 [travis-image]: https://travis-ci.org/webfront-toolkit/hermes-node-example.svg?branch=master
-[travis-url]: https://travis-ci.org/webfront-toolkit/hermes
+[travis-url]: https://travis-ci.org/webfront-toolkit/hermes-node-example
 [david-image]: https://david-dm.org/webfront-toolkit/hermes-node-example.svg
 [david-url]: https://david-dm.org/webfront-toolkit/hermes-node-example
 [david-image-dev]: https://david-dm.org/webfront-toolkit/hermes-node-example/dev-status.svg
