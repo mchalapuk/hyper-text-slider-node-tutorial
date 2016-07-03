@@ -2,7 +2,7 @@
 [setup]: 1_setup.sh.md
 [dir-structure]: 1_setup.sh.md#11-directory-structure
 
-
+[Home][home] &nbsp;&lt;&nbsp; Previous Page<br>
 
 # 0. Introduction
 
@@ -28,3 +28,6 @@ Following tools will be used throughout the project:
 [sass]: https://github.com/sass/sass
 [css]: https://developer.mozilla.org/en-US/docs/Web/CSS
 [hermes]: https://github.com/webfront-toolkit/hermes
+
+&nbsp;<br>
+Next Page &nbsp;&gt;&nbsp; [1. Project Setup][setup]
