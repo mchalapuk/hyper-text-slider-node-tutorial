@@ -22,7 +22,8 @@ var dir = {
 
 var files = {
   config: [
-    'build.config.js',
+    '.writ.config.js',
+    '.writ.gulpfile.js',
     'gulpfile.js',
   ],
   doc: [

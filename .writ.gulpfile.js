@@ -10,7 +10,7 @@ var fixme = require('fixme');
 var del = require('del');
 var _ = require('underscore');
 
-var config = require('./build.config');
+var config = require('./.writ.config');
 
 gulp.task('clean', function(callback) {
   return del([
