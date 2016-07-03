@@ -18,6 +18,16 @@ with [node][node] and [browserify][browserify].
 [node]: https://nodejs.org/
 [browserify]: https://github.com/substack/node-browserify
 
+**Table of Contents**
+
+ 0. [Introdution][introduction]
+ 1. [Project Setup][setup]
+ 2. [Build Configuration][build]
+
+[introduction]: doc/0_introduction.markdown
+[setup]: doc/1_setup.sh.md
+[build-config]: doc/2_gulpfile.js.md
+
 ## License
 
 Copyright &copy; Maciej Chałapuk. Released under [MIT license](LICENSE).
