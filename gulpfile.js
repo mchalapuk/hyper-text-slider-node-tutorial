@@ -3,80 +3,14 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var writ = require('gulp-writ');
-var sass = require('gulp-sass');
 var eslint = require('gulp-eslint');
 var stylelint = require('gulp-stylelint');
-var browserify = require('gulp-browserify');
-var jasmine = require('gulp-jasmine');
 var connect = require('gulp-connect');
-var sequence = require('gulp-sequence');
 var fixme = require('fixme');
 var del = require('del');
 var _ = require('underscore');
 
 var config = require('./build.config');
-
-gulp.task('lint:config', function() {
-  return gulp.src(config.files.config)
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError())
-  ;
-});
-
-gulp.task('generate:code', function() {
-  return gulp.src(config.files.doc)
-    .pipe(writ().on('error', gutil.log))
-    .pipe(gulp.dest(config.dir.src))
-  ;
-});
-
-gulp.task('lint:sass', function() {
-  return gulp.src(config.files.css)
-    .pipe(stylelint({
-      reporters: [ { formatter: 'string', console: true } ],
-    }))
-  ;
-});
-
-gulp.task('sass', [ 'lint:sass' ], function() {
-  return gulp.src(config.files.css)
-    .pipe(sass.sync().on('error', sass.logError))
-    .pipe(gulp.dest(config.dir.build))
-  ;
-});
-
-gulp.task('lint:javascript', function() {
-  return gulp.src(config.files.js)
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError())
-  ;
-});
-
-gulp.task('javascript', [ 'lint:javascript' ], function() {
-  return gulp.src(config.files.js)
-    .pipe(browserify())
-    .pipe(gulp.dest(config.dir.build))
-  ;
-});
-
-gulp.task('lint:spec', function() {
-  return gulp.src(config.files.spec)
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError())
-  ;
-});
-
-gulp.task('spec', [ 'lint:spec' ], function() {
-  return gulp.src(config.files.spec)
-    .pipe(jasmine({
-      // verbose: true,
-      includeStackTrace: true,
-    }))
-  ;
-});
 
 gulp.task('clean', function(callback) {
   return del([
@@ -90,14 +24,47 @@ gulp.task('clean', function(callback) {
   ;
 });
 
-gulp.task('dist', [ 'clean' ], sequence('generate:code', 'sass', 'spec', 'javascript'));
+gulp.task('generate', [ 'clean' ], function() {
+  return gulp.src(config.files.doc)
+    .pipe(writ().on('error', gutil.log))
+    .pipe(gulp.dest(config.dir.src))
+  ;
+});
+
+gulp.task('lint:config', function() {
+  return gulp.src(config.files.config)
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError())
+  ;
+});
+
+gulp.task('lint:sass', function() {
+  return gulp.src(config.files.css)
+    .pipe(stylelint({
+      reporters: [ { formatter: 'string', console: true } ],
+    }))
+  ;
+});
+
+gulp.task('lint:javascript', function() {
+  return gulp.src(config.files.js)
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError())
+  ;
+});
+
+gulp.task('lint', [ 'lint:config', 'lint:sass', 'lint:javascript' ]);
+
+gulp.task('default', [ 'generate' ], function() {
+  return gulp.start('lint').on('task_stop', gutil.noop);
+});
 
 gulp.task('fixme', _.partial(fixme, {
   file_patterns: [ '**/*.js', '**/*.scss' ],
   ignored_directories: [ 'node_modules/**', '.git/**', 'dist/**' ],
 }));
-
-gulp.task('default', [ 'lint:config', 'dist' ]);
 
 gulp.task('watch', [ 'default' ], function() {
   gulp.watch(config.files.config, [ 'lint:config' ]);
