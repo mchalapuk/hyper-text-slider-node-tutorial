@@ -1,4 +1,8 @@
-[dir-structure]: doc/1_setup.sh.md#11-directory-structure
+[home]: /../..
+[setup]: 1_setup.sh.md
+[dir-structure]: 1_setup.sh.md#11-directory-structure
+
+
 
 # 0. Introduction
 
