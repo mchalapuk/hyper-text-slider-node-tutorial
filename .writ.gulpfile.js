@@ -3,6 +3,7 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var writ = require('gulp-writ');
+var rename = require('gulp-rename2');
 var eslint = require('gulp-eslint');
 var stylelint = require('gulp-stylelint');
 var connect = require('gulp-connect');
@@ -27,6 +28,9 @@ gulp.task('clean', function(callback) {
 gulp.task('generate', [ 'clean' ], function() {
   return gulp.src(config.files.doc)
     .pipe(writ().on('error', gutil.log))
+    .pipe(rename(function(pathObj, filePath) {
+      return pathObj.dirname(filePath) +'/'+ pathObj.basename(filePath).replace(/^[0-9]+_/, '');
+    }))
     .pipe(gulp.dest(config.dir.src))
   ;
 });
