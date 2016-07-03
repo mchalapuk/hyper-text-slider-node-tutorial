@@ -2,14 +2,14 @@
 
 [setup]: 1_setup.sh.md
 
-# Build Configuration
+# 2. Build Configuration
 
-By default, [gulp][gulp] searches for `Gulpfile.js` from which it reads task
+By default, [gulp][gulp] searches for `gulpfile.js` from which it reads task
 definitions for the build.
 
 [gulp]: https://github.com/gulpjs/gulp
 
-## Gulpfile.js
+## 2.1 gulpfile.js
 
 By convention, all node files should contain require calls at the top. We need
 gulp for IO and to create task definitions, and plugins for
