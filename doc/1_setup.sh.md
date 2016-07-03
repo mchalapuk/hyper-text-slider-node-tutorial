@@ -21,7 +21,8 @@ npm init
 
 # Get the goodies
 npm install gulp --save-dev
-npm install gulp-browserify --save-dev
+npm install gulp-util --save-dev
+npm install browserify --save-dev
 npm install gulp-sass --save-dev
 npm install hermes-slider --save-dev
 ```
@@ -29,8 +30,7 @@ npm install hermes-slider --save-dev
 Properly configured gulp (more on that later) will invoke browserify to compile
 JavaScript sources (which uses node modules) and sass module to compile
 Sass sources. Compilation will produce JavaScript and CSS code that can be run
-in a web browser. As we are using gulp, gulp plugins for sass and browserify
-are used instead of their original packages.
+in a web browser.
 
 ## 1.2. Directory structure
 
@@ -45,3 +45,8 @@ Project consists of following folders:
 # Create project folders.
 mkdir src dist
 ```
+
+Next Page &nbsp;&gt;&nbsp; [2. Build Configuration][gulpfile]
+
+[gulpfile]: 2_gulpfile.js.md
+
