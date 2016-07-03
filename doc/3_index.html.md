@@ -31,8 +31,8 @@ Normal structure of a web page. Nothing fancy here...
 
 ## 3.2 Body
 
-Declaration of a slider is an element with class name
-[`hermes-layout--slider`][layout-slider].
+Declaration of a slider is an element with
+[`hermes-layout--slider`][layout-slider] class name.
 [Transition class name][transition-class] present on the slider element tells
 the slider which transition to use as default (if transition isn't specified
 on slide element).
@@ -56,6 +56,8 @@ consult [Hermes' Declarative API][css-api] for details).
 
 Each slide must have [hermes-layout--slide][layout-slide] class name.
 Contents of the slide is just any HTML.
+
+[layout-slide]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md#hermes-layout--slide
 
 ```html
 //== slides ==//
