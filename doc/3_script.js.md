@@ -2,7 +2,7 @@
 
 [build-config]: 2_gulpfile.js.md
 
-# JavaScript Module
+# 3. JavaScript Module
 
 [Hermes' scripting API][js-api] is quite rich, but all we need is upgrading a
 slider, which will be declared on out web page.
