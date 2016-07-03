@@ -1,23 +1,5 @@
 # 1. Project Setup
 
-Things used in this tutorial:
-
- * [bash][bash] as system shell,
- * [npm][npm] for dependency management,
- * [gulp][gulp] as a build system,
- * [browserify][browserify] to make [node][node] modules work in the browser,
- * [sass][sass] as a preprocessor for [css][css],
- * [hermes][hermes] to implement a slideshow on a webpage.
-
-[bash]: https://en.wikipedia.org/wiki/Bash_(Unix_shell)
-[npm]: https://docs.npmjs.com/getting-started/what-is-npm
-[gulp]: https://github.com/gulpjs/gulp
-[browserify]: https://github.com/substack/node-browserify
-[node]: https://nodejs.org/en/
-[sass]: https://github.com/sass/sass
-[css]: https://developer.mozilla.org/en-US/docs/Web/CSS
-[hermes]: https://github.com/webfront-toolkit/hermes
-
 ## 1.1. Directory structure
 
 Project consists of following folders:
