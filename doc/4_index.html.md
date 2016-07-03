@@ -86,3 +86,8 @@ but page may render a little faster this way.
   </script>
 ```
 
+&nbsp;<br>
+Next Page &nbsp;&gt;&nbsp; [5. Stylesheet][stylesheet]
+
+[stylesheet]: 5_style.scss.md
+

@@ -25,12 +25,14 @@ with [node][node] and [browserify][browserify].
 &nbsp; `2` [Build Configuration][build-config]<br>
 &nbsp; `3` [JavaScript Module][js-module]<br>
 &nbsp; `4` [HTML Page][html-page]<br>
+&nbsp; `5` [Stylesheet][stylesheet]<br>
 
 [introduction]: doc/0_introduction.markdown
 [setup]: doc/1_setup.sh.md
 [build-config]: doc/2_gulpfile.js.md
 [js-module]: doc/3_script.js.md
 [html-page]: doc/4_index.html.md
+[stylesheet]: doc/5_style.scss.md
 
 ## License
 
