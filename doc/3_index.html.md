@@ -29,7 +29,7 @@ Normal structure of a web page. Nothing fancy here...
   <link href=style.css rel=stylesheet type=text/css>
 ```
 
-## 3.2 Body
+## 3.2. Body
 
 Declaration of a slider is an element with
 [`hermes-layout--slider`][layout-slider] class name.

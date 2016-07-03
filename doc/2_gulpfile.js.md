@@ -9,7 +9,7 @@ definitions for the build.
 
 [gulp]: https://github.com/gulpjs/gulp
 
-## 2.1 gulpfile.js
+## 2.1. gulpfile.js
 
 By convention, all node files should contain require calls at the top. We need
 gulp for IO and to create task definitions, and plugins for
