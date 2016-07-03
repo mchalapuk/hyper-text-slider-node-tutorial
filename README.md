@@ -23,10 +23,12 @@ with [node][node] and [browserify][browserify].
 &nbsp; `0` [Introdution][introduction]<br>
 &nbsp; `1` [Project Setup][setup]<br>
 &nbsp; `2` [Build Configuration][build-config]<br>
+&nbsp; `3` [HTML Page][html.page]<br>
 
 [introduction]: doc/0_introduction.markdown
 [setup]: doc/1_setup.sh.md
 [build-config]: doc/2_gulpfile.js.md
+[html-page]: doc/3_index.html.md
 
 ## License
 

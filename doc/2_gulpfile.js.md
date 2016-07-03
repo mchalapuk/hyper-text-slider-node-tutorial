@@ -71,3 +71,7 @@ Lastly, a default gulp task will connect everything.
 gulp.task('default', [ 'html', 'css', 'javascript' ]);
 ```
 
+Next Page &nbsp;&gt;&nbsp; [3. HTML Page][html-page]
+
+[html-page]: 3_index.html.md
+
