@@ -1,3 +1,7 @@
+[0. Introduction][introduction] &nbsp;&lt;&nbsp; Previous Page
+
+[introduction]: 0_introduction.markdown
+
 # 1. Project Setup
 
 ## 1.1. Directory structure
@@ -18,6 +22,12 @@ mkdir src dist
 
 Use [npm][npm] to get [gulp][gulp], [browserify][browserify], [sass][sass],
 and [hermes][hermes].
+
+[npm]: https://docs.npmjs.com/getting-started/what-is-npm
+[gulp]: https://github.com/gulpjs/gulp
+[browserify]: https://github.com/substack/node-browserify
+[sass]: https://github.com/sass/sass
+[hermes]: https://github.com/webfront-toolkit/hermes
 
 ```sh
 # Initialize the project, if you haven't done that already.
