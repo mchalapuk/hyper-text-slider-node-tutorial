@@ -1,15 +1,13 @@
-[home]: /../..
-[setup]: 1_setup.sh.md
-[dir-structure]: 1_setup.sh.md#11-directory-structure
-
 [Home][home] &nbsp;&lt;&nbsp; Previous Page<br>
+
+[home]: /../..
 
 # 0. Introduction
 
 This is a tutorial on using [hermes][hermes] via [node][node] and [browserify][browserify].
 Source code examples used in here make up a complete project of a single webpage containing
 a nice slideshow. All examples were extracted from the tutorial to provide executable form
-of the project (check out [Directory Structure][dir-structure] for details).
+of the project (check out [1. Project Setup][setup] for details).
 
 Following tools will be used throughout the project:
 
@@ -31,3 +29,5 @@ Following tools will be used throughout the project:
 
 &nbsp;<br>
 Next Page &nbsp;&gt;&nbsp; [1. Project Setup][setup]
+
+[setup]: 1_setup.sh.md

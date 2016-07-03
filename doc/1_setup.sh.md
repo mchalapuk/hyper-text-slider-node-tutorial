@@ -4,23 +4,9 @@
 
 # 1. Project Setup
 
-## 1.1. Directory structure
+## 1.1. Dependencies
 
-Project consists of following folders:
-
- * `src` - containing executable form of source code presented in this
-   tutorial (input files for gulp build).
- * `dist` - containing compiled vanilla HTML, CSS and JavaScript, which can be
-  run in a web browser (output files).
-
-```sh
-# Create project folders.
-mkdir src dist
-```
-
-## 1.2. Dependencies
-
-Use [npm][npm] to get [gulp][gulp], [browserify][browserify], [sass][sass],
+Use [npm][npm] to install [gulp][gulp], [browserify][browserify], [sass][sass],
 and [hermes][hermes].
 
 [npm]: https://docs.npmjs.com/getting-started/what-is-npm
@@ -40,6 +26,22 @@ npm install gulp-sass --save-dev
 npm install hermes-slider --save-dev
 ```
 
-Dependencies are installed for development, because they will be used only
-during gulp build, not during runtime in the browser.
+Properly configured gulp (more on that later) will invoke browserify to compile
+JavaScript sources (which uses node modules) and sass module to compile
+Sass sources. Compilation will produce JavaScript and CSS code that can be run
+in a web browser. As we are using gulp, gulp plugins for sass and browserify
+are used instead of their original packages.
 
+## 1.2. Directory structure
+
+Project consists of following folders:
+
+ * `src` - containing source code presented in this tutorial (input files
+  for [gulp][gulp]).
+ * `dist` - containing vanilla HTML, CSS and JavaScript, which can be
+  run in a web browser (gulp output files).
+
+```sh
+# Create project folders.
+mkdir src dist
+```
