@@ -4,12 +4,12 @@
 
 # JavaScript Module
 
-[Hermes scriptiong API][js-api] is quite rich, but all we need is to upgrade a
-slider declared on the page.
+[Hermes' scripting API][js-api] is quite rich, but all we need is upgrading a
+slider, which will be declared on out web page.
 
 [js-api]: https://github.com/webfront-toolkit/hermes/blob/master/doc/javascript-api.md
 
-The script will just load [hermes][hermes] module...
+Our script will just load [hermes][hermes] module...
 
 [hermes]: https://github.com/webfront-toolkit/hermes
 
@@ -17,7 +17,9 @@ The script will just load [hermes][hermes] module...
 var hermes = require('hermes-slider');
 ```
 
-... and call [hermes.boot(containerElement)][boot] after page loads.
+... and call [boot function][boot] after page loads.
+
+[boot]: https://github.com/webfront-toolkit/hermes/blob/master/doc/javascript-api.md#bootcontainerelement
 
 ```js
 window.addEventListener('load', function() {
@@ -25,10 +27,8 @@ window.addEventListener('load', function() {
 });
 ```
 
-Thats it.
-
 &nbsp;<br>
 Next Page &nbsp;&gt;&nbsp; [4. HTML Page][html-page]
 
-[html-page]: 3_index.html.md
+[html-page]: 4_index.html.md
 
