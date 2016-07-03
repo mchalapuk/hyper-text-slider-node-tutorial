@@ -1,8 +1,8 @@
-[2. Build Configuration][build-config] &nbsp;&lt;&nbsp; Previous Page
+[3. JavaScript Module][js-module] &nbsp;&lt;&nbsp; Previous Page
 
-[build-config]: 2_gulpfile.js.md
+[js-module]: 3_script.js.md
 
-# 3. HTML Page
+# 4. HTML Page
 
 Normal structure of a web page. Nothing fancy here...
 
@@ -19,7 +19,7 @@ Normal structure of a web page. Nothing fancy here...
 </html>
 ```
 
-## 3.1. Head
+## 4.1. Head
 
 `<head>` section contains a link to `style.css` file.
 
@@ -29,7 +29,7 @@ Normal structure of a web page. Nothing fancy here...
   <link href=style.css rel=stylesheet type=text/css>
 ```
 
-## 3.2. Body
+## 4.2. Body
 
 Declaration of a slider is an element with
 [`hermes-layout--slider`][layout-slider] class name.
