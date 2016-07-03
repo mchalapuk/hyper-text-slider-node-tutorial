@@ -1,21 +1,22 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var browserify = require('browserify');
+var source = require('vinyl-source-stream');
 var sass = require('gulp-sass');
-gulp.task('javascript', function() {
-  gulp.src([ 'src/script.js' ])
-      .pipe(browserify().bundle().on('error', gutil.log))
+gulp.task('html', function() {
+  gulp.src([ 'src/index.html' ])
       .pipe(gulp.dest('dist/'))
   ;
 });
 gulp.task('css', function() {
-  gulp.src([ 'src/style.sass' ])
+  gulp.src([ 'src/style.scss' ])
       .pipe(sass.sync().on('error', sass.logError))
       .pipe(gulp.dest('dist/'))
   ;
 });
-gulp.task('html', function() {
-  gulp.src([ 'src/index.html' ])
+gulp.task('javascript', function() {
+  browserify('src/script.js').bundle()
+      .pipe(source('script.js', './src').on('error', gutil.log))
       .pipe(gulp.dest('dist/'))
   ;
 });

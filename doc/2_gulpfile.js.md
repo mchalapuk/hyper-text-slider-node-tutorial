@@ -22,6 +22,7 @@ gulp for IO and to create task definitions, and plugins for
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var browserify = require('browserify');
+var source = require('vinyl-source-stream');
 var sass = require('gulp-sass');
 ```
 
@@ -36,8 +37,8 @@ which can be executed in a browser.
 
 ```js
 gulp.task('javascript', function() {
-  gulp.src([ 'src/script.js' ])
-      .pipe(browserify().bundle().on('error', gutil.log))
+  browserify('src/script.js').bundle()
+      .pipe(source('script.js', './src').on('error', gutil.log))
       .pipe(gulp.dest('dist/'))
   ;
 });
@@ -47,7 +48,7 @@ Piping Sass sources to sass plugin will produce browser-readable CSS.
 
 ```js
 gulp.task('css', function() {
-  gulp.src([ 'src/style.sass' ])
+  gulp.src([ 'src/style.scss' ])
       .pipe(sass.sync().on('error', sass.logError))
       .pipe(gulp.dest('dist/'))
   ;
