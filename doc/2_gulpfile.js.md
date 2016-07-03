@@ -12,7 +12,7 @@ definitions for the build.
 ## 2.1. gulpfile.js
 
 By convention, all node files should contain require calls at the top. We need
-gulp for IO and to create task definitions, and plugins for
+gulp for IO and to create task definitions, and gulp for
 [browserify][browserify] and [sass][sass].
 
 [browserify]: https://github.com/substack/node-browserify
@@ -32,29 +32,6 @@ sourcecode, which gets transformed by gulp plugins.
 
 [pipeline]: https://en.wikipedia.org/wiki/Pipeline_(software)
 
-Piping JavaScript sources to browserify plugin will produce vanilla JavaScript
-which can be executed in a browser.
-
-```js
-gulp.task('javascript', function() {
-  browserify('src/script.js').bundle()
-      .pipe(source('script.js', './src').on('error', gutil.log))
-      .pipe(gulp.dest('dist/'))
-  ;
-});
-```
-
-Piping Sass sources to sass plugin will produce browser-readable CSS.
-
-```js
-gulp.task('css', function() {
-  gulp.src([ 'src/style.scss' ])
-      .pipe(sass.sync().on('error', sass.logError))
-      .pipe(gulp.dest('dist/'))
-  ;
-});
-```
-
 No transformation is needed for HTML sources, as it will be plain HTML. It will
 only be copied into build folder.
 
@@ -65,8 +42,38 @@ gulp.task('html', function() {
   ;
 });
 ```
+Piping Sass sources to sass plugin will produce browser-readable CSS. Pretty
+straight forward.
 
-Lastly, a default gulp task will connect everything.
+```js
+gulp.task('css', function() {
+  gulp.src([ 'src/style.scss' ])
+      .pipe(sass.sync().on('error', sass.logError))
+      .pipe(gulp.dest('dist/'))
+  ;
+});
+```
+
+Browserify is not a gulp plugin, so using it is a bit tricky. Browserify's
+[bundle method][browserify-bundle] returns compiled JavaScript in form of
+a simple text stream. [vinyl-source-stream][vinyl-source-stream] plugin
+consumes this text stream and makes an gulp-compatible vinyl stream out of its
+content. File name must be provided twice. First time for the browserify,
+second time to create vinyl object.
+
+[browserify-bundle]: https://github.com/substack/node-browserify#bbundlecb
+[vinyl-source-stream]: https://github.com/hughsk/vinyl-source-stream
+
+```js
+gulp.task('javascript', function() {
+  browserify('src/script.js').bundle()
+      .pipe(source('script.js', './src').on('error', gutil.log))
+      .pipe(gulp.dest('dist/'))
+  ;
+});
+```
+
+Lastly, a default gulp task that connects everything.
 
 ```js
 gulp.task('default', [ 'html', 'css', 'javascript' ]);
