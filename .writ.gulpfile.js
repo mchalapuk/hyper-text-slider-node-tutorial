@@ -29,7 +29,12 @@ gulp.task('generate', [ 'clean' ], function() {
   return gulp.src(config.files.doc)
     .pipe(writ().on('error', gutil.log))
     .pipe(rename(function(pathObj, filePath) {
-      return pathObj.dirname(filePath) +'/'+ pathObj.basename(filePath).replace(/^[0-9]+_/, '');
+      var basename = pathObj.basename(filePath).replace(/^[0-9]+_/, '');
+      var nobase = config.files.config.concat(config.files.setup);
+      if (nobase.indexOf(basename) !== -1) {
+        return basename;
+      }
+      return pathObj.dirname(filePath) +'/'+ basename;
     }))
     .pipe(gulp.dest(config.dir.src))
   ;

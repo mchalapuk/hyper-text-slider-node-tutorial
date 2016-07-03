@@ -21,6 +21,9 @@ var dir = {
 };
 
 var files = {
+  setup: [
+    'setup.sh',
+  ],
   config: [
     '.writ.config.js',
     '.writ.gulpfile.js',
