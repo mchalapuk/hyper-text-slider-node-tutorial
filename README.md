@@ -20,9 +20,9 @@ with [node][node] and [browserify][browserify].
 
 **Table of Contents**
 
-&nbsp; [0. Introdution][introduction]<br>
-&nbsp; [1. Project Setup][setup]<br>
-&nbsp; [2. Build Configuration][build-config]<br>
+&nbsp; `0` [Introdution][introduction]<br>
+&nbsp; `1` [Project Setup][setup]<br>
+&nbsp; `2` [Build Configuration][build-config]<br>
 
 [introduction]: doc/0_introduction.markdown
 [setup]: doc/1_setup.sh.md
