@@ -20,12 +20,12 @@ with [node][node] and [browserify][browserify].
 
 **Table of Contents**
 
-&nbsp; `0` [Introdution][introduction]<br>
-&nbsp; `1` [Project Setup][setup]<br>
-&nbsp; `2` [Build Configuration][build-config]<br>
-&nbsp; `3` [JavaScript Module][js-module]<br>
-&nbsp; `4` [HTML Page][html-page]<br>
-&nbsp; `5` [Stylesheet][stylesheet]<br>
+&nbsp; `0`&nbsp; [Introdution][introduction]<br>
+&nbsp; `1`&nbsp; [Project Setup][setup]<br>
+&nbsp; `2`&nbsp; [Build Configuration][build-config]<br>
+&nbsp; `3`&nbsp; [JavaScript Module][js-module]<br>
+&nbsp; `4`&nbsp; [HTML Page][html-page]<br>
+&nbsp; `5`&nbsp; [Stylesheet][stylesheet]<br>
 
 [introduction]: doc/0_introduction.markdown
 [setup]: doc/1_setup.sh.md
