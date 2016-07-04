@@ -36,7 +36,7 @@ objects may be filtered etc.).
 [pipeline]: https://en.wikipedia.org/wiki/Pipeline_(software)
 [vinyl]: https://github.com/gulpjs/vinyl
 
-No transformation is needed for HTML sources.
+No transformation will be needed for HTML source file.
 It will only be copied into build folder.
 
 ```js
