@@ -17,8 +17,6 @@ gulp.task('clean', function(callback) {
   return del([
       config.dir.src +'**/*',
       '!'+ config.dir.src,
-      config.dir.build +'**/*',
-      '!'+ config.dir.build
     ],
     { force: true },
     callback)

@@ -9,14 +9,14 @@ definitions for the build.
 
 [gulp]: https://github.com/gulpjs/gulp
 
-## 2.1. gulpfile.js
-
 By convention, all node files should contain require calls at the top. We need
-gulp for IO and to create task definitions, and gulp plugins for
-[browserify][browserify] and [sass][sass].
+gulp for IO and to create task definitions, gulp plugins for
+[browserify][browserify] and [sass][sass], and [del][del] to inplement clean
+tasks.
 
 [browserify]: https://github.com/substack/node-browserify
 [sass]: https://github.com/sass/sass
+[del]: https://github.com/sindresorhus/del
 
 ```js
 'use strict';
@@ -26,6 +26,7 @@ var gutil = require('gulp-util');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var sass = require('gulp-sass');
+var del = require('del');
 ```
 
 In gulp, each type of compilation is done in a separate [pipeline][pipeline]
@@ -38,21 +39,44 @@ objects may be filtered etc.).
 [pipeline]: https://en.wikipedia.org/wiki/Pipeline_(software)
 [vinyl]: https://github.com/gulpjs/vinyl
 
-No transformation will be needed for HTML source file.
-It will only be copied into build folder.
+## 2.1. Clean Tasks
+
+There will be 3 types of compilation (HTML, CSS and JavaScript), so we need 3
+clean tasks. Sorce code of each one will be the same just with different glob
+pattern used to delete files. Code below creates 3 gulp tasks: `clean:html`,
+`clean:css` and `clean:js`.
 
 ```js
-gulp.task('html', function() {
+[ 'html', 'css', 'js' ].forEach(function(ext) {
+  gulp.task('clean:'+ ext, function(callback) {
+    return del([ 'dist/*.'+ ext ], callback);
+  });
+});
+```
+
+In order to delete files with [del][del] module, gulp asynchronous mode must be
+used (task function with a callback).
+
+## 2.2 Build Tasks
+
+No transformation will be needed for HTML source file.
+It will only be copied into build folder.
+For `clean:html` to be invoked before this task, it must be passed as a
+depepndency.
+
+```js
+gulp.task('html', [ 'clean:html' ], function() {
   gulp.src([ 'src/index.html' ])
       .pipe(gulp.dest('dist/'))
   ;
 });
 ```
+
 Piping Sass sources through sass plugin will produce browser-readable CSS.
 Pretty straight forward.
 
 ```js
-gulp.task('css', function() {
+gulp.task('css', [ 'clean:css' ], function() {
   gulp.src([ 'src/style.scss' ])
       .pipe(sass.sync().on('error', sass.logError))
       .pipe(gulp.dest('dist/'))
@@ -71,13 +95,15 @@ second time to create vinyl object.
 [vinyl-source-stream]: https://github.com/hughsk/vinyl-source-stream
 
 ```js
-gulp.task('javascript', function() {
+gulp.task('javascript', [ 'clean:js' ], function() {
   browserify('src/script.js').bundle()
       .pipe(source('script.js', './src').on('error', gutil.log))
       .pipe(gulp.dest('dist/'))
   ;
 });
 ```
+
+## 2.3. Default Task
 
 Lastly, a default gulp task that connects everything.
 
@@ -88,6 +114,8 @@ gulp.task('default', [ 'html', 'css', 'javascript' ]);
   eslint-env node
 */
 ```
+
+To invoke default task from the command line just type `gulp`.
 
 &nbsp;<br>
 Next Page &nbsp;&gt;&nbsp; [3. JavaScript Module][js-module]

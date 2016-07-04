@@ -8,5 +8,6 @@ npm install browserify --save-dev
 npm install vinyl-source-stream --save-dev
 npm install gulp-sass --save-dev
 npm install hermes-slider --save-dev
+npm install del --save-dev
 # Create project folders.
 mkdir src dist

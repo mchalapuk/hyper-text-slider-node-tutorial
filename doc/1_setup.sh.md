@@ -7,12 +7,13 @@
 ## 1.1. Dependencies
 
 Use [npm][npm] to install [gulp][gulp], [browserify][browserify], [sass][sass],
-and [hermes][hermes].
+[del][del], and [hermes][hermes].
 
 [npm]: https://docs.npmjs.com/getting-started/what-is-npm
 [gulp]: https://github.com/gulpjs/gulp
 [browserify]: https://github.com/substack/node-browserify
 [sass]: https://github.com/sass/sass
+[del]: https://github.com/sindresorhus/del
 [hermes]: https://github.com/webfront-toolkit/hermes
 
 ```sh
@@ -26,6 +27,7 @@ npm install browserify --save-dev
 npm install vinyl-source-stream --save-dev
 npm install gulp-sass --save-dev
 npm install hermes-slider --save-dev
+npm install del --save-dev
 ```
 
 Properly configured gulp (more on that later) will invoke browserify to compile
