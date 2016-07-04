@@ -12,7 +12,7 @@ definitions for the build.
 ## 2.1. gulpfile.js
 
 By convention, all node files should contain require calls at the top. We need
-gulp for IO and to create task definitions, and gulp for
+gulp for IO and to create task definitions, and gulp plugins for
 [browserify][browserify] and [sass][sass].
 
 [browserify]: https://github.com/substack/node-browserify
@@ -36,8 +36,8 @@ objects may be filtered etc.).
 [pipeline]: https://en.wikipedia.org/wiki/Pipeline_(software)
 [vinyl]: https://github.com/gulpjs/vinyl
 
-No transformation is needed for HTML sources, as it will be plain HTML. It will
-only be copied into build folder.
+No transformation is needed for HTML sources.
+It will only be copied into build folder.
 
 ```js
 gulp.task('html', function() {
@@ -46,8 +46,8 @@ gulp.task('html', function() {
   ;
 });
 ```
-Piping Sass sources to sass plugin will produce browser-readable CSS. Pretty
-straight forward.
+Piping Sass sources through sass plugin will produce browser-readable CSS.
+Pretty straight forward.
 
 ```js
 gulp.task('css', function() {
