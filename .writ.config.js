@@ -33,13 +33,10 @@ var files = {
     dir.doc +'*.md',
   ],
   css: [
-    dir.src +'*.sass',
+    dir.src +'*.scss',
   ],
   js: [
     dir.src +'*.js',
-  ],
-  spec: [
-    dir.src +'*.spec.js',
   ],
 };
 

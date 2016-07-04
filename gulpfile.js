@@ -1,3 +1,5 @@
+'use strict';
+
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var browserify = require('browserify');
@@ -21,3 +23,7 @@ gulp.task('javascript', function() {
   ;
 });
 gulp.task('default', [ 'html', 'css', 'javascript' ]);
+
+/*
+  eslint-env node
+*/

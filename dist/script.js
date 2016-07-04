@@ -2272,9 +2272,16 @@ function hasOwnProperty(obj, prop) {
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"./support/isBuffer":18,"_process":17,"inherits":13}],20:[function(require,module,exports){
+'use strict';
+
 var hermes = require('hermes-slider');
+
 window.addEventListener('load', function() {
   hermes.boot(document.body);
 });
+
+/*
+  eslint-env node, browser
+ */
 
 },{"hermes-slider":1}]},{},[20]);

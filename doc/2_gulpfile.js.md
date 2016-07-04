@@ -19,6 +19,8 @@ gulp for IO and to create task definitions, and gulp plugins for
 [sass]: https://github.com/sass/sass
 
 ```js
+'use strict';
+
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var browserify = require('browserify');
@@ -81,6 +83,10 @@ Lastly, a default gulp task that connects everything.
 
 ```js
 gulp.task('default', [ 'html', 'css', 'javascript' ]);
+
+/*
+  eslint-env node
+*/
 ```
 
 &nbsp;<br>

@@ -5,26 +5,28 @@
 # 3. JavaScript Module
 
 [Hermes' scripting API][js-api] is quite rich, but all we need is upgrading a
-slider, which will be declared on out web page.
+slider, which will be declared on the web page.
 
 [js-api]: https://github.com/webfront-toolkit/hermes/blob/master/doc/javascript-api.md
 
-Our script will just load [hermes][hermes] module...
+Our script will just load [hermes][hermes] module and call [boot function][boot]
+after page loads.
 
 [hermes]: https://github.com/webfront-toolkit/hermes
-
-```js
-var hermes = require('hermes-slider');
-```
-
-... and call [boot function][boot] after page loads.
-
 [boot]: https://github.com/webfront-toolkit/hermes/blob/master/doc/javascript-api.md#bootcontainerelement
 
 ```js
+'use strict';
+
+var hermes = require('hermes-slider');
+
 window.addEventListener('load', function() {
   hermes.boot(document.body);
 });
+
+/*
+  eslint-env node, browser
+ */
 ```
 
 &nbsp;<br>
