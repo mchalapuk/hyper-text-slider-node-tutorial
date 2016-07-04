@@ -47,9 +47,9 @@ consult [Hermes' Declarative API][css-api] for details).
 
 ```html
 //== slider ==//
-  <div class="hermes-layout--slider
-              hermes-transition--zoom-in-out
-              hermes-defaults">
+  <div id="my-slider" class="hermes-layout--slider
+                             hermes-transition--zoom-in-out
+                             hermes-defaults">
 //:: slides :://
   </div>
 ```

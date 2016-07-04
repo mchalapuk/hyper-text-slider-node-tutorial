@@ -15,3 +15,12 @@ a definition of the transition, which is used on our page.
   'node_modules/hermes-slider/src/sass/transitions/_zoom-in-out.scss';
 ```
 
+```sass
+body,
+html,
+#my-slider {
+  height: 100%;
+  margin: 0;
+}
+```
+
