@@ -77,9 +77,8 @@ gulp.task('fixme', _.partial(fixme, {
 
 gulp.task('watch', [ 'default' ], function() {
   gulp.watch(config.files.config, [ 'lint:config' ]);
-  gulp.watch(config.files.css, [ 'sass' ]);
-  gulp.watch(config.files.js, [ 'javascript', 'spec' ]);
-  gulp.watch(config.files.spec, [ 'spec' ]);
+  gulp.watch(config.files.css, [ 'lint:sass' ]);
+  gulp.watch(config.files.js, [ 'lint:javascript' ]);
   gulp.watch(config.files.doc, [ 'generate' ]);
 
   connect.server({
