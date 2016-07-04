@@ -57,7 +57,7 @@ pattern used to delete files. Code below creates 3 gulp tasks: `clean:html`,
 In order to delete files with [del][del] module, gulp asynchronous mode must be
 used (task function with a callback).
 
-## 2.2 Build Tasks
+## 2.2. Build Tasks
 
 No transformation will be needed for HTML source file.
 It will only be copied into build folder.
@@ -115,7 +115,8 @@ gulp.task('default', [ 'html', 'css', 'javascript' ]);
 */
 ```
 
-To invoke default task from the command line just type `gulp`.
+To invoke default task from the command line just type `gulp`. At this point,
+invoking it will not produce anything, because no sources are written yet.
 
 &nbsp;<br>
 Next Page &nbsp;&gt;&nbsp; [3. JavaScript Module][js-module]
