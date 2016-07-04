@@ -96,7 +96,7 @@ second time to create vinyl object.
 
 ```js
 gulp.task('javascript', [ 'clean:js' ], function() {
-  browserify('src/script.js').bundle()
+  return browserify('src/script.js').bundle()
       .pipe(source('script.js', './src').on('error', gutil.log))
       .pipe(gulp.dest('dist/'))
   ;
