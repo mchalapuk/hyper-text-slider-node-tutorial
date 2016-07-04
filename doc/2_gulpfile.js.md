@@ -26,11 +26,15 @@ var source = require('vinyl-source-stream');
 var sass = require('gulp-sass');
 ```
 
-Each type of compilation is done in separate gulp task, which is essentially
-a [pipeline][pipeline]. Data that flows in this pipeline is typically a
-sourcecode, which gets transformed by gulp plugins.
+In gulp, each type of compilation is done in a separate [pipeline][pipeline]
+(which is called a gulp task). Data that flows through these pipelines takes
+form of file objects (which are called [vinyls][vinyl]).
+Stream of vinyls is piped from one plugin to another, each of which may
+transform the stream (file names may be changed, file contents may be altered,
+objects may be filtered etc.).
 
 [pipeline]: https://en.wikipedia.org/wiki/Pipeline_(software)
+[vinyl]: https://github.com/gulpjs/vinyl
 
 No transformation is needed for HTML sources, as it will be plain HTML. It will
 only be copied into build folder.
