@@ -169,8 +169,11 @@ function boot(containerElement) {
   });
 
   // TODO test invoking start methods
-  // TODO maybe requestAnimationFrame with a polyfill instead of setTimeout?
-  window.setTimeout([].forEach.bind(sliders, function(slider) { slider.start(); }), 100);
+  function startSlidersWithNextPaint() {
+    sliders.forEach(function(slider) { slider.start(); });
+    window.removeEventListener('paint', startSlidersWithNextPaint);
+  }
+  window.addEventListener('paint', startSlidersWithNextPaint);
 }
 
 // finds option class names on passed element
