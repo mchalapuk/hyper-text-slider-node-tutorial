@@ -32,16 +32,22 @@ Normal structure of a web page. Nothing fancy here...
 ## 4.2. Body
 
 Element with [`hermes-slider`][layout-slider] class name signifies
-a declaration of a slider.
-Features of hermes are enabled by adding other class names in here.
-[`hermes-defaults`][hermes-defaults] enables most of the features.
-Many other options can be specified by setting class names on a slider
-(e.g. [CSS transitions][transition-class] or [slide duration][time-classes],
-please consult [Hermes' Declarative API][css-api] for details).
+declaration of a slider.
+Hermes' features are enabled by adding other class names on
+the slider element.
+[`hermes-defaults`][hermes-defaults] is an option group, which enables
+most of the features.
+
+This is a minimal configuration, but you can get pretty wild in here
+(enable specific [options][option-classes],
+set [CSS transitions][transition-class],
+or specify [time duration][time-classes] of a slide).
+Please consult [Hermes' Declarative API][css-api] for details.
 
 [layout-slider]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md#hermes-slider
 [transition-class]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md#hermes-transition--sg
 [time-classes]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md#time-class-names
+[option-classes]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md#option-class-names
 [hermes-defaults]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md#hermes-defaults
 [css-api]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md
 
