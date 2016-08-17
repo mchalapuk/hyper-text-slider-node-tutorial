@@ -10,6 +10,7 @@ var connect = require('gulp-connect');
 var fixme = require('fixme');
 var del = require('del');
 var _ = require('underscore');
+var child = require('child_process');
 
 var config = require('./.writ.config');
 
@@ -64,7 +65,11 @@ gulp.task('lint:javascript', function() {
 
 gulp.task('lint', [ 'lint:config', 'lint:sass', 'lint:javascript' ]);
 
-gulp.task('default', [ 'generate' ], function() {
+gulp.task('dist', [ 'generate' ], function() {
+  child.execSync('gulp');
+});
+
+gulp.task('default', [ 'dist' ], function() {
   return gulp.start('lint').on('task_stop', gutil.noop);
 });
 
@@ -77,7 +82,7 @@ gulp.task('watch', [ 'default' ], function() {
   gulp.watch(config.files.config, [ 'lint:config' ]);
   gulp.watch(config.files.css, [ 'lint:sass' ]);
   gulp.watch(config.files.js, [ 'lint:javascript' ]);
-  gulp.watch(config.files.doc, [ 'generate' ]);
+  gulp.watch(config.files.doc, [ 'dist' ]);
 
   connect.server({
     root: [ 'dist' ],
