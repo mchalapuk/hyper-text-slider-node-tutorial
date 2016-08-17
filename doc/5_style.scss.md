@@ -12,7 +12,7 @@ a definition of the transition, which is used on our page.
 ```sass
 @import
   'node_modules/hermes-slider/src/_hermes.scss',
-  'node_modules/hermes-slider/src/sass/transitions/_zoom-in-out.scss';
+  'node_modules/hermes-slider/src/styles/transitions/_zoom-in-out.scss';
 ```
 
 ```sass
@@ -21,6 +21,13 @@ html,
 #my-slider {
   height: 100%;
   margin: 0;
+}
+```
+
+```sass
+#example,
+#dependencies {
+  text-align: center;
 }
 ```
 

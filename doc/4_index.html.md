@@ -47,9 +47,7 @@ consult [Hermes' Declarative API][css-api] for details).
 
 ```html
 //== slider ==//
-  <div id="my-slider" class="hermes-layout--slider
-                             hermes-transition--zoom-in-out
-                             hermes-defaults">
+  <div id=my-slider class="hermes-slider hermes-defaults">
 //:: slides :://
   </div>
 ```
@@ -61,19 +59,19 @@ Contents of the slide is just any HTML.
 
 ```html
 //== slides ==//
-    <div class="hermes-layout--slide" id=example>
+    <div id=example>
       <p>This is a simple example of a web page containing
       <h1>
-       <a href=https://github.com/webfront-toolkit/hermes>Hermes CSS3 Slideshow</a>
+        <a href=https://github.com/webfront-toolkit/hermes>Hermes CSS3 Slideshow</a>
       </h1>
     </div>
-    <div class="hermes-layout--slide" id="dependencies">
+    <div id=dependencies>
       <p>It was built using:
       <ul>
         <li><a href=https://github.com/gulpjs/gulp>gulp</a>
         <li><a href=https://github.com/substack/node-browserify>browserify</a>
         <li><a href=https://github.com/sass/sass>sass</a>
-      <ul>
+      </div>
     </div>
 ```
 
