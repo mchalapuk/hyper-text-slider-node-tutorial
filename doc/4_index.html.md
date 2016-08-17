@@ -30,6 +30,7 @@ Styles for the slider should be linked in `<head>` section (see [5. Stylesheet][
 
 ```html
 //== stylesheet ==//
+
   <link href=style.css rel=stylesheet type=text/css>
 ```
 
@@ -57,6 +58,7 @@ Please consult [Hermes' Declarative API][css-api] for details.
 
 ```html
 //== slider-declaration ==//
+
   <div id=my-slider class="hermes-slider hermes-defaults">
     <div id=example>
       <p>This is a simple example of a web page containing
@@ -91,6 +93,7 @@ but page may render a little faster this way.
 
 ```html
 //== browserified-script ==//
+
   <script src=script.js type=text/javascript>
   </script>
 ```
