@@ -31,17 +31,17 @@ Normal structure of a web page. Nothing fancy here...
 
 ## 4.2. Body
 
-Declaration of a slider is an element with
-[`hermes-layout--slider`][layout-slider] class name.
-[Transition class name][transition-class] present on the slider element tells
-the slider which transition to use as default (if transition isn't specified
-on slide element).
+Element with [`hermes-slider`][layout-slider] class name signifies
+a declaration of a slider.
 Features of hermes are enabled by adding other class names in here.
-[`hermes-defaults`][hermes-defaults] enables most of the features (please
-consult [Hermes' Declarative API][css-api] for details).
+[`hermes-defaults`][hermes-defaults] enables most of the features.
+Many other options can be specified by setting class names on a slider
+(e.g. [CSS transitions][transition-class] or [slide duration][time-classes],
+please consult [Hermes' Declarative API][css-api] for details).
 
-[layout-slider]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md#hermes-layout--slider
+[layout-slider]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md#hermes-slider
 [transition-class]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md#hermes-transition--sg
+[time-classes]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md#time-class-names
 [hermes-defaults]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md#hermes-defaults
 [css-api]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md
 
@@ -52,10 +52,14 @@ consult [Hermes' Declarative API][css-api] for details).
   </div>
 ```
 
-Each slide must have [hermes-layout--slide][layout-slide] class name.
-Contents of the slide is just any HTML.
+Any direct child of slider element is treated as a slide.
+There are no constraints on the contents of a slide. It can be anything
+that your target web browser understands ([HTML][html], [SVG][svg]
+or even [WebGL][webgl]).
 
-[layout-slide]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md#hermes-layout--slide
+[html]: https://www.w3.org/TR/html5/
+[svg]: https://www.w3.org/TR/SVG2/
+[webgl]: https://www.khronos.org/registry/webgl/specs/1.0/
 
 ```html
 //== slides ==//
