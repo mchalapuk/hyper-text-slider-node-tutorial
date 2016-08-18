@@ -24,3 +24,12 @@ html {
 }
 ```
 
+Roboto font is loaded from Google Fonts.
+
+```sass
+body {
+  font-family: Roboto, Helvetica, sans-serif;
+  font-weight: 300;
+}
+```
+
