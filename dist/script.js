@@ -2,10 +2,10 @@
 // There are inmates and there are convicts. A convict has a certain code. And he knows to show a
 // certain respect. An inmate, on the other hand, pulls the pin on his fellow man. Does the guards'
 // work for them... brings shame... to the game. So, which are you gonna be?
-module.exports = require('./src/hermes');
+module.exports = require('./lib/hermes');
 
 
-},{"./src/hermes":13}],2:[function(require,module,exports){
+},{"./lib/hermes":14}],2:[function(require,module,exports){
 /*
 
    Copyright 2015 Maciej Chałapuk
@@ -98,7 +98,7 @@ function concatUnique(unique, candidate) {
 */
 
 
-},{"../enums/layout":8,"../enums/option":10,"./slider":5}],3:[function(require,module,exports){
+},{"../enums/layout":9,"../enums/option":11,"./slider":6}],3:[function(require,module,exports){
 /*
 
    Copyright 2015 Maciej Chałapuk
@@ -444,7 +444,98 @@ MultiMap.prototype.put = function(key, value) {
 */
 
 
-},{"../enums/phase":12,"./detect-features":3,"precond":15}],5:[function(require,module,exports){
+},{"../enums/phase":13,"./detect-features":3,"precond":20}],5:[function(require,module,exports){
+/*!
+
+   Copyright 2016 Maciej Chałapuk
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+*/
+'use strict';
+
+var precond = require('precond');
+
+/**
+ * Fired by the slider when currently visible slide changes.
+ *
+ * @see Slider.prototype.on
+ * @fqn SlideChangeEvent
+ */
+module.exports = SlideChangeEvent;
+
+/**
+ * Creates SlideChangeEvent.
+ *
+ * @param {Number} from index of a previous slide
+ * @param {Number} to index of current slide
+ * @fqn SlideChangeEvent.prototype.constructor
+ */
+function SlideChangeEvent(fromIndex, toIndex) {
+  precond.checkIsNumber(fromIndex, 'fromIndex must be a number');
+  precond.checkIsNumber(toIndex, 'toIndex must be a number');
+
+  var pub = Object.create(SlideChangeEvent.prototype);
+
+  /**
+   * Index of previous slide.
+   *
+   * @type Number
+   * @access read-only
+   * @fqn SlideChangeEvent.prototype.fromIndex
+   */
+  pub.fromIndex = fromIndex;
+
+  /**
+   * Index of current slide.
+   *
+   * @type Number
+   * @access read-only
+   * @fqn SlideChangeEvent.prototype.toIndex
+   */
+  pub.toIndex = toIndex;
+
+  return pub;
+}
+
+SlideChangeEvent.prototype = {
+
+  /**
+   * Always set to 'slideChange'.
+   *
+   * @type String
+   * @access read-only
+   * @fqn SlideChangeEvent.prototype.eventName
+   */
+  eventName: 'slideChange',
+
+  /**
+   * Slider instance in which slide has changed.
+   *
+   * @type Slider
+   * @access read-only
+   * @fqn SlideChangeEvent.prototype.target
+   */
+  target: null,
+};
+
+/*
+  eslint-env node
+ */
+
+
+
+},{"precond":20}],6:[function(require,module,exports){
 /*!
 
    Copyright 2015 Maciej Chałapuk
@@ -466,6 +557,7 @@ MultiMap.prototype.put = function(key, value) {
 
 var phaser = require('./phaser');
 var upgrader = require('./upgrader');
+var slidechange = require('./slide-change-event');
 
 var precond = require('precond');
 
@@ -524,6 +616,7 @@ function Slider(elem) {
   priv.phaser = phaser(elem);
   priv.slides = [];
   priv.upgrader = upgrader(elem);
+  priv.listeners = {};
   priv.tempClasses = [];
   priv.fromIndex = 1;
   priv.toIndex = 0;
@@ -578,6 +671,8 @@ function Slider(elem) {
     moveTo,
     moveToNext,
     moveToPrevious,
+    on,
+    removeListener,
   ], priv);
 
   priv.pub = pub;
@@ -629,6 +724,7 @@ function start(priv, callback) {
   priv.upgrader.start();
   priv.phaser.addPhaseListener(partial(onPhaseChange, priv));
 
+  on(priv, 'slideChange', changeDot.bind(null, priv));
   priv.started = true;
 }
 
@@ -687,6 +783,37 @@ function moveTo(priv, index) {
   addTempClass(priv, chooseTransition(priv));
 
   priv.phaser.startTransition();
+  emitEvent(priv, slidechange(priv.fromIndex, priv.toIndex));
+}
+
+/**
+ * Registers a listener on given eventName.
+ *
+ * @param {String} eventName name of event
+ * @param {Function} listener a function
+ * @postcondition given listener will be notified about current slide changes
+ * @fqn Slider.prototype.on
+ */
+function on(priv, eventName, listener) {
+  precond.checkArgument(typeof listener === 'function', 'listener must be a function');
+  getListeners(priv, eventName).push(listener);
+}
+
+/**
+ * Unregisters a listener from given eventName.
+ *
+ * @param {String} eventName name of event
+ * @param {Function} listener a function
+ * @precondition given listener was previously passed to ${link Slider.prototype.on}
+ * @postcondition given listener will no longer be notified about current slide changes
+ * @fqn Slider.prototype.removeListener
+ */
+function removeListener(priv, eventName, listener) {
+  precond.checkArgument(typeof listener === 'function', 'listener must be a function');
+  var listeners = getListeners(priv, eventName);
+  var index = listeners.indexOf(listener);
+  precond.checkArgument(index !== -1, 'listener not found');
+  listeners.splice(index, 1);
 }
 
 // private
@@ -706,14 +833,31 @@ function searchForTransitions(elem) {
 
 function acceptSlide(priv, slideElement) {
   slideElement.classList.add(Flag.UPGRADED);
+  insertSlide(priv, slideElement);
 
-  priv.slides.push(slideElement);
   priv.phaser.addPhaseTrigger(slideElement.querySelector('.'+ Layout.CONTENT));
 
   if (priv.slides.length === 1) {
-    moveToFirstSlide(priv);
     priv.startCallback.call(null, priv.pub);
+    // moving this to next tick is required in chromium for some reason
+    window.setTimeout(moveToFirstSlide.bind(null, priv), 1);
   }
+}
+
+function insertSlide(priv, slideElement) {
+  var domIndex = [].indexOf.call(priv.elem.childNodes, slideElement);
+  var index = 0;
+
+  for (var i = 0; i < priv.slides.length; ++i) {
+    var next = priv.slides[i];
+    var nextDomIndex = [].indexOf.call(priv.elem.childNodes, next);
+    if (nextDomIndex > domIndex) {
+      break;
+    }
+    index += 1;
+  }
+
+  priv.slides.splice(index, 0, slideElement);
 }
 
 function moveToFirstSlide(priv) {
@@ -722,12 +866,10 @@ function moveToFirstSlide(priv) {
   if (firstSlide.id !== null) {
     addTempClass(priv, 'hermes-slide-id-'+ firstSlide.id);
   }
-  if (typeof firstSlide.dot !== 'undefined') {
-    firstSlide.dot.classList.add(Flag.ACTIVE);
-  }
 
   addTempClass(priv, chooseTransition(priv));
   priv.phaser.startTransition();
+  emitEvent(priv, slidechange(priv.fromIndex, priv.toIndex));
 }
 
 function expandOptionGroups(priv) {
@@ -749,9 +891,6 @@ function removeMarkersAndFlags(priv) {
   var toSlide = priv.slides[priv.toIndex];
   fromSlide.classList.remove(Marker.SLIDE_FROM);
   toSlide.classList.remove(Marker.SLIDE_TO);
-  if (typeof toSlide.dot !== 'undefined') {
-    toSlide.dot.classList.remove(Flag.ACTIVE);
-  }
 }
 
 function addMarkersAndFlags(priv) {
@@ -759,9 +898,6 @@ function addMarkersAndFlags(priv) {
   var toSlide = priv.slides[priv.toIndex];
   fromSlide.classList.add(Marker.SLIDE_FROM);
   toSlide.classList.add(Marker.SLIDE_TO);
-  if (typeof toSlide.dot !== 'undefined') {
-    toSlide.dot.classList.add(Flag.ACTIVE);
-  }
 }
 
 function addTempClass(priv, className) {
@@ -823,6 +959,26 @@ function random(array) {
   return array[parseInt(Math.random() * array.length, 10)];
 }
 
+function getListeners(priv, eventName) {
+  return priv.listeners[eventName] || (priv.listeners[eventName] = []);
+}
+
+function emitEvent(priv, evt) {
+  evt.target = priv.pub;
+
+  getListeners(priv, evt.eventName)
+    .forEach(function(listener) { listener(evt); });
+}
+
+function changeDot(priv) {
+  var dotsElement = priv.elem.querySelector('.'+ Layout.DOTS);
+  var active = dotsElement.querySelector('.'+ Flag.ACTIVE);
+  if (active) {
+    active.classList.remove(Flag.ACTIVE);
+  }
+  dotsElement.childNodes[priv.toIndex].classList.add(Flag.ACTIVE);
+}
+
 // utilities
 
 function bindMethods(wrapper, methods, arg) {
@@ -849,7 +1005,7 @@ function noop() {
  */
 
 
-},{"../enums/flag":7,"../enums/layout":8,"../enums/marker":9,"../enums/option":10,"../enums/pattern":11,"./phaser":4,"./upgrader":6,"precond":15}],6:[function(require,module,exports){
+},{"../enums/flag":8,"../enums/layout":9,"../enums/marker":10,"../enums/option":11,"../enums/pattern":12,"./phaser":4,"./slide-change-event":5,"./upgrader":7,"precond":20}],7:[function(require,module,exports){
 /*!
 
    Copyright 2016 Maciej Chałapuk
@@ -927,8 +1083,14 @@ function createDotButtons(priv) {
 
 function createDot(priv, slideElement) {
   var dot = create(Layout.CONTROLS, Layout.DOT);
-  priv.dotsElement.appendChild(dot);
-  slideElement.dot = dot;
+  var index = [].indexOf.call(slideElement.parentNode.childNodes, slideElement);
+
+  var parent = priv.dotsElement;
+  if (index === parent.length) {
+    parent.appendChild(dot);
+  } else {
+    parent.insertBefore(dot, parent.childNodes[index]);
+  }
 }
 
 function upgradeSlides(priv) {
@@ -1013,7 +1175,7 @@ function noop() {
  */
 
 
-},{"../enums/flag":7,"../enums/layout":8,"./detect-features":3}],7:[function(require,module,exports){
+},{"../enums/flag":8,"../enums/layout":9,"./detect-features":3}],8:[function(require,module,exports){
 /*!
 
    Copyright 2015 Maciej Chałapuk
@@ -1066,7 +1228,7 @@ module.exports = Flag;
 */
 
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 /*!
 
    Copyright 2015 Maciej Chałapuk
@@ -1263,7 +1425,7 @@ module.exports = Layout;
 */
 
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 /*!
 
    Copyright 2015 Maciej Chałapuk
@@ -1322,7 +1484,7 @@ module.exports = Marker;
 */
 
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 /*!
 
    Copyright 2015 Maciej Chałapuk
@@ -1482,7 +1644,7 @@ module.exports = Option;
 */
 
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 /*!
 
    Copyright 2015 Maciej Chałapuk
@@ -1546,7 +1708,7 @@ module.exports = Pattern;
 */
 
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 /*!
 
    Copyright 2015 Maciej Chałapuk
@@ -1608,7 +1770,7 @@ module.exports = Phase;
 */
 
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 /*
 
    Copyright 2015 Maciej Chałapuk
@@ -1643,7 +1805,222 @@ module.exports = {
  */
 
 
-},{"./core/boot":2,"./core/phaser":4,"./core/slider":5}],14:[function(require,module,exports){
+},{"./core/boot":2,"./core/phaser":4,"./core/slider":6}],15:[function(require,module,exports){
+/*
+
+   Copyright 2016 Maciej Chałapuk
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+*/
+'use strict';
+
+
+/**
+ * During project build, this script is compiled to `dist/polyfills.js`,
+ * which contains ES5 code that can be run in not-so-modern browsers.
+ * It is to be used only when programming in vanilla-browser style.
+ * When using nodejs-based javascript preprocessor, it's better to load
+ * hermes module and polyfills with `require()` function.
+ */
+Object.values = require('./polyfills/values');
+window.DOMTokenList = require('./polyfills/dom-token-list');
+require('./polyfills/class-list')(window.Element);
+
+/*
+  eslint-env node, browser
+ */
+
+
+},{"./polyfills/class-list":16,"./polyfills/dom-token-list":17,"./polyfills/values":18}],16:[function(require,module,exports){
+/*
+
+   Copyright 2015 Maciej Chałapuk
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+*/
+'use strict';
+
+var DOMTokenList = require('./dom-token-list');
+
+module.exports = applyPolyfill;
+
+/**
+ * Checks if prototype of passed ElementClass contains classList and,
+ * in case not, creates a polyfill implementation.
+ */
+function applyPolyfill(ElementClass) {
+  if (ElementClass.prototype.hasOwnProperty('classList')) {
+    return;
+  }
+
+  Object.defineProperty(ElementClass.prototype, 'classList', {
+    get: lazyDefinePropertyValue('classList', function() {
+      if (!(this instanceof ElementClass)) {
+        throw new Error(
+            '\'get classList\' called on an object that does not implement interface Element.');
+      }
+      return new DOMTokenList(this, 'className');
+    }),
+    set: throwError('classList property is read-only'),
+    enumerable: true,
+    configurable: true,
+  });
+}
+
+/**
+ * Returns a function that:
+ *  1. Calls fiven **loader** on first call,
+ *  2. Defines a property of given **propertyName** with value returned from loader.
+ */
+function lazyDefinePropertyValue(propertyName, loader) {
+  return function() {
+    var value = loader.apply(this, arguments);
+
+    Object.defineProperty(this, propertyName, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+    });
+
+    return value;
+  };
+}
+
+/**
+ * Returns a function that throws an Error with given **message**.
+ */
+function throwError(message) {
+  return function() { throw new Error(message); };
+}
+
+/*
+  eslint-env node
+ */
+
+/*
+  eslint
+    no-invalid-this: 0,
+ */
+
+
+},{"./dom-token-list":17}],17:[function(require,module,exports){
+(function (global){
+/*
+
+   Copyright 2015 Maciej Chałapuk
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+*/
+'use strict';
+
+var namespace = typeof window !== 'undefined'? window: global;
+
+module.exports = namespace.DOMTokenList || Polyfill;
+
+/**
+ * Constructs Polyfill of DOMTokenList.
+ *
+ * The list will be represented as a string located in given **object**
+ * under property of name **key**.
+ *
+ * @see https://developer.mozilla.org/pl/docs/Web/API/DOMTokenList
+ */
+function Polyfill(object, key) {
+  var that = this;
+
+  that.add = function() {
+    object[key] += (object[key].length ?' ' :'') + [].slice.apply(arguments).join(' ');
+  };
+  that.remove = function(token) {
+    object[key] = object[key].replace(new RegExp('\\b'+ token +'\\b\\s*'), '').replace(/^\\s*/, '');
+  };
+  that.contains = function(token) {
+    return object[key].search(new RegExp('\\b'+ token +'\\b')) !== -1;
+  };
+  Object.defineProperty(that, 'length', {
+    get: function() {
+      return (object[key].match(/[^\s]+/g) || []).length;
+    },
+  });
+
+  return that;
+}
+
+/*
+  eslint-env node, browser
+ */
+
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],18:[function(require,module,exports){
+/*
+
+   Copyright 2015 Maciej Chałapuk
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+*/
+'use strict';
+
+module.exports = Object.values || polyfill;
+
+function polyfill(object) {
+  var values = [];
+  for (var key in object) {
+    values.push(object[key]);
+  }
+  return values;
+}
+
+/*
+  eslint-env node
+ */
+
+
+},{}],19:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -1668,14 +2045,14 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],15:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 /*
  * Copyright (c) 2012 Mathieu Turcotte
  * Licensed under the MIT license.
  */
 
 module.exports = require('./lib/checks');
-},{"./lib/checks":16}],16:[function(require,module,exports){
+},{"./lib/checks":21}],21:[function(require,module,exports){
 /*
  * Copyright (c) 2012 Mathieu Turcotte
  * Licensed under the MIT license.
@@ -1771,7 +2148,7 @@ module.exports.checkIsBoolean = typeCheck('boolean');
 module.exports.checkIsFunction = typeCheck('function');
 module.exports.checkIsObject = typeCheck('object');
 
-},{"./errors":17,"util":20}],17:[function(require,module,exports){
+},{"./errors":22,"util":25}],22:[function(require,module,exports){
 /*
  * Copyright (c) 2012 Mathieu Turcotte
  * Licensed under the MIT license.
@@ -1797,7 +2174,7 @@ IllegalStateError.prototype.name = 'IllegalStateError';
 
 module.exports.IllegalStateError = IllegalStateError;
 module.exports.IllegalArgumentError = IllegalArgumentError;
-},{"util":20}],18:[function(require,module,exports){
+},{"util":25}],23:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -1931,14 +2308,14 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],19:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],20:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -2528,9 +2905,10 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":19,"_process":18,"inherits":14}],21:[function(require,module,exports){
+},{"./support/isBuffer":24,"_process":23,"inherits":19}],26:[function(require,module,exports){
 'use strict';
 
+require('hermes-slider/lib/polyfills');
 var hermes = require('hermes-slider');
 
 window.addEventListener('load', function() {
@@ -2541,4 +2919,4 @@ window.addEventListener('load', function() {
   eslint-env node, browser
  */
 
-},{"hermes-slider":1}]},{},[21]);
+},{"hermes-slider":1,"hermes-slider/lib/polyfills":15}]},{},[26]);
