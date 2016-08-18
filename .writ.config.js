@@ -38,6 +38,9 @@ var files = {
   js: [
     dir.src +'*.js',
   ],
+  deps: [
+    'node_modules/hermes/src/**/*',
+  ],
 };
 
 module.exports = {

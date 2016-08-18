@@ -83,6 +83,7 @@ gulp.task('watch', [ 'default' ], function() {
   gulp.watch(config.files.css, [ 'lint:sass' ]);
   gulp.watch(config.files.js, [ 'lint:javascript' ]);
   gulp.watch(config.files.doc, [ 'dist' ]);
+  gulp.watch(config.files.deps, [ 'dist' ]);
 
   connect.server({
     root: [ 'dist' ],
