@@ -9,22 +9,18 @@ Before doing any styling, we need to import basic [hermes][hermes] styles.
 [hermes]: https://github.com/webfront-toolkit/hermes
 
 ```sass
-@import 'node_modules/hermes-slider/src/_hermes.scss';
+@import 'node_modules/hermes-slider/lib/_hermes.scss';
 ```
+
+Let's say we would like our slider to fill the page. Sliders `width` and
+`height` is `100%` by default, but we need to set body's height and remove
+default webpage margin.
 
 ```sass
 body,
-html,
-#my-slider {
+html {
   height: 100%;
   margin: 0;
-}
-```
-
-```sass
-#example,
-#dependencies {
-  text-align: center;
 }
 ```
 

@@ -1,11 +1,6 @@
-@import 'node_modules/hermes-slider/src/_hermes.scss';
+@import 'node_modules/hermes-slider/lib/_hermes.scss';
 body,
-html,
-#my-slider {
+html {
   height: 100%;
   margin: 0;
-}
-#example,
-#dependencies {
-  text-align: center;
 }
