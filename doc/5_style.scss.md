@@ -4,15 +4,12 @@
 
 # 5. Stylesheet
 
-Before doing any styling, we need to import styles of [hermes][hermes] and
-a definition of the transition, which is used on our page.
+Before doing any styling, we need to import basic [hermes][hermes] styles.
 
 [hermes]: https://github.com/webfront-toolkit/hermes
 
 ```sass
-@import
-  'node_modules/hermes-slider/src/_hermes.scss',
-  'node_modules/hermes-slider/src/styles/transitions/_zoom-in-out.scss';
+@import 'node_modules/hermes-slider/src/_hermes.scss';
 ```
 
 ```sass
