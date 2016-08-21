@@ -26,17 +26,18 @@ To make [hermes][hermes] work via node via [node][node],
 
 ## 4.1. Stylesheet
 
-Styles for the slider should be linked in `<head>` section (see [5.
-Stylesheet][stylesheet]). We'll use Google Fonts to load Roboto font into
-our webpage.
+Styles for the slider should be linked in `<head>` section (see
+[5. Stylesheet][stylesheet]). We'll also use [Google Fonts][gfonts]
+to load [Roboto][roboto] into our webpage.
+
+[gfonts]: https://developers.google.com/fonts/
+[roboto]: https://fonts.google.com/specimen/Roboto
 
 ```html
 //== stylesheet ==//
 
-  <link href=//fonts.googleapis.com/css?family=Roboto:regular,thin&amp;lang=pl
-        rel=stylesheet>
-  <link href=style.css
-        rel=stylesheet>
+  <link href=//fonts.googleapis.com/css?family=Roboto:regular,thin rel=stylesheet>
+  <link href=style.css rel=stylesheet>
 ```
 
 ## 4.2. Slider Declaration
