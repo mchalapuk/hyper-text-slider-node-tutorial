@@ -3781,8 +3781,4 @@ window.addEventListener('load', function() {
   hermes.boot(document.body);
 });
 
-/*
-  eslint-env node, browser
- */
-
 },{"hermes-slider":1,"hermes-slider/lib/polyfills":16}]},{},[50]);

@@ -165,5 +165,9 @@
     "space-unary-ops": 1,
     "spaced-comment": [0, "always"],
     "wrap-regex": 1
+  },
+  env: {
+    "node": true,
+    "browser": true
   }
 }
