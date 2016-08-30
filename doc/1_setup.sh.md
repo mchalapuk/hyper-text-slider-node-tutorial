@@ -49,6 +49,7 @@ Project consists of following folders:
 mkdir src dist
 ```
 
+<br>
 Next Page &nbsp;&gt;&nbsp; [2. Build Configuration][gulpfile]
 
 [gulpfile]: 2_gulpfile.js.md
