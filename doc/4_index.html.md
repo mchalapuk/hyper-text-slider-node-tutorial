@@ -100,8 +100,7 @@ It can be anything that your target web browser understands
 
 ## 4.3. Browserified Script
 
-Lastly, our browserified script. It could also be placed in the head section,
-but page may render a little faster this way.
+Lastly, at the very bottom of the page, we load our browserified script.
 
 ```html
 //== browserified-script ==//
