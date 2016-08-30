@@ -88,10 +88,11 @@ Please consult [Hermes' Declarative API][css-api] for details.
   </div>
 ```
 
-Any direct child of slider element is treated as a slide.
-There are no constraints on the contents of a slide. It can be anything
-that your target web browser understands ([HTML][html], [SVG][svg]
-or even [WebGL][webgl]).
+Any direct child of the slider element is treated as a slide
+(above code contains 4).
+There are no constraints on the contents of&nbsp;a&nbsp;slide.
+It can be anything that your target web browser understands
+([HTML][html], [SVG][svg] or even [WebGL][webgl]).
 
 [html]: https://www.w3.org/TR/html5/
 [svg]: https://www.w3.org/TR/SVG2/
