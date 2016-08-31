@@ -12,6 +12,7 @@ Before doing any styling, we need to import basic [hermes][hermes] styles
 ```sass
 @import 'node_modules/hermes-slider/lib/_hermes.scss';
 ```
+## 5.1. Global Styles
 
 In order for the slider to fill the whole page, `<body>`'s `height` must
 be set to `100%` and default webpage `margin` must be removed (slider's
@@ -51,3 +52,26 @@ body {
 > of [custom themes][custom-themes].
 
 [custom-themes]: https://github.com/webfront-toolkit/hermes/blob/master/doc/custom-themes.md
+
+Links need some love.
+
+```sass
+a {
+  text-decoration: underline;
+  transition: color ease-in-out 150ms;
+
+  &:link,
+  &:visited {
+    color: #222;
+  }
+
+  &:hover {
+    color: #2962ff;
+  }
+
+  &:active {
+    color: #000;
+  }
+}
+```
+

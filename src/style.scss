@@ -8,3 +8,20 @@ body {
   font-family: Roboto, Helvetica, sans-serif;
   font-weight: 300;
 }
+a {
+  text-decoration: underline;
+  transition: color ease-in-out 150ms;
+
+  &:link,
+  &:visited {
+    color: #222;
+  }
+
+  &:hover {
+    color: #2962ff;
+  }
+
+  &:active {
+    color: #000;
+  }
+}
