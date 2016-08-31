@@ -41,10 +41,12 @@ objects may be filtered etc.).
 
 ## 2.1. Clean Tasks
 
-There will be 3 types of compilation (HTML, CSS and JavaScript), so we need 3
-clean tasks. Sorce code of each one will be the same just with different glob
-pattern used to delete files. Code below creates 3 gulp tasks: `clean:html`,
-`clean:css` and `clean:js`.
+We need a clean task for each type of compilation. There will be 3 types of
+source files in the project (HTML, CSS, and JavaScript), so we need 3 clean
+tasks.
+Sorce code of each clean task will be identical, just with different glob
+pattern used to delete files.
+Code below creates `clean:html`, `clean:css` and `clean:js`.
 
 ```js
 [ 'html', 'css', 'js' ].forEach(function(ext) {
@@ -54,15 +56,15 @@ pattern used to delete files. Code below creates 3 gulp tasks: `clean:html`,
 });
 ```
 
-In order to delete files with [del][del] module, gulp asynchronous mode must be
-used (task function with a callback).
+In order to delete files with [del][del] module, gulp must be used
+in asynchronuous mode (task function has a callback which is called by `del`).
 
 ## 2.2. Build Tasks
 
 No transformation will be needed for HTML source file.
 It will only be copied into build folder.
-For `clean:html` to be invoked before this task, it must be passed as a
-depepndency.
+For `clean:html` to be invoked before this task, it must be passed
+as a dependency.
 
 ```js
 gulp.task('html', [ 'clean:html' ], function() {
