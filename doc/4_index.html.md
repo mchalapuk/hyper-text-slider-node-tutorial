@@ -75,10 +75,10 @@ Please consult [Hermes' Declarative API][css-api] for details.
     </div>
     <div id=dependencies>
       <p>It was built using
-        <a href=https://github.com/gulpjs/gulp>gulp</a>,
-        <a href=https://github.com/substack/node-browserify>browserify</a>,
-        <a href=https://github.com/sass/sass>sass</a>,
-        and <a href=https://github.com/webfront-toolkit/hermes>hermes</a>.
+        <a href=https://github.com/gulpjs/gulp class=nth1>gulp</a>,
+        <a href=https://github.com/substack/node-browserify class=nth2>browserify</a>,
+        <a href=https://github.com/sass/sass class=nth3>sass</a>,
+        and <a href=https://github.com/webfront-toolkit/hermes class=nth4>hermes</a>.
     </div>
     <div id=more>
       <p>For more info, check out

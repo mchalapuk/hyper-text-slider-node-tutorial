@@ -539,3 +539,31 @@ a {
     color: #2962ff; }
   a:active {
     color: #000; }
+
+@keyframes blink {
+  0% {
+    color: #222; }
+  50% {
+    color: #aa2; }
+  100% {
+    color: #222; } }
+
+#dependencies.hermes-slide-to a {
+  animation-name: blink;
+  animation-timing-function: ease-in-out;
+  animation-duration: 300ms; }
+
+#dependencies.hermes-slide-to .nth4 {
+  animation-duration: 400ms; }
+
+#dependencies.hermes-slide-to .nth1 {
+  animation-delay: 1.58s; }
+
+#dependencies.hermes-slide-to .nth2 {
+  animation-delay: 1.66s; }
+
+#dependencies.hermes-slide-to .nth3 {
+  animation-delay: 1.74s; }
+
+#dependencies.hermes-slide-to .nth4 {
+  animation-delay: 1.82s; }

@@ -75,3 +75,36 @@ a {
 }
 ```
 
+## 5.2. Styling Specific Slides
+
+When slide becomes active, slider adds [`hermes-slide-to`][slide-to] class
+on it. Using this class as part of CSS selector is very handy in cases when
+styled slide contains animations or transitions (they will be started each
+time slide becomes visible).
+
+[slide-to]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md#hermes-slide-to
+
+```sass
+@keyframes blink {
+  0% { color: #222; }
+  50% { color: #aa2; }
+  100% { color: #222; }
+}
+#dependencies.hermes-slide-to {
+  a {
+    animation-name: blink;
+    animation-timing-function: ease-in-out;
+    animation-duration: 300ms;
+  }
+
+  .nth4 {
+    animation-duration: 400ms;
+  }
+  @for $i from 1 through 4 {
+    .nth#{$i} {
+      animation-delay: 1.5s + 80ms * $i;
+    }
+  }
+}
+```
+
