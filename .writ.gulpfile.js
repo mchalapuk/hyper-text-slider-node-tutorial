@@ -86,7 +86,7 @@ gulp.task('watch', [ 'default' ], function() {
   gulp.watch(config.files.deps, [ 'dist' ]);
 
   connect.server({
-    root: [ 'dist' ],
+    root: [ 'dist', 'images' ],
     port: 8889,
     livereload: false,
   });
