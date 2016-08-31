@@ -69,18 +69,18 @@ Please consult [Hermes' Declarative API][css-api] for details.
     <div id=webpage>
       <p>This is a simple web page...
     </div>
-    <div id=slideshow>
+    <div id=slideshow class=hermes-theme--black>
       <p>...which contains a nice
        <a href=https://github.com/webfront-toolkit/hermes>CSS3 Slideshow</a>.
     </div>
-    <div id=dependencies>
+    <div id=dependencies class=hermes-theme--black>
       <p>It was built using
         <a href=https://github.com/gulpjs/gulp class=nth1>gulp</a>,
         <a href=https://github.com/substack/node-browserify class=nth2>browserify</a>,
         <a href=https://github.com/sass/sass class=nth3>sass</a>,
         and <a href=https://github.com/webfront-toolkit/hermes class=nth4>hermes</a>.
     </div>
-    <div id=more>
+    <div id=more class=hermes-theme--black>
       <p>For more info, check out
        <a href=https://github.com/webfront-toolkit/hermes-node-example>Hermes
        Node Tutorial</a>.

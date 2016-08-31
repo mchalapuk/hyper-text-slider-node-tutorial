@@ -25,6 +25,15 @@ a {
     color: #000;
   }
 }
+#slideshow .hermes-layout--background {
+  background-image: url('big-ben.jpg');
+}
+#dependencies .hermes-layout--background {
+  background-image: url('css-on-macbook-pro.jpg');
+}
+#more .hermes-layout--background {
+  background-image: url('keyboard.jpg');
+}
 @keyframes blink {
   0% { color: #222; }
   50% { color: #aa2; }

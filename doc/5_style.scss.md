@@ -77,6 +77,23 @@ a {
 
 ## 5.2. Styling Specific Slides
 
+The most common styling of a slide is setting its background. Let's do that.
+
+```sass
+#slideshow .hermes-layout--background {
+  background-image: url('big-ben.jpg');
+}
+#dependencies .hermes-layout--background {
+  background-image: url('css-on-macbook-pro.jpg');
+}
+#more .hermes-layout--background {
+  background-image: url('keyboard.jpg');
+}
+```
+
+First slide has no background image, only white background from default theme.
+This makes transition to second slide more impressive.
+
 When slide becomes active, slider adds [`hermes-slide-to`][slide-to] class
 on it. Using this class as part of CSS selector is very handy in cases when
 styled slide contains animations or transitions (they will be started each
