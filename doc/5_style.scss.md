@@ -27,7 +27,7 @@ html {
 ```
 
 [`hermes-theme--white`][theme-classes] and [`hermes-theme--black`][theme-classes]
-theme don't contain any typography styling. To use Roboto font,
+do not contain any typography styling. To use Roboto font,
 which was [loaded in the`<head>` section of our webpage][html-stylesheet],
 we must set `font-family`.
 
@@ -121,8 +121,8 @@ time slide becomes visible).
 ```
 
 Above code makes all links on `#dependencies` slide blink with yellow color, one
-after another. Christmas lights (kind of) effect. Let's make the link on last
-slide permanently yellow.
+after another. Christmas lights (kind of) effect. Let's make links on second and
+last slide permanently yellow.
 
 ```sass
 #slideshow,
