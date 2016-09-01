@@ -79,8 +79,8 @@ First slide has no background image, only white background from default theme.
 This will make transition to second slide more impressive.
 By default, slide backgrounds are [centered][background-position] without
 [repeat][background-repeat] and with [cover][background-size].
-[`hermes-theme--black`][theme-classes] also adds an&nbsp;overlay which makes
-background slightly darker.
+[`hermes-theme--black`][theme-classes] also adds an&nbsp;overlay which
+darkens the background.
 In most cases, setting [`background-image`][background-image] is enough
 to make things look good.
 
