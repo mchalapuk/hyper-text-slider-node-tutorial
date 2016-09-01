@@ -1,5 +1,5 @@
 extends: stylelint-config-standard
 rules:
-  rule-non-nested-empty-line-before: never
-  at-rule-empty-line-before: never
+  rule-non-nested-empty-line-before: null
+  at-rule-empty-line-before: null
 

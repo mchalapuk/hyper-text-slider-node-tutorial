@@ -88,8 +88,24 @@ setting [`background-image`][background-image] is enough.
 [background-size]: https://www.w3.org/TR/css3-background/#the-background-size
 [background-image]: https://www.w3.org/TR/css3-background/#the-background-image
 
+```sass
+$pattern: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAADklEQVQIW2NgQAXGZHAAGioAza6+Hk0AAAAASUVORK5CYII=";
+
+#slideshow,
+#dependencies,
+#more {
+  .hermes-layout--background::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: transparent url($pattern) center center repeat;
+  }
+}
+```
+
 When slide becomes active, slider adds [`hermes-slide-to`][slide-to] class
-on it. Using this class as part of CSS selector is very handy in cases when
+on it. Using this class as a part of CSS selector is very handy in cases when
 styled slide contains animations or transitions (they will be started each
 time slide becomes visible).
 

@@ -587,6 +587,15 @@ body {
 #more .hermes-layout--background {
   background-image: url("keyboard.jpg"); }
 
+#slideshow .hermes-layout--background::after,
+#dependencies .hermes-layout--background::after,
+#more .hermes-layout--background::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: transparent url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAADklEQVQIW2NgQAXGZHAAGioAza6+Hk0AAAAASUVORK5CYII=") center center repeat; }
+
 @keyframes blink {
   0% {
     color: #222; }
