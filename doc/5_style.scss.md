@@ -53,28 +53,6 @@ body {
 
 [custom-themes]: https://github.com/webfront-toolkit/hermes/blob/master/doc/custom-themes.md
 
-Links need some love.
-
-```sass
-a {
-  text-decoration: underline;
-  transition: color ease-in-out 150ms;
-
-  &:link,
-  &:visited {
-    color: #222;
-  }
-
-  &:hover {
-    color: #2962ff;
-  }
-
-  &:active {
-    color: #000;
-  }
-}
-```
-
 ## 5.2. Styling Specific Slides
 
 The most common styling of a slide is setting its background. Let's do that.
