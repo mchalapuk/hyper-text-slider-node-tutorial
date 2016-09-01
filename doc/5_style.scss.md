@@ -55,22 +55,37 @@ body {
 
 ## 5.2. Styling Specific Slides
 
-The most common styling of a slide is setting its background. Let's do that.
+The most common styling of an individual slide is setting its background.
+Let's do that.
 
 ```sass
-#slideshow .hermes-layout--background {
-  background-image: url('big-ben.jpg');
+#slideshow {
+  .hermes-layout--background {
+    background-image: url('big-ben.jpg');
+  }
 }
-#dependencies .hermes-layout--background {
-  background-image: url('css-on-macbook-pro.jpg');
+#dependencies {
+  .hermes-layout--background {
+    background-image: url('css-on-macbook-pro.jpg');
+  }
 }
-#more .hermes-layout--background {
-  background-image: url('keyboard.jpg');
+#more {
+  .hermes-layout--background {
+    background-image: url('keyboard.jpg');
+  }
 }
 ```
 
 First slide has no background image, only white background from default theme.
-This makes transition to second slide more impressive.
+This will make transition to second slide more impressive.
+By default, slide backgrounds are [centered][background-position] without
+[repeat][background-repeat] and with [cover][background-size]. In most cases,
+setting [`background-image`][background-image] is enough.
+
+[background-position]: https://www.w3.org/TR/css3-background/#the-background-position
+[background-repeat]: https://www.w3.org/TR/css3-background/#the-background-repeat
+[background-size]: https://www.w3.org/TR/css3-background/#the-background-size
+[background-image]: https://www.w3.org/TR/css3-background/#the-background-image
 
 When slide becomes active, slider adds [`hermes-slide-to`][slide-to] class
 on it. Using this class as part of CSS selector is very handy in cases when

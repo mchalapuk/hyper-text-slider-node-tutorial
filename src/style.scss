@@ -8,14 +8,20 @@ body {
   font-family: Roboto, Helvetica, sans-serif;
   font-weight: 300;
 }
-#slideshow .hermes-layout--background {
-  background-image: url('big-ben.jpg');
+#slideshow {
+  .hermes-layout--background {
+    background-image: url('big-ben.jpg');
+  }
 }
-#dependencies .hermes-layout--background {
-  background-image: url('css-on-macbook-pro.jpg');
+#dependencies {
+  .hermes-layout--background {
+    background-image: url('css-on-macbook-pro.jpg');
+  }
 }
-#more .hermes-layout--background {
-  background-image: url('keyboard.jpg');
+#more {
+  .hermes-layout--background {
+    background-image: url('keyboard.jpg');
+  }
 }
 @keyframes blink {
   0% { color: #222; }
