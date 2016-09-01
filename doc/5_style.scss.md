@@ -26,12 +26,10 @@ html {
 }
 ```
 
-As no themes or transitions were specified in client HTML, all slides use
-[default theme][theme-classes] and [default transition][transition-classes].
-
-Default theme does not contain any typography styling. To use Roboto font,
+[`hermes-theme--white`][theme-classes] and [`hermes-theme--black`][theme-classes]
+theme don't contain any typography styling. To use Roboto font,
 which was [loaded in the`<head>` section of our webpage][html-stylesheet],
-`font-family` must be set.
+we must set `font-family`.
 
 [theme-classes]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md#theme-class-names
 [transition-classes]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md#transition-class-names
@@ -80,8 +78,11 @@ Let's do that.
 First slide has no background image, only white background from default theme.
 This will make transition to second slide more impressive.
 By default, slide backgrounds are [centered][background-position] without
-[repeat][background-repeat] and with [cover][background-size]. In most cases,
-setting [`background-image`][background-image] is enough.
+[repeat][background-repeat] and with [cover][background-size].
+[`hermes-theme--black`][theme-classes] also adds an&nbsp;overlay which makes
+background slightly darker.
+In most cases, setting [`background-image`][background-image] is enough
+to make things look good.
 
 [background-position]: https://www.w3.org/TR/css3-background/#the-background-position
 [background-repeat]: https://www.w3.org/TR/css3-background/#the-background-repeat
