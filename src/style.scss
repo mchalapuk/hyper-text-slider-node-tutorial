@@ -7,6 +7,7 @@ html {
 body {
   font-family: Roboto, Helvetica, sans-serif;
   font-weight: 300;
+  text-shadow: #333 1px 1px 1px;
 }
 #slideshow {
   .hermes-layout--background {
@@ -25,14 +26,14 @@ body {
 }
 @keyframes blink {
   0% { color: #222; }
-  50% { color: #aa2; }
-  100% { color: #222; }
+  100% { color: #aa2; }
 }
 #dependencies.hermes-slide-to {
   a {
     animation-name: blink;
     animation-timing-function: ease-in-out;
     animation-duration: 300ms;
+    animation-iteration-count: 1;
   }
 
   .nth4 {
@@ -42,5 +43,10 @@ body {
     .nth#{$i} {
       animation-delay: 1.5s + 80ms * $i;
     }
+  }
+}
+#more.slide-to {
+  a {
+    color: #aa2;
   }
 }

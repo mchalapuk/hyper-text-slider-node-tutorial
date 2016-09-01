@@ -41,6 +41,7 @@ which was [loaded in the`<head>` section of our webpage][html-stylesheet],
 body {
   font-family: Roboto, Helvetica, sans-serif;
   font-weight: 300;
+  text-shadow: #333 1px 1px 1px;
 }
 ```
 
@@ -97,14 +98,14 @@ time slide becomes visible).
 ```sass
 @keyframes blink {
   0% { color: #222; }
-  50% { color: #aa2; }
-  100% { color: #222; }
+  100% { color: #aa2; }
 }
 #dependencies.hermes-slide-to {
   a {
     animation-name: blink;
     animation-timing-function: ease-in-out;
     animation-duration: 300ms;
+    animation-iteration-count: 1;
   }
 
   .nth4 {
@@ -114,6 +115,18 @@ time slide becomes visible).
     .nth#{$i} {
       animation-delay: 1.5s + 80ms * $i;
     }
+  }
+}
+```
+
+Above code makes all links on `#dependencies` slide blink with yellow color, one
+after another. Christmas lights (kind of) effect. Let's make the link on last
+slide permanently yellow.
+
+```sass
+#more.slide-to {
+  a {
+    color: #aa2;
   }
 }
 ```

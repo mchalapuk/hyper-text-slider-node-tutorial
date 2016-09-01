@@ -575,7 +575,8 @@ html {
 
 body {
   font-family: Roboto, Helvetica, sans-serif;
-  font-weight: 300; }
+  font-weight: 300;
+  text-shadow: #333 1px 1px 1px; }
 
 #slideshow .hermes-layout--background {
   background-image: url("big-ben.jpg"); }
@@ -589,15 +590,14 @@ body {
 @keyframes blink {
   0% {
     color: #222; }
-  50% {
-    color: #aa2; }
   100% {
-    color: #222; } }
+    color: #aa2; } }
 
 #dependencies.hermes-slide-to a {
   animation-name: blink;
   animation-timing-function: ease-in-out;
-  animation-duration: 300ms; }
+  animation-duration: 300ms;
+  animation-iteration-count: 1; }
 
 #dependencies.hermes-slide-to .nth4 {
   animation-duration: 400ms; }
@@ -613,3 +613,6 @@ body {
 
 #dependencies.hermes-slide-to .nth4 {
   animation-delay: 1.82s; }
+
+#more.slide-to a {
+  color: #aa2; }
