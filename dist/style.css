@@ -585,13 +585,13 @@ body {
   text-shadow: #333 1px 1px 1px; }
 
 #slideshow .hermes-layout--background {
-  background-image: url("big-ben.jpg"); }
+  background-image: url("images/big-ben.jpg"); }
 
 #dependencies .hermes-layout--background {
-  background-image: url("css-on-macbook-pro.jpg"); }
+  background-image: url("images/css-on-macbook-pro.jpg"); }
 
 #more .hermes-layout--background {
-  background-image: url("keyboard.jpg"); }
+  background-image: url("images/keyboard.jpg"); }
 
 @keyframes blink {
   0% {
