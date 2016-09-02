@@ -26,6 +26,7 @@ with [node][node] and [browserify][browserify].
 &nbsp; `3`&nbsp; [JavaScript Module][js-module]<br>
 &nbsp; `4`&nbsp; [HTML Page][html-page]<br>
 &nbsp; `5`&nbsp; [Stylesheet][stylesheet]<br>
+&nbsp; `6`&nbsp; [Result][result]<br>
 
 [introduction]: doc/0_introduction.markdown
 [setup]: doc/1_setup.sh.md
@@ -33,6 +34,7 @@ with [node][node] and [browserify][browserify].
 [js-module]: doc/3_script.js.md
 [html-page]: doc/4_index.html.md
 [stylesheet]: doc/5_style.scss.md
+[result]: https://webfront-toolkit.github.io/hermes-node-example
 
 ## License
 
