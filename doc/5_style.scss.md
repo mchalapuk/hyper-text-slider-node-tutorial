@@ -136,3 +136,7 @@ last slide permanently yellow.
 }
 ```
 
+&nbsp;<br>
+Next Page &nbsp;&gt;&nbsp; [6. Result][result]
+
+[result]: https://webfront-toolkit.github.io/hermes-node-example
