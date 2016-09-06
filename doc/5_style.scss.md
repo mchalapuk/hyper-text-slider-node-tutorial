@@ -139,9 +139,9 @@ last slide permanently yellow.
 **Congratulations! You have finished the tutorial.**
 
 Remember to compile all sources with `gulp`
-(see [2. Gulpfile][gulpfile] for details).
+(see [2.3. Default Task][gulpfile] for details).
 
-[gulpfile]: 2_gulpfile.js.md
+[gulpfile]: 2_gulpfile.js.md#23-default-task
 
 &nbsp;<br>
 Next Page &nbsp;&gt;&nbsp; [6. Result][result]
