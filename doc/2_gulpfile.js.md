@@ -42,7 +42,7 @@ objects may be augmented or filtered).
 ## 2.1. Clean Tasks
 
 We need a clean task for each type of compilation. There will be 3 types of
-source files in the project (HTML, CSS, and JavaScript), so we need 3 clean
+source files in the project (HTML, CSS, and&nbsp;JavaScript), so we need 3 clean
 tasks.
 Sorce code of each clean task will be identical, just with different glob
 pattern used to delete files.
@@ -87,11 +87,11 @@ gulp.task('css', [ 'clean:css' ], function() {
 ```
 
 Browserify is not a gulp plugin, so using it is a bit tricky. Browserify's
-[bundle method][browserify-bundle] returns compiled JavaScript in form of
-a&nbsp;simple text stream. [vinyl-source-stream][vinyl-source-stream] plugin
-consumes this text stream and makes an gulp-compatible vinyl stream out
-of&nbsp;its content. File name must be provided twice. First time for
-browserify, second time to create vinyl object.
+[bundle method][browserify-bundle] returns compiled JavaScript in form
+of&nbsp;a&nbsp;simple text stream. [vinyl-source-stream][vinyl-source-stream]
+plugin consumes this text stream and makes an gulp-compatible vinyl stream
+out&nbsp;of&nbsp;its content. File name must be provided twice. First time
+for browserify, second time to create vinyl object.
 
 [browserify-bundle]: https://github.com/substack/node-browserify#bbundlecb
 [vinyl-source-stream]: https://github.com/hughsk/vinyl-source-stream
@@ -114,7 +114,7 @@ gulp.task('default', [ 'html', 'css', 'javascript' ]);
 ```
 
 To invoke default task from the command line just type `gulp`. At this point,
-invoking it will not produce anything, because no&nbsp;sources are yet written.
+invoking it will not produce anything since no&nbsp;sources are yet written.
 
 &nbsp;<br>
 Next Page &nbsp;&gt;&nbsp; [3. JavaScript Module][js-module]
