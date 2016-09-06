@@ -114,7 +114,8 @@ gulp.task('default', [ 'html', 'css', 'javascript' ]);
 ```
 
 To invoke default task from the command line just type `gulp`. At this point,
-invoking it will not produce anything since no&nbsp;sources are yet written.
+invoking it will not produce anything since no&nbsp;sources are yet written,
+but remember to run `gulp` after all sources are in place.
 
 &nbsp;<br>
 Next Page &nbsp;&gt;&nbsp; [3. JavaScript Module][js-module]
