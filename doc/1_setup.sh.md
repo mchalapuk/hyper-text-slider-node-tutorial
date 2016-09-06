@@ -31,8 +31,8 @@ npm install del --save-dev
 ```
 
 Properly configured gulp (more on that later) will invoke browserify to compile
-JavaScript sources (which uses node modules) and sass module to compile
-Sass sources. Compilation will produce JavaScript and CSS code that can be run
+JavaScript sources and sass module to&nbsp;compile Sass sources.
+Compilation will produce JavaScript and CSS code that can be run
 in a web browser.
 
 ## 1.2. Directory structure
