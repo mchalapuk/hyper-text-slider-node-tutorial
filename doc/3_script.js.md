@@ -4,16 +4,10 @@
 
 # 3. JavaScript Module
 
-[Hermes' scripting API][js-api] is quite rich, but all we need is upgrading a
-slider, which will be declared on the web page.
+[Hermes' scripting API][js-api] is quite rich, but all we need is upgrading
+the slider, which will be declared on our web page.
 
 [js-api]: https://github.com/webfront-toolkit/hermes/blob/master/doc/javascript-api.md
-
-Our script will just load [hermes][hermes] module and call [boot function][boot]
-after page loads.
-
-[hermes]: https://github.com/webfront-toolkit/hermes
-[boot]: https://github.com/webfront-toolkit/hermes/blob/master/doc/javascript-api.md#bootcontainerelement
 
 ```js
 'use strict';
@@ -25,6 +19,12 @@ window.addEventListener('load', function() {
   hermes.boot(document.body);
 });
 ```
+
+Script loads [hermes][hermes] module and call [boot function][boot]
+after page loads.
+
+[hermes]: https://github.com/webfront-toolkit/hermes
+[boot]: https://github.com/webfront-toolkit/hermes/blob/master/doc/javascript-api.md#bootcontainerelement
 
 &nbsp;<br>
 Next Page &nbsp;&gt;&nbsp; [4. HTML Page][html-page]
