@@ -20,7 +20,7 @@ window.addEventListener('load', function() {
 });
 ```
 
-Script loads [hermes][hermes] module and call [boot function][boot]
+Above script loads [hermes][hermes] module and call [boot function][boot]
 after page loads.
 
 [hermes]: https://github.com/webfront-toolkit/hermes
