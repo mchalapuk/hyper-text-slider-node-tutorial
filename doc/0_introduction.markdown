@@ -5,9 +5,11 @@
 # 0. Introduction
 
 This is a tutorial on using [hermes][hermes] via [node][node] and [browserify][browserify].
-Source code examples used in here make up a complete project of a single webpage containing
-a nice slideshow. All examples were extracted from the tutorial to provide executable form
-of the project (check out [1. Project Setup][setup] for details).
+Source code examples used in here make up a complete project of&nbsp;a&nbsp;single webpage
+containing a nice slideshow. All examples were extracted from the tutorial to provide
+executable form of&nbsp;the project (check out [1. Project Setup][setup] for details).
+
+## 0.1. Prerequisites
 
 Following tools will be used throughout the project:
 
