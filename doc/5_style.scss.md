@@ -27,9 +27,9 @@ html {
 ```
 
 [`hermes-theme--white`][theme-classes] and [`hermes-theme--black`][theme-classes]
-do not contain any typography styling. To use Roboto font,
+do not contain any typography styling. In order to use Roboto font,
 which was [loaded in the`<head>` section of our webpage][html-stylesheet],
-we must set `font-family`.
+`font-family` must be set.
 
 [theme-classes]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md#theme-class-names
 [transition-classes]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md#transition-class-names
