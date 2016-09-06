@@ -136,6 +136,13 @@ last slide permanently yellow.
 }
 ```
 
+**Congratulations! You have finished the tutorial.**
+
+Remember to compile all sources with `gulp`
+(see [2. Gulpfile][gulpfile] for details).
+
+[gulpfile]: 2_gulpfile.js.md
+
 &nbsp;<br>
 Next Page &nbsp;&gt;&nbsp; [6. Result][result]
 
