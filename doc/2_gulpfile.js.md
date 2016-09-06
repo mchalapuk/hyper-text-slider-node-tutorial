@@ -9,10 +9,10 @@ definitions for the build.
 
 [gulp]: https://github.com/gulpjs/gulp
 
-By convention, all node files should contain require calls at the top. We need
-gulp for IO and to create task definitions, gulp plugins for
-[browserify][browserify] and [sass][sass], and [del][del] to inplement clean
-tasks.
+By convention, all node files should contain require calls at the top.
+We will need gulp for IO and to create task definitions,
+gulp plugins for [browserify][browserify] and [sass][sass],
+and [del][del] to implement clean tasks.
 
 [browserify]: https://github.com/substack/node-browserify
 [sass]: https://github.com/sass/sass
@@ -30,11 +30,11 @@ var del = require('del');
 ```
 
 In gulp, each type of compilation is done in a separate [pipeline][pipeline]
-(which is called a gulp task). Data that flows through these pipelines takes
-form of file objects (which are called [vinyls][vinyl]).
+(which is called a gulp task). Through these pipelines flows data
+in a form of file objects (which are called [vinyls][vinyl]).
 Stream of vinyls is piped from one plugin to another, each of which may
 transform the stream (file names may be changed, file contents may be altered,
-objects may be filtered etc.).
+objects may be augmented or filtered).
 
 [pipeline]: https://en.wikipedia.org/wiki/Pipeline_(software)
 [vinyl]: https://github.com/gulpjs/vinyl
@@ -57,12 +57,13 @@ Code below creates `clean:html`, `clean:css` and `clean:js`.
 ```
 
 In order to delete files with [del][del] module, gulp must be used
-in asynchronuous mode (task function has a callback which is called by `del`).
+in asynchronuous mode (task function has a callback which
+is&nbsp;called by `del`).
 
 ## 2.2. Build Tasks
 
-No transformation will be needed for HTML source file.
-It will only be copied into build folder.
+No transformation is needed for HTML source file.
+It must only be copied into build folder.
 For `clean:html` to be invoked before this task, it must be passed
 as a dependency.
 
@@ -75,7 +76,6 @@ gulp.task('html', [ 'clean:html' ], function() {
 ```
 
 Piping Sass sources through sass plugin will produce browser-readable CSS.
-Pretty straight forward.
 
 ```js
 gulp.task('css', [ 'clean:css' ], function() {
@@ -88,10 +88,10 @@ gulp.task('css', [ 'clean:css' ], function() {
 
 Browserify is not a gulp plugin, so using it is a bit tricky. Browserify's
 [bundle method][browserify-bundle] returns compiled JavaScript in form of
-a simple text stream. [vinyl-source-stream][vinyl-source-stream] plugin
-consumes this text stream and makes an gulp-compatible vinyl stream out of its
-content. File name must be provided twice. First time for the browserify,
-second time to create vinyl object.
+a&nbsp;simple text stream. [vinyl-source-stream][vinyl-source-stream] plugin
+consumes this text stream and makes an gulp-compatible vinyl stream out
+of&nbsp;its content. File name must be provided twice. First time for
+browserify, second time to create vinyl object.
 
 [browserify-bundle]: https://github.com/substack/node-browserify#bbundlecb
 [vinyl-source-stream]: https://github.com/hughsk/vinyl-source-stream
@@ -107,18 +107,14 @@ gulp.task('javascript', [ 'clean:js' ], function() {
 
 ## 2.3. Default Task
 
-Lastly, a default gulp task that connects everything.
+Lastly, a task that connects everything.
 
 ```js
 gulp.task('default', [ 'html', 'css', 'javascript' ]);
-
-/*
-  eslint-env node
-*/
 ```
 
 To invoke default task from the command line just type `gulp`. At this point,
-invoking it will not produce anything, because no sources are written yet.
+invoking it will not produce anything, because no&nbsp;sources are yet written.
 
 &nbsp;<br>
 Next Page &nbsp;&gt;&nbsp; [3. JavaScript Module][js-module]
