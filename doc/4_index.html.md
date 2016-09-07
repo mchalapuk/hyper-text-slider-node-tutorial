@@ -4,7 +4,7 @@
 
 # 4. HTML Page
 
-To make [hermes][hermes] work via node via [node][node],
+To make [hermes][hermes] work via [node][node],
 3 things are needed in client HTML.
 
 [hermes]: https://github.com/webfront-toolkit/hermes
