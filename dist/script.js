@@ -277,7 +277,7 @@ function setPhase(priv, phase) {
  * @fqn Phaser.prototype.addPhaseTrigger
  */
 function addPhaseTrigger(priv, target, propertyName) {
-  check(target, 'target').is.instanceOf(EventTarget);
+  check(target, 'target').is.anEventTarget();
   var property = propertyName || 'transform';
   check(property, 'property').is.aString();
 
@@ -1921,7 +1921,6 @@ module.exports = {
  * hermes module and polyfills with `require()` function.
  */
 Object.values = require('./polyfills/values');
-window.DOMTokenList = require('./polyfills/dom-token-list');
 require('./polyfills/class-list')(window.Element);
 
 /*
@@ -1929,7 +1928,7 @@ require('./polyfills/class-list')(window.Element);
  */
 
 
-},{"./polyfills/class-list":17,"./polyfills/dom-token-list":18,"./polyfills/values":19}],17:[function(require,module,exports){
+},{"./polyfills/class-list":17,"./polyfills/values":19}],17:[function(require,module,exports){
 /*
 
    Copyright 2015 Maciej Chałapuk
@@ -2013,7 +2012,6 @@ function throwError(message) {
 
 
 },{"./dom-token-list":18}],18:[function(require,module,exports){
-(function (global){
 /*
 
    Copyright 2015 Maciej Chałapuk
@@ -2037,9 +2035,7 @@ function throwError(message) {
 // (it would be loaded in the browser twice otherwise)
 var nodsl = require('offensive/lib/nodsl');
 
-var namespace = typeof window !== 'undefined'? window: global;
-
-module.exports = namespace.DOMTokenList || Polyfill;
+module.exports = Polyfill;
 
 /**
  * Constructs Polyfill of DOMTokenList.
@@ -2085,7 +2081,6 @@ function Polyfill(object, key) {
  */
 
 
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"offensive/lib/nodsl":41}],19:[function(require,module,exports){
 /*
 
@@ -2149,8 +2144,24 @@ function polyfill(object) {
 'use strict';
 
 var check = require('offensive');
+var Assertion = require('offensive/lib/model/assertion');
 
 module.exports = check;
+
+var customAssertions = {
+  'anEventTarget': new Assertion(function(context) {
+    context._push();
+    context.has.method('addEventListener')
+      .and.method('removeEventListener')
+      .and.method('dispatchEvent')
+      ;
+    context._pop();
+  }),
+};
+
+for (var name in customAssertions) {
+  check.addAssertion(name, customAssertions[name]);
+}
 
 /*
   eslint-env node
@@ -2163,7 +2174,7 @@ module.exports = check;
  */
 
 
-},{"offensive":49}],21:[function(require,module,exports){
+},{"offensive":49,"offensive/lib/model/assertion":36}],21:[function(require,module,exports){
 /*
 
    Copyright 2015 Maciej Chałapuk
@@ -3788,5 +3799,19 @@ var hermes = require('hermes-slider');
 window.addEventListener('load', function() {
   hermes.boot(document.body);
 });
+window.WebFontConfig = {
+  google: { families: [ 'Roboto:thin' ] },
+};
+
+(function() {
+  var wfs = document.createElement('script');
+  wfs.src = (document.location.protocol === 'https:'? 'https' : 'http') +
+    '://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+  wfs.type = 'text/javascript';
+  wfs.async = 'true';
+
+  var script = document.getElementsByTagName('script')[0];
+  script.parentNode.insertBefore(wfs, script);
+}());
 
 },{"hermes-slider":1,"hermes-slider/lib/polyfills":16}]},{},[50]);

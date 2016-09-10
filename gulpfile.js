@@ -29,7 +29,3 @@ gulp.task('javascript', [ 'clean:js' ], function() {
   ;
 });
 gulp.task('default', [ 'html', 'css', 'javascript' ]);
-
-/*
-  eslint-env node
-*/
