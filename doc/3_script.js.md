@@ -7,7 +7,7 @@
 ## 3.1. Polyfills
 
 In order to support older browsers, polyfills that enable technologied required
-by hermes must be loaded. If you don't use any polyfill loaded in your project,
+by hermes must be loaded. If you don't use any polyfill loader in your project,
 use `polyfills.js` file provided by hermes.
 
 ```js
@@ -37,7 +37,7 @@ after page loads.
 [hermes]: https://github.com/webfront-toolkit/hermes
 [boot]: https://github.com/webfront-toolkit/hermes/blob/master/doc/javascript-api.md#bootcontainerelement
 
-## 3.3. Font Loader
+## 3.3. Loading Fonts
 
 We'll also use [Google Fonts][gfonts] to load [Roboto][roboto] into our webpage.
 
