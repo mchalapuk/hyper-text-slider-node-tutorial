@@ -69,10 +69,12 @@ To deal with this problem we will add `js` class name on `<html>` element.
 This class will be styled in CSS (see [5.5. Page Visibility][page-visibility]).
 
 [fouc]: https://en.wikipedia.org/wiki/Flash_of_unstyled_content
-[page-visibility]: 5_style.css.md#55-page-visibility
+[page-visibility]: 5_style.scss.md#55-page-visibility
 
 ```js
-document.documentElement.classList.add('js');
+window.addEventListener('load', function() {
+  document.documentElement.classList.add('js');
+});
 ```
 
 &nbsp;<br>

@@ -3813,6 +3813,8 @@ window.WebFontConfig = {
   var script = document.getElementsByTagName('script')[0];
   script.parentNode.insertBefore(wfs, script);
 }());
-document.documentElement.classList.add('js');
+window.addEventListener('load', function() {
+  document.documentElement.classList.add('js');
+});
 
 },{"hermes-slider":1,"hermes-slider/lib/polyfills":16}]},{},[50]);
