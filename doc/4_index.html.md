@@ -27,11 +27,15 @@ To make [hermes][hermes] work via [node][node],
 ## 4.1. Stylesheet
 
 Styles for the slider should be linked in `<head>` section (see
-[5. Stylesheet][stylesheet]).
+[5. Stylesheet][stylesheet]). We also need to make `<html>` element invisible.
+Using `opacity` for invisibility is the best choice because transition/animation
+events can fire normally while contents being hidden. Also `opacity` is a
+property that can be used in a CSS transition.
 
 ```html
 //== stylesheet ==//
 
+  <style type=text/css> html { opacity: 0; } </style>
   <link href=style.css rel=stylesheet>
 ```
 

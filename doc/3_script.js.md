@@ -61,6 +61,20 @@ window.WebFontConfig = {
 }());
 ```
 
+## 3.4. Dealing with FOUC
+
+As resources loaded by our web page are quite heavy (CSS, JavaScipt and images),
+flash of unstyled content ([FOUC][fouc]) may occur.
+To deal with this problem we will add `js` class name on `<html>` element.
+This class will be styled in CSS (see [5.5. Page Visibility][page-visibility]).
+
+[fouc]: https://en.wikipedia.org/wiki/Flash_of_unstyled_content
+[page-visibility]: 5_style.css.md#55-page-visibility
+
+```js
+document.documentElement.classList.add('js');
+```
+
 &nbsp;<br>
 Next Page &nbsp;&gt;&nbsp; [4. HTML Page][html-page]
 

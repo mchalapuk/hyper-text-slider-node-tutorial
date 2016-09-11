@@ -54,3 +54,9 @@ body {
     }
   }
 }
+html {
+  transition: opacity 300ms ease-in;
+}
+html.js {
+  opacity: 1;
+}

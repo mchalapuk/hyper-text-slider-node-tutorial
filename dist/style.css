@@ -659,3 +659,9 @@ body {
 #more a:link,
 #more a:visited {
   color: #aa2; }
+
+html {
+  transition: opacity 300ms ease-in; }
+
+html.js {
+  opacity: 1; }

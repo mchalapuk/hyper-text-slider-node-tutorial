@@ -12,7 +12,8 @@ Before doing any styling, we need to import basic [hermes][hermes] styles
 ```sass
 @import 'node_modules/hermes-slider/lib/_hermes.scss';
 ```
-## 5.1. Global Styles
+
+## 5.1. Slider Size
 
 In order for the slider to fill the whole page, `<body>`'s `height` must
 be set to `100%` and default webpage `margin` must be removed (slider's
@@ -25,6 +26,8 @@ html {
   margin: 0;
 }
 ```
+
+## 5.2. Typography
 
 [`hermes-theme--white`][theme-classes] and [`hermes-theme--black`][theme-classes]
 do not contain any typography styling. In order to use Roboto font,
@@ -51,7 +54,7 @@ body {
 
 [custom-themes]: https://github.com/webfront-toolkit/hermes/blob/master/doc/custom-themes.md
 
-## 5.2. Styling Specific Slides
+## 5.3. Slide Backgrounds
 
 The most common styling of an individual slide is setting its background.
 Let's do that.
@@ -87,6 +90,8 @@ to make things look good.
 [background-repeat]: https://www.w3.org/TR/css3-background/#the-background-repeat
 [background-size]: https://www.w3.org/TR/css3-background/#the-background-size
 [background-image]: https://www.w3.org/TR/css3-background/#the-background-image
+
+## 5.4. In-slide Animations
 
 When slide becomes active, slider adds [`hermes-slide-to`][slide-to] class
 on it. Using this class as a part of CSS selector is very handy in cases when
@@ -132,6 +137,24 @@ last slide permanently yellow.
       color: #aa2;
     }
   }
+}
+```
+
+## 5.5. Page Visibility
+
+We styled the page to be invisible [in the `<head>` section][head-styles].
+Out script [adds `js` class name to `<html>` element][dealing-with-fouc].
+Last thing to do is to make the page visible in CSS.
+
+[head-styles]: 4_index.html.md#41-stylesheet
+[dealing-with-fouc]: 3_script.js.md#34-dealing-with-fouc
+
+```sass
+html {
+  transition: opacity 300ms ease-in;
+}
+html.js {
+  opacity: 1;
 }
 ```
 

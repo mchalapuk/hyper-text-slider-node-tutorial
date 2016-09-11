@@ -20,3 +20,4 @@ window.WebFontConfig = {
   var script = document.getElementsByTagName('script')[0];
   script.parentNode.insertBefore(wfs, script);
 }());
+document.documentElement.classList.add('js');
