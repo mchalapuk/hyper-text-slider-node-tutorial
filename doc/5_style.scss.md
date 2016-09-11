@@ -144,7 +144,7 @@ last slide permanently yellow.
 
 We styled the page to be invisible [in the `<head>` section][head-styles].
 Out script [adds `js` class name to `<html>` element][dealing-with-fouc].
-Last thing to do is to make the page visible in CSS.
+Last thing to&nbsp;do&nbsp;is to make the page visible in CSS.
 
 [head-styles]: 4_index.html.md#41-stylesheet
 [dealing-with-fouc]: 3_script.js.md#34-dealing-with-fouc
