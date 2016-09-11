@@ -43,10 +43,18 @@ Project consists of following folders:
   for [gulp][gulp]).
  * `dist` - containing vanilla HTML, CSS and JavaScript, which can be
   run in a web browser (gulp output files).
+ * `dist/images` - containing JPG files used as slide background images.
 
 ```sh
 # Create project folders.
-mkdir src dist
+mkdir -p src dist/images
+
+# Download image files
+cd dist/images
+wget https://webfront-toolkit.github.io/hermes-node-example/dist/images/big-ben.jpg
+wget https://webfront-toolkit.github.io/hermes-node-example/dist/images/css-on-macbook-pro.jpg
+wget https://webfront-toolkit.github.io/hermes-node-example/dist/images/keyboard.jpg
+cd -
 ```
 
 <br>
