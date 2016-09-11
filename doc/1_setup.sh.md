@@ -48,7 +48,15 @@ Project consists of following folders:
 ```sh
 # Create project folders.
 mkdir -p src dist/images
+```
 
+## 1.3. Image Resources
+
+Use [wget][wget] to download image files that will be used as backgrounds.
+
+[wget]: https://www.gnu.org/software/wget/
+
+```sh
 # Download image files
 cd dist/images
 wget https://webfront-toolkit.github.io/hermes-node-example/dist/images/big-ben.jpg
