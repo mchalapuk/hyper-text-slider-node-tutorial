@@ -14,6 +14,7 @@ executable form of&nbsp;the project (check out [1. Project Setup][setup] for det
 Following tools will be used throughout the project:
 
  * [bash][bash] as system shell,
+ * [wget][wget] as download utility,
  * [npm][npm] for dependency management,
  * [gulp][gulp] as a build system,
  * [browserify][browserify] to make [node][node] modules work in the browser,
@@ -21,6 +22,7 @@ Following tools will be used throughout the project:
  * [hermes][hermes] to implement a slideshow on a webpage.
 
 [bash]: https://en.wikipedia.org/wiki/Bash_(Unix_shell)
+[wget]: https://www.gnu.org/software/wget/
 [npm]: https://docs.npmjs.com/getting-started/what-is-npm
 [gulp]: https://github.com/gulpjs/gulp
 [browserify]: https://github.com/substack/node-browserify
