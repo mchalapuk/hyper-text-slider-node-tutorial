@@ -42,7 +42,10 @@ This tutorial contains information on:
  * Writing JavaScript module that loads hermes,
  * Importing hermes' CSS stylesheets,
  * Adding your own CSS to hermes slider,
- * Styling individual slides.
+ * Styling individual slides,
+ * Preventing [FOUC][fouc].
+
+[fouc]: https://en.wikipedia.org/wiki/Flash_of_unstyled_content
 
 And does not contain information on:
 
@@ -50,7 +53,8 @@ And does not contain information on:
  * Configuring transitions globally (see [Declarative API Reference][declarative-api]),
  * Configuring transitions for individual slides (see [Declarative API Reference][declarative-api]),
  * Writing custom transitions (!link needed!),
- * Writing custom themes (see [Custom Themes Guide][custom-themes]).
+ * Writing custom themes (see [Custom Themes Guide][custom-themes]),
+ * Preloading background images.
 
 [declarative-api]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md
 [custom-themes]: https://github.com/webfront-toolkit/hermes/blob/master/doc/custom-themes.md
