@@ -11,7 +11,6 @@ npm install hermes-slider --save-dev
 npm install del --save-dev
 # Create project folders.
 mkdir -p src dist/images
-
 # Download image files
 cd dist/images
 wget https://webfront-toolkit.github.io/hermes-node-example/dist/images/big-ben.jpg
