@@ -30,8 +30,8 @@ var del = require('del');
 ```
 
 In gulp, each type of compilation is done in a separate [pipeline][pipeline]
-(which is called a gulp task). Through these pipelines flows data objects
-which represent files and are called [vinyls][vinyl].
+(which is called a gulp task). Data objects, which represent files, flow
+through these pipelines. These objects are called [vinyls][vinyl].
 Stream of&nbsp;vinyls is piped from one plugin to another, each of which may
 transform the stream (file names may be changed, file contents may be altered,
 objects may be augmented or filtered).
