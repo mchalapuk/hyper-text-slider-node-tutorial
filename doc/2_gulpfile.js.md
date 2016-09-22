@@ -34,7 +34,7 @@ In gulp, each type of compilation is done in a separate [pipeline][pipeline]
 through these pipelines. These objects are called [vinyls][vinyl].
 Stream of&nbsp;vinyls is piped from one plugin to another, each of which may
 transform the stream (file names may be changed, file contents may be altered,
-objects may be augmented or filtered).
+objects may be augmented, filtered, or added to the stream).
 
 [pipeline]: https://en.wikipedia.org/wiki/Pipeline_(software)
 [vinyl]: https://github.com/gulpjs/vinyl
