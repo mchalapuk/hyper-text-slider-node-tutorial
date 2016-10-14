@@ -3,7 +3,7 @@
 [david-image]: https://david-dm.org/webfront-toolkit/hermes-node-example.svg
 [david-url]: https://david-dm.org/webfront-toolkit/hermes-node-example
 [david-image-dev]: https://david-dm.org/webfront-toolkit/hermes-node-example/dev-status.svg
-[david-url-dev]: https://david-dm.org/webfront-toolkit/hermes-node-example#info=devDependencies
+[david-url-dev]: https://david-dm.org/webfront-toolkit/hermes-node-example?type=dev
 
 # [Hermes][hermes] [Node][node] Example
 
