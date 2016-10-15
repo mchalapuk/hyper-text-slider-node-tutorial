@@ -4,6 +4,16 @@ html {
   height: 100%;
   margin: 0;
 }
+#my-slider {
+  height: 100%;
+}
+@media only screen and (min-height: 600px) {
+  #my-slider {
+    height: 600px;
+    top: calc(50% - 300px);
+    position: absolute;
+  }
+}
 body {
   font-family: Roboto, Helvetica, sans-serif;
   font-weight: 300;
@@ -23,6 +33,9 @@ body {
   .hermes-layout--background {
     background-image: url('images/keyboard.jpg');
   }
+}
+body {
+  background-color: #222125;
 }
 @keyframes blink {
   0% { color: #222; }

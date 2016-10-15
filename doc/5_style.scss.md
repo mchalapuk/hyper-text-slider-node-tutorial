@@ -15,15 +15,35 @@ Before doing any styling, we need to import basic [hermes][hermes] styles
 
 ## 5.1. Slider Size
 
-In order for the slider to fill the whole page, `<body>`'s `height` must
-be set to `100%` and default webpage `margin` must be removed (slider's
-`width` and `height` is `100%` by default).
+By default, slider has height of `100%`. Full HD slider looks cool, but it may
+be too heavy for machines without good GPU acceleration in the browser.
+
+First things first. Let's turn off `<body>`'s annoying default margin.
 
 ```sass
 body,
 html {
   height: 100%;
   margin: 0;
+}
+```
+We would like our slider to fill the page on small screens.
+
+```sass
+#my-slider {
+  height: 100%;
+}
+```
+
+And have height of 600px on bigger screens.
+
+```sass
+@media only screen and (min-height: 600px) {
+  #my-slider {
+    height: 600px;
+    top: calc(50% - 300px);
+    position: absolute;
+  }
 }
 ```
 
@@ -54,7 +74,7 @@ body {
 
 [custom-themes]: https://github.com/webfront-toolkit/hermes/blob/master/doc/custom-themes.md
 
-## 5.3. Slide Backgrounds
+## 5.3. Backgrounds
 
 The most common styling of an individual slide is setting its background.
 Let's do that.
@@ -77,6 +97,7 @@ Let's do that.
 }
 ```
 
+
 First slide has no background image, only white background from default theme.
 This will make transition to second slide more impressive.
 By default, slide backgrounds are [centered][background-position] without
@@ -85,6 +106,16 @@ By default, slide backgrounds are [centered][background-position] without
 darkens the background.
 In most cases, setting [`background-image`][background-image] is enough
 to make things look good.
+
+Page background color shouldn't be left default, because it will be white
+or gray depending on the browser at use.
+Let's use some nice dark purpleish color for that.
+
+```sass
+body {
+  background-color: #222125;
+}
+```
 
 [background-position]: https://www.w3.org/TR/css3-background/#the-background-position
 [background-repeat]: https://www.w3.org/TR/css3-background/#the-background-repeat
