@@ -47,9 +47,10 @@
   height: 100%;
   width: 100%;
   display: inline-block;
-  position: relative;
+  white-space: normal;
   font-size: 32px;
-  text-align: center; }
+  text-align: center;
+  position: relative; }
 
 .hermes-layout--background {
   position: absolute;
@@ -446,6 +447,7 @@
    limitations under the License.
 
 */
+/* All properties defined in this file can be safely overriden in client CSS. */
 .hermes-layout--background {
   background-repeat: no-repeat;
   background-position: center center;
@@ -453,7 +455,8 @@
 
 .hermes-layout--content {
   text-align: left;
-  font-size: 32px; }
+  font-size: 32px;
+  padding: 0 80px; }
 
 /*
 
