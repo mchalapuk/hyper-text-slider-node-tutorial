@@ -132,115 +132,6 @@
 
 /*
 
-   Copyright 2015 Maciej Chałapuk
-
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-
-*/
-.hermes-show-arrows .hermes-layout--arrow-left,
-.hermes-show-arrows .hermes-layout--arrow-right {
-  display: block; }
-
-.hermes-layout--arrow-left,
-.hermes-layout--arrow-right {
-  display: none;
-  position: absolute;
-  top: 0;
-  width: 20%;
-  height: 100%;
-  z-index: 2;
-  text-align: center;
-  cursor: pointer; }
-  .hermes-layout--arrow-left::after,
-  .hermes-layout--arrow-right::after {
-    position: relative;
-    display: inline-block;
-    top: 50%;
-    font-family: inherit;
-    font-size: 60px;
-    font-weight: 200;
-    line-height: 0;
-    padding: 0;
-    margin: 0;
-    border: none;
-    background: transparent none;
-    cursor: pointer;
-    -webkit-transform: scale(0.7, 2.4);
-    -moz-transform: scale(0.7, 2.4);
-    -o-transform: scale(0.7, 2.4);
-    transform: scale(0.7, 2.4);
-    -webkit-transition: all 0.5s ease-in-out;
-    -moz-transition: all 0.5s ease-in-out;
-    -o-transition: all 0.5s ease-in-out;
-    transition: all 0.5s ease-in-out; }
-
-.hermes-layout--arrow-left {
-  left: 0;
-  padding-right: 20%; }
-  .hermes-layout--arrow-left::after {
-    content: "<"; }
-
-.hermes-layout--arrow-right {
-  right: 0;
-  padding-left: 20%; }
-  .hermes-layout--arrow-right::after {
-    content: ">"; }
-
-/*
-
-   Copyright 2015 Maciej Chałapuk
-
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-
-*/
-.hermes-show-dots .hermes-layout--dots {
-  display: block; }
-
-.hermes-layout--dots {
-  display: none;
-  position: absolute;
-  width: 100%;
-  top: 86%;
-  text-align: center;
-  z-index: 1;
-  font-size: 0;
-  line-height: 1px; }
-
-.hermes-layout--dot {
-  width: 13px;
-  height: 13px;
-  margin: 0 6.5px;
-  border-radius: 13px;
-  border: 3px solid white;
-  display: inline-block;
-  cursor: pointer;
-  -webkit-transition: background ease-in-out 500ms;
-  -moz-transition: background ease-in-out 500ms;
-  -o-transition: background ease-in-out 500ms;
-  transition: background ease-in-out 500ms; }
-
-/*
-
    Copyright 2016 Maciej Chałapuk
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -395,43 +286,6 @@
 
 /*
 
-   Copyright 2015 Maciej Chałapuk
-
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-
-*/
-/* slider arrows get smaller and move to bottom on tablets and phones */
-.hermes-layout--slider.hermes-responsive-controls .hermes-layout--arrow {
-  width: calc((100% - 1248px + 40px) / 2); }
-
-@media screen and (min-width: 42em) and (max-width: 78em) {
-  .hermes-layout--slider.hermes-responsive-controls .hermes-layout--arrow {
-    width: 80px; } }
-
-@media screen and (min-width: 0) and (max-width: 42em) {
-  .hermes-layout--slider.hermes-responsive-controls .hermes-layout--arrow {
-    width: calc(40% - 40px);
-    padding: 0; }
-    .hermes-layout--slider.hermes-responsive-controls .hermes-layout--arrow::after {
-      top: 88%;
-      font-weight: 300;
-      -webkit-transform: scale(0.5, 1);
-      -moz-transform: scale(0.5, 1);
-      -o-transform: scale(0.5, 1);
-      transform: scale(0.5, 1); } }
-
-/*
-
    Copyright 2016 Maciej Chałapuk
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -475,28 +329,28 @@
    limitations under the License.
 
 */
-.hermes-theme--white .hermes-layout--background {
+.hermes-layout--slider.hermes-theme--white .hermes-layout--background {
   background-color: white; }
 
-.hermes-theme--white .hermes-layout--content {
+.hermes-layout--slider.hermes-theme--white .hermes-layout--content {
   color: black; }
 
-.hermes-theme--white a {
+.hermes-layout--slider.hermes-theme--white a {
   transition: color ease-in-out 150ms; }
-  .hermes-theme--white a:link, .hermes-theme--white a:visited {
+  .hermes-layout--slider.hermes-theme--white a:link, .hermes-layout--slider.hermes-theme--white a:visited {
     color: #333; }
-  .hermes-theme--white a:hover {
+  .hermes-layout--slider.hermes-theme--white a:hover {
     color: #2962ff; }
-  .hermes-theme--white a:active {
+  .hermes-layout--slider.hermes-theme--white a:active {
     color: #000; }
 
-.hermes-theme--white .hermes-layout--arrow {
+.hermes-layout--slider.hermes-theme--white .hermes-layout--arrow {
   color: black; }
 
-.hermes-theme--white .hermes-layout--dot {
+.hermes-layout--slider.hermes-theme--white .hermes-layout--dot {
   background-color: rgba(0, 0, 0, 0.4);
   border-color: black; }
-  .hermes-theme--white .hermes-layout--dot.is-active {
+  .hermes-layout--slider.hermes-theme--white .hermes-layout--dot.is-active {
     background-color: black; }
 
 /*
@@ -516,35 +370,274 @@
    limitations under the License.
 
 */
-.hermes-theme--black .hermes-layout--background {
+.hermes-layout--slider.hermes-theme--black .hermes-layout--background {
   background-color: black; }
-  .hermes-theme--black .hermes-layout--background::after {
+  .hermes-layout--slider.hermes-theme--black .hermes-layout--background::after {
     content: '';
     display: block;
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.7) url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAADklEQVQIW2NgQAXGZHAAGioAza6+Hk0AAAAASUVORK5CYII=") center center repeat; }
 
-.hermes-theme--black .hermes-layout--content {
+.hermes-layout--slider.hermes-theme--black .hermes-layout--content {
   color: white; }
 
-.hermes-theme--black a {
+.hermes-layout--slider.hermes-theme--black a {
   transition: color ease-in-out 150ms; }
-  .hermes-theme--black a:link, .hermes-theme--black a:visited {
+  .hermes-layout--slider.hermes-theme--black a:link, .hermes-layout--slider.hermes-theme--black a:visited {
     color: #bbb; }
-  .hermes-theme--black a:hover {
+  .hermes-layout--slider.hermes-theme--black a:hover {
     color: #4b84ff; }
-  .hermes-theme--black a:active {
+  .hermes-layout--slider.hermes-theme--black a:active {
     color: white; }
 
-.hermes-theme--black .hermes-layout--arrow {
+.hermes-layout--slider.hermes-theme--black .hermes-layout--arrow {
   color: white; }
 
-.hermes-theme--black .hermes-layout--dot {
+.hermes-layout--slider.hermes-theme--black .hermes-layout--dot {
   background-color: rgba(255, 255, 255, 0.4);
   border-color: white; }
-  .hermes-theme--black .hermes-layout--dot.is-active {
+  .hermes-layout--slider.hermes-theme--black .hermes-layout--dot.is-active {
     background-color: white; }
+
+/*
+
+   Copyright 2015 Maciej Chałapuk
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+*/
+.hermes-theme--default-arrows .hermes-layout--arrow-left,
+.hermes-theme--default-arrows .hermes-layout--arrow-right {
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 20%;
+  height: 100%;
+  z-index: 2;
+  text-align: center;
+  cursor: pointer;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out; }
+  .hermes-theme--default-arrows .hermes-layout--arrow-left::after,
+  .hermes-theme--default-arrows .hermes-layout--arrow-right::after {
+    position: relative;
+    display: inline-block;
+    top: 50%;
+    font-family: inherit;
+    font-size: 60px;
+    font-weight: 200;
+    line-height: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: transparent none;
+    cursor: pointer;
+    -webkit-transform: scale(0.7, 2.4);
+    -moz-transform: scale(0.7, 2.4);
+    -o-transform: scale(0.7, 2.4);
+    transform: scale(0.7, 2.4);
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out; }
+
+.hermes-theme--default-arrows .hermes-layout--arrow-left {
+  left: 0;
+  padding-right: 20%; }
+  .hermes-theme--default-arrows .hermes-layout--arrow-left::after {
+    content: "<"; }
+
+.hermes-theme--default-arrows .hermes-layout--arrow-right {
+  right: 0;
+  padding-left: 20%; }
+  .hermes-theme--default-arrows .hermes-layout--arrow-right::after {
+    content: ">"; }
+
+/*
+
+   Copyright 2016 Maciej Chałapuk
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+*/
+.hermes-theme--default-dots .hermes-layout--dots {
+  display: block;
+  position: absolute;
+  width: 100%;
+  top: 86%;
+  text-align: center;
+  z-index: 1;
+  font-size: 0;
+  line-height: 1px;
+  -webkit-transition: all ease-in-out 500ms;
+  -moz-transition: all ease-in-out 500ms;
+  -o-transition: all ease-in-out 500ms;
+  transition: all ease-in-out 500ms; }
+
+.hermes-theme--default-dots .hermes-layout--dot {
+  width: 13px;
+  height: 13px;
+  margin: 0 6.5px;
+  border-radius: 13px;
+  border: 3px solid white;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-transition: all ease-in-out 500ms;
+  -moz-transition: all ease-in-out 500ms;
+  -o-transition: all ease-in-out 500ms;
+  transition: all ease-in-out 500ms; }
+
+/*
+
+   Copyright 2015 Maciej Chałapuk
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+*/
+/* slider arrows get smaller and move to bottom on tablets and phones */
+.hermes-theme--responsive-arrows .hermes-layout--arrow {
+  width: calc((100% - 1248px + 40px) / 2); }
+
+@media screen and (min-width: 42em) and (max-width: 78em) {
+  .hermes-theme--responsive-arrows .hermes-layout--arrow {
+    width: 80px; } }
+
+@media screen and (min-width: 0) and (max-width: 42em) {
+  .hermes-theme--responsive-arrows .hermes-layout--arrow {
+    width: calc(40% - 40px);
+    padding: 0; }
+    .hermes-theme--responsive-arrows .hermes-layout--arrow::after {
+      top: 88%;
+      font-weight: 300;
+      -webkit-transform: scale(0.5, 1);
+      -moz-transform: scale(0.5, 1);
+      -o-transform: scale(0.5, 1);
+      transform: scale(0.5, 1); } }
+
+/*
+
+   Copyright 2016 Maciej Chałapuk
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+*/
+.hermes-theme--hover-visible-arrows .hermes-layout--arrow {
+  opacity: 0; }
+
+.hermes-theme--hover-visible-arrows:hover .hermes-layout--arrow, .hermes-theme--hover-visible-arrows:active .hermes-layout--arrow {
+  opacity: 0.8; }
+
+/*
+
+   Copyright 2016 Maciej Chałapuk
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+*/
+.hermes-theme--hover-visible-dots .hermes-layout--dot {
+  opacity: 0; }
+
+.hermes-theme--hover-visible-dots:hover .hermes-layout--dot, .hermes-theme--hover-visible-dots:active .hermes-layout--dot {
+  opacity: 0.8; }
+
+/*
+
+   Copyright 2016 Maciej Chałapuk
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+*/
+.hermes-theme--hover-opaque-arrows .hermes-layout--arrow {
+  opacity: 0.4; }
+
+.hermes-theme--hover-opaque-arrows:hover .hermes-layout--arrow, .hermes-theme--hover-opaque-arrows:active .hermes-layout--arrow {
+  opacity: 0.8; }
+
+/*
+
+   Copyright 2016 Maciej Chałapuk
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+*/
+.hermes-theme--hover-opaque-dots .hermes-layout--dot {
+  opacity: 0.4; }
+
+.hermes-theme--hover-opaque-dots:hover .hermes-layout--dot, .hermes-theme--hover-opaque-dots:active .hermes-layout--dot {
+  opacity: 0.8; }
 
 /*
 

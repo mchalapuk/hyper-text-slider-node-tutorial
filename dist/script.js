@@ -153,7 +153,7 @@ function concatUnique(unique, candidate) {
  * layout elements} (background and contents) of each slide and calls proper phase change methods
  * when slider controls are being used.
  *
- * > ***DISCLAIMER***
+ * > **NOTE**
  * >
  * > Implementation based on `window.setTimeout` function instead of `transitionend` event could
  * > be simpler, but implementing a transition would have to involve JavaScript programming (now
@@ -497,15 +497,11 @@ var DOM = require('../utils/dom');
 var check = require('../utils/check');
 
 /**
- * > **DISCLAIMER**
+ * > **NOTE**
  * >
  * > Hermes JavaScript API should be used only when specific initialization or integration
  * > with other parts of the website is required. In other (simpler) cases please consider
  * > using [declarative API](class-names.md).
- *
- * > **DISCLAIMER**
- * >
- * > JavaScript API is in early **alpha stage** and may change in the future.
  *
  * ### Example
  *
@@ -944,6 +940,11 @@ var Selector = (function() {
 
 var DEFAULT_THEMES = [
   Theme.WHITE,
+  Theme.DEFAULT_DOTS,
+  Theme.HOVER_OPAQUE_DOTS,
+  Theme.DEFAULT_ARROWS,
+  Theme.HOVER_OPAQUE_ARROWS,
+  Theme.RESPONSIVE_ARROWS,
 ];
 var DEFAULT_TRANSITIONS = [
   Transition.ZOOM_OUT_IN,
@@ -995,9 +996,6 @@ function expandOptionGroups(priv) {
   if (list.contains(Option.DEFAULTS)) {
     list.add(Option.AUTOPLAY);
     list.add(Option.ARROW_KEYS);
-    list.add(Option.SHOW_ARROWS);
-    list.add(Option.SHOW_DOTS);
-    list.add(Option.RESPONSIVE_CONTROLS);
   }
 }
 
@@ -1028,6 +1026,7 @@ function upgradeSlides(priv) {
 
 function upgradeSlide(priv, slideElement) {
   supplementClassNames(priv, slideElement);
+  expandThemeGroups(priv, slideElement);
 
   var contentElement = slideElement.querySelector(Selector.CONTENT);
   var backgroundElement = slideElement.querySelector(Selector.BACKGROUND);
@@ -1064,6 +1063,21 @@ function supplementClassNames(priv, slideElement) {
     priv.defaultTransitions.forEach(function(className) {
       slideElement.classList.add(className);
     });
+  }
+}
+
+function expandThemeGroups(priv, slideElement) {
+  if (slideElement.classList.contains(Theme.DEFAULT_CONTROLS)) {
+    slideElement.classList.add(Theme.DEFAULT_ARROWS);
+    slideElement.classList.add(Theme.DEFAULT_DOTS);
+  }
+  if (slideElement.classList.contains(Theme.HOVER_VISIBLE_CONTROLS)) {
+    slideElement.classList.add(Theme.HOVER_VISIBLE_ARROWS);
+    slideElement.classList.add(Theme.HOVER_VISIBLE_DOTS);
+  }
+  if (slideElement.classList.contains(Theme.HOVER_OPAQUE_CONTROLS)) {
+    slideElement.classList.add(Theme.HOVER_OPAQUE_ARROWS);
+    slideElement.classList.add(Theme.HOVER_OPAQUE_DOTS);
   }
 }
 
@@ -1501,10 +1515,7 @@ var Option = {
   /**
    * Adds
    * ${link Option.AUTOPLAY},
-   * ${link Option.SHOW_ARROWS},
-   * ${link Option.SHOW_DOTS},
-   * ${link Option.ARROW_KEYS},
-   * ${link Option.RESPONSIVE_CONTROLS}
+   * ${link Option.ARROW_KEYS}.
    * classes to the slider.
    *
    * @target `<body` or ${link Layout.SLIDER}
@@ -1528,34 +1539,6 @@ var Option = {
   AUTOPLAY: 'hermes-autoplay',
 
   /**
-   * Shows side arrow buttons.
-   *
-   * `click` event on dispatched on left arrow moves slider to previous slide.
-   * `click` event on dispatched on right arrow moves slider to next slide.
-   *
-   * @target `<body` or ${link Layout.SLIDER}
-   * @checked continuously
-   * @see Slider.prototype.moveToPrevious
-   * @see Slider.prototype.moveToNext
-   *
-   * @fqn Option.SHOW_ARROWS
-   */
-  SHOW_ARROWS: 'hermes-show-arrows',
-
-  /**
-   * Shows dot button for each slide.
-   *
-   * `click` event displatched on dot button moves slider to slide asociated with this dot button.
-   *
-   * @target `<body` or ${link Layout.SLIDER}
-   * @checked continuously
-   * @see Slider.prototype.currentIndex
-   *
-   * @fqn Option.SHOW_DOTS
-   */
-  SHOW_DOTS: 'hermes-show-dots',
-
-  /**
    * Adds keyboard control to slider.
    *
    * `keydown` event displatched on `window` object with `LeftArrow` key moves slider to previous
@@ -1568,21 +1551,6 @@ var Option = {
    * @fqn Option.ARROW_KEYS
    */
   ARROW_KEYS: 'hermes-arrow-keys',
-
-  /**
-   * Adds screen responsiveness to slider controls.
-   *
-   * Slider controls come in 3 different layouts. Each for different range of screen width.
-   *
-   * @target `<body` or ${link Layout.SLIDER}
-   * @checked once
-   * @see [Screen Responsiveness](responsiveness.md)
-   * @see Slider.breakpointNarrowToNormal
-   * @see Slider.breakpointNormalToWide
-   *
-   * @fqn Option.RESPONSIVE_CONTROLS
-   */
-  RESPONSIVE_CONTROLS: 'hermes-responsive-controls',
 };
 
 module.exports = Option;
@@ -1768,27 +1736,171 @@ module.exports = Phase;
  * Multiple themes MAY be specified for each slide element (${link Layout.SLIDE}) in client HTML.
  * During [slider's DOM upgrade procedure](dom-upgrade.md), each slide with no theme specified
  * receives theme classes which were declared on the slider element (${link Layout.SLIDER}).
- * If there is no theme specified on the slider, ${link Theme.WHITE} is used as default.
+ * If there is no theme specified on the slider, default themes are used.
  *
  * [How to add custom theme?](custom-themes.md)
  *
  * @name Theme Class Names
+ * @summary-column default Is Default Theme
  */
 var Theme = {
 
   /**
-   * White background, dark foreground. This is the default theme if none specified.
+   * White background, dark foreground elements (texts, dots, arrows).
    *
+   * @default false
    * @fqn Theme.WHITE
    */
   WHITE: 'hermes-theme--white',
 
   /**
-   * Black background, white foreground.
+   * Black background, white foreground elements (texts, dots, arrows).
    *
+   * @default true
    * @fqn Theme.BLACK
    */
   BLACK: 'hermes-theme--black',
+
+  /**
+   * Shows dot button for each slide.
+   *
+   * This theme provides basic dot visuals. In case different styling of dots is needed, either
+   * extend this theme class or create your own from scratch. Extending this class may be
+   * prefereable as other themes (${link Theme.BLACK}, ${link Theme.WHITE}) are compatible
+   * with this one.
+   *
+   * @default true
+   * @fqn Theme.DEFAULT_DOTS
+   */
+  DEFAULT_DOTS: 'hermes-theme--default-dots',
+
+  /**
+   * Adds hover-dependent visibility change to dots.
+   *
+   * Dots become visible when mouse is hovering above the slider.
+   *
+   * > **NOTE**
+   * >
+   * > This class does not provide visual styles for arrows. It must be used in combination
+   * > with ${link Theme.DEFAULT_DOTS} or custom theme that defines dot visuals.
+   *
+   * @default false
+   * @fqn Theme.HOVER_VISIBLE_DOTS
+   */
+  HOVER_VISIBLE_DOTS: 'hermes-theme--hover-visible-dots',
+
+  /**
+   * Adds hover-dependent opacity change to dots.
+   *
+   * Dots become more opaque twhen mouseis hovering above the slider.
+   *
+   * > **NOTE**
+   * >
+   * > This class does not provide visual styles for dots. It must be used in combination
+   * > with ${link Theme.DEFAULT_DOTS} or custom theme that defines dot visuals.
+   *
+   * @default true
+   * @fqn Theme.HOVER_OPAQUE_DOTS
+   */
+  HOVER_OPAQUE_DOTS: 'hermes-theme--hover-opaque-dots',
+
+  /**
+   * Shows default side arrow buttons.
+   *
+   * This theme provides basic arrow visuals. In case different styling of arrows is needed, either
+   * extend this theme class or create your own from scratch. Extending this class may be
+   * prefereable if you also want to use ${link Theme.RESPONSIVE_ARROWS}.
+   *
+   * @default true
+   * @fqn Theme.DEFAULT_ARROWS
+   */
+  DEFAULT_ARROWS: 'hermes-theme--default-arrows',
+
+  /**
+   * Adds screen responsiveness to slider arrows.
+   *
+   * Slider controls come in 3 different layouts. Each for different range of screen width.
+   *
+   * 1. On wide screens arrows are located on sides out of content area,
+   * 2. On mid-sized screens arrows are located on sides above content area,
+   * 3. On small screens arrows are smaller and located on the bottom at the same height as dots.
+   *
+   * > **NOTE**
+   * >
+   * > This class does not provide visual styles for arrows. It must be used in combination
+   * > with ${link Theme.DEFAULT_ARROWS}.
+   *
+   * @see [Screen Responsiveness](responsiveness.md)
+   * @see Slider.breakpointNarrowToNormal
+   * @see Slider.breakpointNormalToWide
+   *
+   * @default true
+   * @fqn Theme.RESPONSIVE_ARROWS
+   */
+  RESPONSIVE_ARROWS: 'hermes-theme--responsive-arrows',
+
+  /**
+   * Adds hover-dependent visibility change to arrows.
+   *
+   * Arrows become visible when mouse is hovering above the slider.
+   *
+   * > **NOTE**
+   * >
+   * > This class does not provide visual styles for arrows. It must be used in combination
+   * > with ${link Theme.DEFAULT_ARROWS} or custom theme that defines arrow visuals.
+   *
+   * @default false
+   * @fqn Theme.HOVER_VISIBLE_ARROWS
+   */
+  HOVER_VISIBLE_ARROWS: 'hermes-theme--hover-visible-arrows',
+
+  /**
+   * Adds hover-dependent opacity change to arrows.
+   *
+   * Arrows become more opaque twhen mouseis hovering above the slider.
+   *
+   * > **NOTE**
+   * >
+   * > This class does not provide visual styles for arrows. It must be used in combination
+   * > with ${link Theme.DEFAULT_ARROWS} or custom theme that defines arrow visuals.
+   *
+   * @default true
+   * @fqn Theme.HOVER_OPAQUE_ARROWS
+   */
+  HOVER_OPAQUE_ARROWS: 'hermes-theme--hover-opaque-arrows',
+
+  /**
+   * Adds
+   * ${link Theme.DEFAULT_ARROWS},
+   * ${link Theme.DEFAULT_DOTS}.
+   * classes to the slide.
+   *
+   * @default false
+   * @fqn Theme.DEFAULT_CONTROLS
+   */
+  DEFAULT_CONTROLS: 'hermes-theme--default-controls',
+
+  /**
+   * Adds
+   * ${link Theme.HOVER_VISIBLE_ARROWS},
+   * ${link Theme.HOVER_VISIBLE_DOTS}.
+   * classes to the slide.
+   *
+   * @default false
+   * @fqn Theme.HOVER_VISIBLE_CONTROLS
+   */
+  HOVER_VISIBLE_CONTROLS: 'hermes-theme--hover-visible-controls',
+
+  /**
+   * Adds
+   * ${link Theme.HOVER_OPAQUE_ARROWS},
+   * ${link Theme.HOVER_OPAQUE_DOTS}.
+   * classes to the slide.
+   *
+   * @default false
+   * @fqn Theme.HOVER_OPAQUE_CONTROLS
+   */
+  HOVER_OPAQUE_CONTROLS: 'hermes-theme--hover-opaque-controls',
 };
 
 module.exports = Theme;
