@@ -69,11 +69,11 @@ Please consult [Hermes' Declarative API][css-api] for details.
                            hermes-theme--black
                            hermes-theme--default-controls
                            hermes-theme--hover-opaque-controls
-                           hermes-theme--responsive-controls">
+                           hermes-theme--responsive-arrows">
     <div id=webpage class="hermes-theme--white
                            hermes-theme--default-controls
                            hermes-theme--hover-opaque-controls
-                           hermes-theme--responsive-controls">
+                           hermes-theme--responsive-arrows">
       <p>This is a simple web page...
     </div>
     <div id=slideshow>
