@@ -64,10 +64,7 @@ Please consult [Hermes' Declarative API][css-api] for details.
 ```html
 //== slider-declaration ==//
 
-  <div id=my-slider class="hermes-slider
-                           hermes-autoplay
-                           hermes-theme--defaults
-                           hermes-theme--black">
+  <div id=my-slider class="hermes-slider hermes-defaults hermes-theme--black">
     <div id=webpage class="hermes-theme--defaults">
       <p>This is a simple web page...
     </div>

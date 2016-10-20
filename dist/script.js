@@ -5,7 +5,7 @@
 module.exports = require('./lib/hermes');
 
 
-},{"./lib/hermes":15}],2:[function(require,module,exports){
+},{"./lib/hermes":16}],2:[function(require,module,exports){
 /*
 
    Copyright 2015 Maciej Chałapuk
@@ -27,6 +27,7 @@ module.exports = require('./lib/hermes');
 
 var Slider = require('./slider');
 var Option = require('../enums/option');
+var Common = require('../enums/common');
 var Layout = require('../enums/layout');
 var check = require('../utils/check');
 
@@ -54,7 +55,7 @@ module.exports = boot;
  * @param {Element} containerElement element that contains sliders in (not necessarily immediate) children
  * @return {Array<Slider>} array containing all created ${link Slider} instances
  *
- * @see Option.AUTOBOOT
+ * @see Common.AUTOBOOT
  * @fqn boot
  */
 function boot(containerElement) {
@@ -63,7 +64,7 @@ function boot(containerElement) {
   var containerOptions = getEnabledOptions(containerElement);
   var sliderElems = concatUnique(
       [].slice.call(containerElement.querySelectorAll('.'+ Layout.SLIDER)),
-      [].slice.call(containerElement.querySelectorAll('.'+ Layout.SLIDER_SHORT))
+      [].slice.call(containerElement.querySelectorAll('.'+ Common.SLIDER_SHORT))
       );
 
   var sliders = sliderElems.map(function(elem) {
@@ -85,7 +86,7 @@ function boot(containerElement) {
 function getEnabledOptions(element) {
   var retVal = [];
   Object.values(Option).forEach(function(option) {
-    if (element.classList.contains(option) && option !== Option.AUTOBOOT) {
+    if (element.classList.contains(option)) {
       retVal.push(option);
     }
   });
@@ -101,7 +102,7 @@ function concatUnique(unique, candidate) {
 */
 
 
-},{"../enums/layout":8,"../enums/option":10,"../utils/check":20,"./slider":5}],3:[function(require,module,exports){
+},{"../enums/common":7,"../enums/layout":9,"../enums/option":11,"../utils/check":21,"./slider":5}],3:[function(require,module,exports){
 /*
 
    Copyright 2015 Maciej Chałapuk
@@ -379,7 +380,7 @@ MultiMap.prototype.put = function(key, value) {
 */
 
 
-},{"../enums/phase":12,"../utils/check":20,"../utils/detect-features":21}],4:[function(require,module,exports){
+},{"../enums/phase":13,"../utils/check":21,"../utils/detect-features":22}],4:[function(require,module,exports){
 /*!
 
    Copyright 2016 Maciej Chałapuk
@@ -470,7 +471,7 @@ SlideChangeEvent.prototype = {
 
 
 
-},{"../utils/check":20}],5:[function(require,module,exports){
+},{"../utils/check":21}],5:[function(require,module,exports){
 /*!
 
    Copyright 2015 Maciej Chałapuk
@@ -627,7 +628,7 @@ function Slider(elem) {
  * @param {Function} callback that will be called after all slides are upgraded
  * @precondition ${link Slider.prototype.start} was not called on this slider
  * @postcondition calling ${link Slider.prototype.start} again will throw exception
- * @see ${link Option.AUTOBOOT}
+ * @see ${link Common.AUTOBOOT}
  *
  * @fqn Slider.prototype.start
  */
@@ -897,7 +898,7 @@ function noop() {
  */
 
 
-},{"../enums/flag":7,"../enums/layout":8,"../enums/marker":9,"../enums/option":10,"../enums/pattern":11,"../utils/check":20,"../utils/dom":22,"./phaser":3,"./slide-change-event":4,"./upgrader":6}],6:[function(require,module,exports){
+},{"../enums/flag":8,"../enums/layout":9,"../enums/marker":10,"../enums/option":11,"../enums/pattern":12,"../utils/check":21,"../utils/dom":23,"./phaser":3,"./slide-change-event":4,"./upgrader":6}],6:[function(require,module,exports){
 /*!
 
    Copyright 2016 Maciej Chałapuk
@@ -929,6 +930,7 @@ var Theme = require('../enums/theme');
 var Transition = require('../enums/transition');
 var Pattern = require('../enums/pattern');
 var Option = require('../enums/option');
+var Common = require('../enums/common');
 
 var Selector = (function() {
   var selectors = {};
@@ -990,23 +992,29 @@ function start(priv) {
   check(priv.started, 'upgrader.started').is.False();
   priv.started = true;
 
+  expandOptionGroups(priv);
+
   priv.defaultThemes = DOM.extractClassNames(priv.elem, Pattern.THEME) || [ Theme.DEFAULTS ];
   priv.defaultTransitions = DOM.extractClassNames(priv.elem, Pattern.TRANSITION) || DEFAULT_TRANSITIONS;
 
-  expandOptionGroups(priv);
   createArrowButtons(priv);
   createDotButtons(priv);
   upgradeSlides(priv);
 
-  if (!priv.elem.classList.contains(Layout.SLIDER)) {
-    priv.elem.classList.add(Layout.SLIDER);
+  var list = priv.elem.classList;
+  if (!list.contains(Layout.SLIDER)) {
+    list.add(Layout.SLIDER);
   }
-  priv.elem.classList.add(Flag.UPGRADED);
+  list.add(Flag.UPGRADED);
 }
 
 function expandOptionGroups(priv) {
   var list = priv.elem.classList;
 
+  if (list.contains(Common.DEFAULTS)) {
+    list.add(Option.DEFAULTS);
+    list.add(Theme.DEFAULTS);
+  }
   if (list.contains(Option.DEFAULTS)) {
     list.add(Option.AUTOPLAY);
     list.add(Option.ARROW_KEYS);
@@ -1141,7 +1149,102 @@ function noop() {
  */
 
 
-},{"../enums/flag":7,"../enums/layout":8,"../enums/option":10,"../enums/pattern":11,"../enums/theme":13,"../enums/transition":14,"../utils/check":20,"../utils/detect-features":21,"../utils/dom":22}],7:[function(require,module,exports){
+},{"../enums/common":7,"../enums/flag":8,"../enums/layout":9,"../enums/option":11,"../enums/pattern":12,"../enums/theme":14,"../enums/transition":15,"../utils/check":21,"../utils/detect-features":22,"../utils/dom":23}],7:[function(require,module,exports){
+/*!
+
+   Copyright 2015 Maciej Chałapuk
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+*/
+
+'use strict';
+
+/**
+ * Most commonly used class names.
+ *
+ * Each class is checked by the slider in one of two ways:
+ *  1. <a href='#once' id='once'>**checked once**</a> - class name should be set
+ *    in client HTML, slider will check for it only once during upgrade, adding/removing class
+ *    after upgrade make no effect,
+ *  2. <a href='#continuously' id='continuously'>**checked continuously**</a> -
+ *    class name may be added/removed at any time, slider will check if it is set every time
+ *    a decission connected with this class is made.
+ *
+ * There are two categories of class names:
+ *  1. **functional classes** - each of which enables one feature,
+ *  2. **class groups** - that adds many class names to the slider during its
+ *    [upgrade](dom-upgrade.md).
+ *
+ * @name Common Class Names
+ * @summary-column checked Checked
+ * @summary-column target Target Element
+ * @summary-column client-html Client HTML
+ */
+var Common = {
+
+  /**
+   * Automatically creates ${link Slider} objects for all sliders declared on the page
+   * and invokes their ${link Slider.prototype.start} methods.
+   *
+   * This options can be set only on `<body>` element.
+   * It enabled using Hermes without any JavaScript programming.
+   *
+   * > ***WARNING***
+   * >
+   * > When using Hermes via node and broserify, this option is ignored.
+   *
+   * @target document's `<body>`
+   * @checked once
+   * @client-html mandatory
+   * @see boot
+   * @see Slider.prototype.start
+   *
+   * @fqn Common.AUTOBOOT
+   */
+  AUTOBOOT: 'hermes-autoboot',
+
+  /**
+   * Alias for ${link Layout.SLIDER}.
+   *
+   * @target ${link Layout.SLIDER}
+   * @checked once
+   * @client-html mandatory
+   *
+   * @fqn Common.SLIDER_SHORT
+   */
+  SLIDER_SHORT: 'hermes-slider',
+
+  /**
+   * Adds ${link Option.DEFAULTS} and ${link Theme.DEFAULTS} classes to the slider.
+   *
+   * @target ${link Layout.SLIDER}
+   * @checked once
+   * @client-html optional
+   *
+   * @fqn Common.DEFAULTS
+   */
+  DEFAULTS: 'hermes-defaults',
+};
+
+module.exports = Common;
+
+/*
+  eslint-env node
+*/
+
+
+},{}],8:[function(require,module,exports){
 /*!
 
    Copyright 2015 Maciej Chałapuk
@@ -1194,7 +1297,7 @@ module.exports = Flag;
 */
 
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 /*!
 
    Copyright 2015 Maciej Chałapuk
@@ -1218,7 +1321,7 @@ module.exports = Flag;
 /**
  * In most cases, most of layout classes **SHOULD not be used in client HTML**, as they are
  * automatially applied to apropriate elements during [slider's upgrade procedure](dom-upgrade.md)
- * (${link Layout.SLIDER_SHORT} is the only layout class name that MUST be applied in client HTML).
+ * (${link Common.SLIDER_SHORT} is the only layout class name that MUST be applied in client HTML).
  *
  * Layout classes play following roles in slider's inner-workings.
  *  1. **role-id** - class names are used to identify element's role during slider upgrade,
@@ -1230,16 +1333,6 @@ module.exports = Flag;
  * @summary-column client-html Client HTML
  */
 var Layout = {
-
-  /**
-   * Alias for ${link Layout.SLIDER}.
-   *
-   * @usage role-id styling
-   * @client-html mandatory
-   *
-   * @fqn Layout.SLIDER_SHORT
-   */
-  SLIDER_SHORT: 'hermes-slider',
 
   /**
    * Identifies main slider element.
@@ -1391,7 +1484,7 @@ module.exports = Layout;
 */
 
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 /*!
 
    Copyright 2015 Maciej Chałapuk
@@ -1450,10 +1543,10 @@ module.exports = Marker;
 */
 
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 /*!
 
-   Copyright 2015 Maciej Chałapuk
+   Copyright 2016 Maciej Chałapuk
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -1478,19 +1571,6 @@ module.exports = Marker;
  * set on document's `<body>`. Options set on `<body>` are treated as defaults for each ${link
  * Layout.SLIDER} declared on the page.
  *
- * Two categories:
- *  1. **single options** - each of which enables one feature,
- *  2. **option groups** - that adds many option classes to the slider during
- *    [upgrade](dom-upgrade.md).
- *
- * Each option class is checked by the slider in one of two ways:
- *  1. <a href='#once' id='once'>**checked once**</a> - class name should be set
- *    in client HTML, slider will check for it only once during upgrade, adding/removing class
- *    after upgrade make no effect,
- *  2. <a href='#continuously' id='continuously'>**checked continuously**</a> -
- *    class name may be added/removed at any time, slider will check if it is set every time
- *    a decission connected with this class is made.
- *
  * @name Option Class Names
  * @summary-column checked Checked
  * @summary-column target Target Element
@@ -1498,29 +1578,9 @@ module.exports = Marker;
 var Option = {
 
   /**
-   * Automatically creates ${link Slider} objects for all sliders declared on the page
-   * and invokes their ${link Slider.prototype.start} methods.
-   *
-   * This options can be set only on `<body>` element.
-   * It enabled using Hermes without any JavaScript programming.
-   *
-   * > ***WARNING***
-   * >
-   * > When using Hermes via node and broserify, this option is ignored.
-   *
-   * @target document's `<body>`
-   * @checked once
-   * @see boot
-   * @see Slider.prototype.start
-   *
-   * @fqn Option.AUTOBOOT
-   */
-  AUTOBOOT: 'hermes-autoboot',
-
-  /**
    * Adds
    * ${link Option.AUTOPLAY},
-   * ${link Option.ARROW_KEYS}.
+   * ${link Option.ARROW_KEYS}
    * classes to the slider.
    *
    * @target `<body` or ${link Layout.SLIDER}
@@ -1528,7 +1588,7 @@ var Option = {
    *
    * @fqn Option.DEFAULTS
    */
-  DEFAULTS: 'hermes-defaults',
+  DEFAULTS: 'hermes-option--defaults',
 
   /**
    * Automatically moves slider to next slide.
@@ -1541,7 +1601,7 @@ var Option = {
    *
    * @fqn Option.AUTOPLAY
    */
-  AUTOPLAY: 'hermes-autoplay',
+  AUTOPLAY: 'hermes-option--autoplay',
 
   /**
    * Adds keyboard control to slider.
@@ -1555,7 +1615,7 @@ var Option = {
    *
    * @fqn Option.ARROW_KEYS
    */
-  ARROW_KEYS: 'hermes-arrow-keys',
+  ARROW_KEYS: 'hermes-option--arrow-keys',
 };
 
 module.exports = Option;
@@ -1565,7 +1625,7 @@ module.exports = Option;
 */
 
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 /*!
 
    Copyright 2015 Maciej Chałapuk
@@ -1651,7 +1711,7 @@ module.exports = Pattern;
 */
 
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 /*!
 
    Copyright 2015 Maciej Chałapuk
@@ -1713,7 +1773,7 @@ module.exports = Phase;
 */
 
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 /*!
 
    Copyright 2016 Maciej Chałapuk
@@ -1928,7 +1988,7 @@ module.exports = Theme;
 */
 
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 /*!
 
    Copyright 2016 Maciej Chałapuk
@@ -1987,7 +2047,7 @@ module.exports = Transition;
 */
 
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 /*
 
    Copyright 2015 Maciej Chałapuk
@@ -2022,7 +2082,7 @@ module.exports = {
  */
 
 
-},{"./core/boot":2,"./core/phaser":3,"./core/slider":5}],16:[function(require,module,exports){
+},{"./core/boot":2,"./core/phaser":3,"./core/slider":5}],17:[function(require,module,exports){
 /*
 
    Copyright 2016 Maciej Chałapuk
@@ -2058,7 +2118,7 @@ require('./polyfills/class-list')(window.Element);
  */
 
 
-},{"./polyfills/class-list":17,"./polyfills/values":19}],17:[function(require,module,exports){
+},{"./polyfills/class-list":18,"./polyfills/values":20}],18:[function(require,module,exports){
 /*
 
    Copyright 2015 Maciej Chałapuk
@@ -2141,7 +2201,7 @@ function throwError(message) {
  */
 
 
-},{"./dom-token-list":18}],18:[function(require,module,exports){
+},{"./dom-token-list":19}],19:[function(require,module,exports){
 /*
 
    Copyright 2015 Maciej Chałapuk
@@ -2211,7 +2271,7 @@ function Polyfill(object, key) {
  */
 
 
-},{"offensive/lib/nodsl":41}],19:[function(require,module,exports){
+},{"offensive/lib/nodsl":42}],20:[function(require,module,exports){
 /*
 
    Copyright 2015 Maciej Chałapuk
@@ -2253,7 +2313,7 @@ function polyfill(object) {
  */
 
 
-},{"offensive/lib/nodsl":41}],20:[function(require,module,exports){
+},{"offensive/lib/nodsl":42}],21:[function(require,module,exports){
 /*!
 
    Copyright 2016 Maciej Chałapuk
@@ -2304,7 +2364,7 @@ for (var name in customAssertions) {
  */
 
 
-},{"offensive":49,"offensive/lib/model/assertion":36}],21:[function(require,module,exports){
+},{"offensive":50,"offensive/lib/model/assertion":37}],22:[function(require,module,exports){
 /*
 
    Copyright 2015 Maciej Chałapuk
@@ -2374,7 +2434,7 @@ function featureNameFromProperty(instance, defaultName, candidateMap) {
 */
 
 
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 /*!
 
    Copyright 2016 Maciej Chałapuk
@@ -2439,7 +2499,7 @@ function extractClassNames(elem, pattern) {
  */
 
 
-},{"../utils/check":20}],23:[function(require,module,exports){
+},{"../utils/check":21}],24:[function(require,module,exports){
 'use strict';
 
 var Assertion = require('../../model/assertion');
@@ -2562,7 +2622,7 @@ function noop() {
  */
 
 
-},{"../../getters":33,"../../model/alias":35,"../../model/assertion":36,"../../model/parameterized-assertion":39}],24:[function(require,module,exports){
+},{"../../getters":34,"../../model/alias":36,"../../model/assertion":37,"../../model/parameterized-assertion":40}],25:[function(require,module,exports){
 'use strict';
 
 var Assertion = require('../../model/assertion');
@@ -2617,7 +2677,7 @@ function isFalsy(value) {
  */
 
 
-},{"../../model/alias":35,"../../model/assertion":36}],25:[function(require,module,exports){
+},{"../../model/alias":36,"../../model/assertion":37}],26:[function(require,module,exports){
 'use strict';
 
 Object.assign = require('../../polyfill/assign');
@@ -2639,7 +2699,7 @@ module.exports = Object.assign({},
  */
 
 
-},{"../../polyfill/assign":42,"./array":23,"./boolean":24,"./null":26,"./number":27,"./property":28,"./type":29}],26:[function(require,module,exports){
+},{"../../polyfill/assign":43,"./array":24,"./boolean":25,"./null":27,"./number":28,"./property":29,"./type":30}],27:[function(require,module,exports){
 'use strict';
 
 var Assertion = require('../../model/assertion');
@@ -2672,7 +2732,7 @@ function isNull(value) {
  */
 
 
-},{"../../model/alias":35,"../../model/assertion":36}],27:[function(require,module,exports){
+},{"../../model/alias":36,"../../model/assertion":37}],28:[function(require,module,exports){
 'use strict';
 
 var ParameterizedAssertion = require('../../model/parameterized-assertion');
@@ -2734,7 +2794,7 @@ module.exports = {
  */
 
 
-},{"../../model/alias":35,"../../model/parameterized-assertion":39}],28:[function(require,module,exports){
+},{"../../model/alias":36,"../../model/parameterized-assertion":40}],29:[function(require,module,exports){
 'use strict';
 
 Object.getPrototypeOf = require('../../polyfill/get-prototype-of');
@@ -2818,7 +2878,7 @@ function hasProperty(object, propertyName) {
  */
 
 
-},{"../../getters":33,"../../model/alias":35,"../../model/parameterized-assertion":39,"../../polyfill/get-prototype-of":43}],29:[function(require,module,exports){
+},{"../../getters":34,"../../model/alias":36,"../../model/parameterized-assertion":40,"../../polyfill/get-prototype-of":44}],30:[function(require,module,exports){
 'use strict';
 
 var Assertion = require('../../model/assertion');
@@ -2886,7 +2946,7 @@ function getTypePrefix(type) {
  */
 
 
-},{"../../model/alias":35,"../../model/assertion":36,"../../model/parameterized-assertion":39}],30:[function(require,module,exports){
+},{"../../model/alias":36,"../../model/assertion":37,"../../model/parameterized-assertion":40}],31:[function(require,module,exports){
 'use strict';
 
 // names of context methods that will do nothing and return this
@@ -2905,7 +2965,7 @@ module.exports = [
  */
 
 
-},{}],31:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 'use strict';
 
 var UnaryOperator = require('../../model/unary-operator');
@@ -2961,7 +3021,7 @@ function applyNot(operand) {
  */
 
 
-},{"../../model/alias":35,"../../model/binary-operator":37,"../../model/unary-operator":40}],32:[function(require,module,exports){
+},{"../../model/alias":36,"../../model/binary-operator":38,"../../model/unary-operator":41}],33:[function(require,module,exports){
 'use strict';
 
 Object.setPrototypeOf = require('./polyfill/set-prototype-of');
@@ -3180,7 +3240,7 @@ function returnTrue() {
  */
 
 
-},{"./message-builder":34,"./nodsl":41,"./polyfill/set-prototype-of":44,"./registry/assertion":45,"./registry/operator":47,"./syntax-tree-builder":48}],33:[function(require,module,exports){
+},{"./message-builder":35,"./nodsl":42,"./polyfill/set-prototype-of":45,"./registry/assertion":46,"./registry/operator":48,"./syntax-tree-builder":49}],34:[function(require,module,exports){
 'use strict';
 
 // built in getters
@@ -3208,7 +3268,7 @@ module.exports = {
  */
 
 
-},{}],34:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 'use strict';
 
 var Assertion = require('./model/assertion');
@@ -3394,7 +3454,7 @@ function pipe() {
  */
 
 
-},{"./model/assertion":36,"./model/unary-operator":40,"./nodsl":41}],35:[function(require,module,exports){
+},{"./model/assertion":37,"./model/unary-operator":41,"./nodsl":42}],36:[function(require,module,exports){
 'use strict';
 
 module.exports = Alias;
@@ -3412,7 +3472,7 @@ Alias.prototype = {};
  */
 
 
-},{}],36:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 'use strict';
 
 var getters = require('../getters');
@@ -3435,7 +3495,7 @@ Assertion.prototype = {
  */
 
 
-},{"../getters":33}],37:[function(require,module,exports){
+},{"../getters":34}],38:[function(require,module,exports){
 'use strict';
 
 var Operator = require('./operator');
@@ -3461,7 +3521,7 @@ function addBinaryOperator(syntax, applyFunction) {
  */
 
 
-},{"./operator":38}],38:[function(require,module,exports){
+},{"./operator":39}],39:[function(require,module,exports){
 'use strict';
 
 module.exports = Operator;
@@ -3478,7 +3538,7 @@ Operator.prototype = {
  */
 
 
-},{}],39:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 'use strict';
 
 var Assertion = require('./assertion');
@@ -3498,7 +3558,7 @@ ParameterizedAssertion.prototype = new Assertion();
  */
 
 
-},{"./assertion":36}],40:[function(require,module,exports){
+},{"./assertion":37}],41:[function(require,module,exports){
 'use strict';
 
 var Operator = require('./operator');
@@ -3524,7 +3584,7 @@ function addUnaryOperator(syntax, applyFunction) {
  */
 
 
-},{"./operator":38}],41:[function(require,module,exports){
+},{"./operator":39}],42:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -3542,7 +3602,7 @@ function noDslCheck(condition) {
  */
 
 
-},{}],42:[function(require,module,exports){
+},{}],43:[function(require,module,exports){
 'use strict';
 
 module.exports = Object.assign || polyfill;
@@ -3568,7 +3628,7 @@ function assign0(target, source) {
  */
 
 
-},{}],43:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
 'use strict';
 
 module.exports = originalOrPolyfill();
@@ -3597,7 +3657,7 @@ function polyfill(instance) {
  */
 
 
-},{}],44:[function(require,module,exports){
+},{}],45:[function(require,module,exports){
 'use strict';
 
 module.exports = Object.setPrototypeOf || polyfill;
@@ -3615,7 +3675,7 @@ function polyfill(instance, prototype) {
  */
 
 
-},{}],45:[function(require,module,exports){
+},{}],46:[function(require,module,exports){
 'use strict';
 
 var Assertion = require('../model/assertion');
@@ -3691,7 +3751,7 @@ function assert(name, assertion) {
  */
 
 
-},{"../model/alias":35,"../model/assertion":36,"../model/parameterized-assertion":39,"../nodsl":41,"./noop":46}],46:[function(require,module,exports){
+},{"../model/alias":36,"../model/assertion":37,"../model/parameterized-assertion":40,"../nodsl":42,"./noop":47}],47:[function(require,module,exports){
 'use strict';
 
 var nodsl = require('../nodsl');
@@ -3722,7 +3782,7 @@ function returnThis() {
  */
 
 
-},{"../nodsl":41}],47:[function(require,module,exports){
+},{"../nodsl":42}],48:[function(require,module,exports){
 'use strict';
 
 var Operator = require('../model/operator');
@@ -3778,7 +3838,7 @@ OperatorRegistry.prototype = {
  */
 
 
-},{"../model/alias":35,"../model/binary-operator":37,"../model/operator":38,"../nodsl":41,"./assertion":45,"./noop":46}],48:[function(require,module,exports){
+},{"../model/alias":36,"../model/binary-operator":38,"../model/operator":39,"../nodsl":42,"./assertion":46,"./noop":47}],49:[function(require,module,exports){
 'use strict';
 
 var nodsl = require('./nodsl');
@@ -3870,7 +3930,7 @@ function cacheResult(evaluate) {
  */
 
 
-},{"./nodsl":41}],49:[function(require,module,exports){
+},{"./nodsl":42}],50:[function(require,module,exports){
 'use strict';
 
 var CheckFactory = require('./lib/check-factory');
@@ -3920,7 +3980,7 @@ function throwContractError(context) {
  */
 
 
-},{"./lib/built-ins/assertions":25,"./lib/built-ins/noops":30,"./lib/built-ins/operators":31,"./lib/check-factory":32,"./lib/registry/assertion":45,"./lib/registry/noop":46,"./lib/registry/operator":47}],50:[function(require,module,exports){
+},{"./lib/built-ins/assertions":26,"./lib/built-ins/noops":31,"./lib/built-ins/operators":32,"./lib/check-factory":33,"./lib/registry/assertion":46,"./lib/registry/noop":47,"./lib/registry/operator":48}],51:[function(require,module,exports){
 'use strict';
 
 require('hermes-slider/lib/polyfills');
@@ -3945,4 +4005,4 @@ window.WebFontConfig = {
 }());
 document.documentElement.classList.add('js');
 
-},{"hermes-slider":1,"hermes-slider/lib/polyfills":16}]},{},[50]);
+},{"hermes-slider":1,"hermes-slider/lib/polyfills":17}]},{},[51]);
