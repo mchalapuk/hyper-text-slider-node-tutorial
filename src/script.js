@@ -1,10 +1,10 @@
 'use strict';
 
-require('hermes-slider/lib/polyfills');
-var hermes = require('hermes-slider');
+require('hyper-text-slider/lib/polyfills');
+var htSlider = require('hyper-text-slider');
 
 window.addEventListener('load', function() {
-  hermes.boot(document.body);
+  htSlider.boot(document.body);
 });
 window.WebFontConfig = {
   google: { families: [ 'Roboto:thin' ] },

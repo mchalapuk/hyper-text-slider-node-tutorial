@@ -1,11 +1,12 @@
 {
-  "name": "hermes-example-node",
-  "version": "0.2.1",
-  "description": "Example page using Hermes slider via nodejs and browserify",
-  "main": "index.js",
+  "name": "hyper-text-slider-node-tutorial",
+  "version": "0.2.5",
+  "description": "Tutotial and example page using hyper-text-slider via nodejs and browserify.",
+  "main": "index.html",
   "keywords": [
+    "tutorial",
     "example",
-    "hermes",
+    "hyper-text-slider",
     "slider",
     "css3",
     "node",
@@ -17,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/webfront-toolkit/hermes"
+    "url": "https://github.com/muroc/hyper-text-slider"
   },
   "author": "Maciej Chałapuk",
   "license": "MIT",
@@ -38,6 +39,6 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
-    "hermes-slider": "webfront-toolkit/hermes"
+    "hyper-text-slider": "muroc/hyper-text-slider"
   }
 }

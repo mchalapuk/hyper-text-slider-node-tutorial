@@ -39,7 +39,7 @@ var files = {
     dir.src +'*.js',
   ],
   deps: [
-    'node_modules/hermes/src/**/*',
+    'node_modules/hyper-text-slider/lib/**/*',
   ],
 };
 

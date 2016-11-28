@@ -7,14 +7,14 @@
 ## 1.1. Dependencies
 
 Use [npm][npm] to install [gulp][gulp], [browserify][browserify], [sass][sass],
-[del][del], and [hermes][hermes].
+[del][del], and [hyper-text-slider][slider].
 
 [npm]: https://docs.npmjs.com/getting-started/what-is-npm
 [gulp]: https://github.com/gulpjs/gulp
 [browserify]: https://github.com/substack/node-browserify
 [sass]: https://github.com/sass/sass
 [del]: https://github.com/sindresorhus/del
-[hermes]: https://github.com/webfront-toolkit/hermes
+[slider]: https://github.com/muroc/hyper-text-slider
 
 ```sh
 # Initialize the project, if you haven't done that already.
@@ -26,7 +26,7 @@ npm install gulp-util --save-dev
 npm install browserify --save-dev
 npm install vinyl-source-stream --save-dev
 npm install gulp-sass --save-dev
-npm install hermes-slider --save-dev
+npm install hyper-text-slider --save-dev
 npm install del --save-dev
 ```
 
@@ -59,9 +59,9 @@ Use [wget][wget] to download image files that will be used as backgrounds.
 ```sh
 # Download image files
 cd dist/images
-wget https://webfront-toolkit.github.io/hermes-node-example/dist/images/big-ben.jpg
-wget https://webfront-toolkit.github.io/hermes-node-example/dist/images/css-on-macbook-pro.jpg
-wget https://webfront-toolkit.github.io/hermes-node-example/dist/images/keyboard.jpg
+wget https://muroc.github.io/hyper-text-slider-node-tutorial/dist/images/big-ben.jpg
+wget https://muroc.github.io/hyper-text-slider-node-tutorial/dist/images/css-on-macbook-pro.jpg
+wget https://muroc.github.io/hyper-text-slider-node-tutorial/dist/images/keyboard.jpg
 cd -
 ```
 

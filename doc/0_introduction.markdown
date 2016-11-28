@@ -4,7 +4,7 @@
 
 # 0. Introduction
 
-This is a tutorial on using [hermes][hermes] via [node][node] and [browserify][browserify].
+This is a tutorial on using [HyperText Slider][slider] via [Node][node] and [Browserify][browserify].
 Source code examples used in here make up a complete project of&nbsp;a&nbsp;single webpage
 containing a nice slideshow. All examples were extracted from the tutorial to provide
 executable form of&nbsp;the project (check out [1. Project Setup][setup] for details).
@@ -19,7 +19,7 @@ Following tools will be used throughout the project:
  * [gulp][gulp] as a build system,
  * [browserify][browserify] to make [node][node] modules work in the browser,
  * [sass][sass] as a preprocessor for [css][css],
- * [hermes][hermes] to implement a slideshow on a webpage.
+ * [hyper-text-slider][slider] to implement a slideshow on a webpage.
 
 [bash]: https://en.wikipedia.org/wiki/Bash_(Unix_shell)
 [wget]: https://www.gnu.org/software/wget/
@@ -29,7 +29,7 @@ Following tools will be used throughout the project:
 [node]: https://nodejs.org/en/
 [sass]: https://github.com/sass/sass
 [css]: https://developer.mozilla.org/en-US/docs/Web/CSS
-[hermes]: https://github.com/webfront-toolkit/hermes
+[slider]: https://github.com/muroc/hyper-text-slider
 
 ## 0.2. Meta-information
 
@@ -37,11 +37,11 @@ This tutorial contains information on:
 
  * Setting up a font-end project using node,
  * Configuring browserify and sass with gulp,
- * Writing HTML webpage containing hermes slider,
+ * Writing HTML webpage containing HyperText Slider,
  * Configuring slide themes,
- * Writing JavaScript module that loads hermes,
- * Importing hermes' CSS stylesheets,
- * Adding your own CSS to hermes slider,
+ * Writing JavaScript module that loads HyperText Slider,
+ * Importing slider's CSS stylesheets,
+ * Adding your own CSS to a slider,
  * Styling individual slides,
  * Preventing [FOUC][fouc].
 
@@ -56,8 +56,8 @@ And does not contain information on:
  * Writing custom themes (see [Custom Themes Guide][custom-themes]),
  * Preloading background images.
 
-[declarative-api]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md
-[custom-themes]: https://github.com/webfront-toolkit/hermes/blob/master/doc/custom-themes.md
+[declarative-api]: https://github.com/muroc/hyper-text-slider/blob/master/doc/class-names.md
+[custom-themes]: https://github.com/muroc/hyper-text-slider/blob/master/doc/custom-themes.md
 
 &nbsp;<br>
 Next Page &nbsp;&gt;&nbsp; [1. Project Setup][setup]

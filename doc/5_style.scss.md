@@ -4,13 +4,13 @@
 
 # 5. Stylesheet
 
-Before doing any styling, we need to import basic [hermes][hermes] styles
-(we may want to overwrite some of them later).
+Before doing any styling, we need to import basic styles for [HyperText
+Slider][slider] (we may want to overwrite some of them later).
 
-[hermes]: https://github.com/webfront-toolkit/hermes
+[slider]: https://github.com/muroc/hyper-text-slider
 
 ```sass
-@import 'node_modules/hermes-slider/lib/_hermes.scss';
+@import 'node_modules/hyper-text-slider/lib/_slider.scss';
 ```
 
 ## 5.1. Slider Size
@@ -49,12 +49,12 @@ And have height of 600px on bigger screens.
 
 ## 5.2. Typography
 
-[`hermes-theme--white`][theme-classes] and [`hermes-theme--black`][theme-classes]
+[`ht-theme--white`][theme-classes] and [`ht-theme--black`][theme-classes]
 do not contain any typography styling. In order to use Roboto font,
 which was [loaded in the our script][loading-fonts], `font-family` must be set.
 
-[theme-classes]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md#theme-class-names
-[transition-classes]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md#transition-class-names
+[theme-classes]: https://github.com/muroc/hyper-text-slider/blob/master/doc/class-names.md#theme-class-names
+[transition-classes]: https://github.com/muroc/hyper-text-slider/blob/master/doc/class-names.md#transition-class-names
 [loading-fonts]: 3_script.js.md#33-loading-fonts
 
 ```sass
@@ -72,7 +72,7 @@ body {
 > (e.g. multiple fonts used throughout the slideshow) require usage
 > of [custom themes][custom-themes].
 
-[custom-themes]: https://github.com/webfront-toolkit/hermes/blob/master/doc/custom-themes.md
+[custom-themes]: https://github.com/muroc/hyper-text-slider/blob/master/doc/custom-themes.md
 
 ## 5.3. Backgrounds
 
@@ -81,17 +81,17 @@ Let's do that.
 
 ```sass
 #slideshow {
-  .hermes-layout--background {
+  .ht-layout--background {
     background-image: url('images/big-ben.jpg');
   }
 }
 #dependencies {
-  .hermes-layout--background {
+  .ht-layout--background {
     background-image: url('images/css-on-macbook-pro.jpg');
   }
 }
 #more {
-  .hermes-layout--background {
+  .ht-layout--background {
     background-image: url('images/keyboard.jpg');
   }
 }
@@ -102,7 +102,7 @@ First slide has no background image, only white background from default theme.
 This will make transition to second slide more impressive.
 By default, slide backgrounds are [centered][background-position] without
 [repeat][background-repeat] and with [cover][background-size].
-[`hermes-theme--black`][theme-classes] also adds an&nbsp;overlay which
+[`ht-theme--black`][theme-classes] also adds an&nbsp;overlay which
 darkens the background.
 In most cases, setting [`background-image`][background-image] is enough
 to make things look good.
@@ -124,19 +124,19 @@ body {
 
 ## 5.4. In-slide Animations
 
-When slide becomes active, slider adds [`hermes-slide-to`][slide-to] class
+When slide becomes active, slider adds [`ht-slide-to`][slide-to] class
 on it. Using this class as a part of CSS selector is very handy in cases when
 styled slide contains animations or transitions (they will be started each
 time slide becomes visible).
 
-[slide-to]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md#hermes-slide-to
+[slide-to]: https://github.com/muroc/hyper-text-slider/blob/master/doc/class-names.md#ht-slide-to
 
 ```sass
 @keyframes blink {
   0% { color: #222; }
   100% { color: #aa2; }
 }
-#dependencies.hermes-slide-to {
+#dependencies.ht-slide-to {
   a {
     animation-name: blink;
     animation-timing-function: ease-in-out;
@@ -199,5 +199,5 @@ Remember to compile all sources with `gulp`
 &nbsp;<br>
 Next Page &nbsp;&gt;&nbsp; [6. Result][result]
 
-[result]: https://webfront-toolkit.github.io/hermes-node-example
+[result]: https://muroc.github.io/hyper-text-slider-node-tutorial
 

@@ -4,17 +4,17 @@
 
 # 4. HTML Page
 
-To make [hermes][hermes] work via [node][node],
+To make [HyperText Slider][slider] work via [Node][node],
 3 things are needed in client HTML.
 
-[hermes]: https://github.com/webfront-toolkit/hermes
+[slider]: https://github.com/muroc/hyper-text-slider
 [node]: https://nodejs.org/en/
 
 ```html
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Hermes via Node and Browserify</title>
+  <title>HyperText Slider via Node and Browserify</title>
 //:: stylesheet :://
 </head>
 <body>
@@ -41,48 +41,47 @@ property that can be used in a CSS transition.
 
 ## 4.2. Slider Declaration
 
-Element with [`hermes-slider`][layout-slider] class name signifies
+Element with [`ht-slider`][layout-slider] class name signifies
 declaration of a slider.
-Hermes' features are enabled by adding other class names on
+Features of HyperText Sliderare enabled by adding other class names on
 the slider element.
-[`hermes-defaults`][hermes-defaults] is an option group, which enables
+[`ht-defaults`][ht-defaults] is an option group, which enables
 most of the features.
 
 This is a minimal configuration, but you can get pretty wild in here
 (enable specific [options][option-classes],
 set [CSS transitions][transition-class],
 or specify [time duration][time-classes] of a slide).
-Please consult [Hermes' Declarative API][css-api] for details.
+Please consult [Declarative API of HyperText Slider][css-api] for details.
 
-[layout-slider]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md#hermes-slider
-[transition-class]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md#hermes-transition--sg
-[time-classes]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md#time-class-names
-[option-classes]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md#option-class-names
-[hermes-defaults]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md#hermes-defaults
-[css-api]: https://github.com/webfront-toolkit/hermes/blob/master/doc/class-names.md
+[layout-slider]: https://github.com/muroc/hyper-text-slider/blob/master/doc/class-names.md#ht-slider
+[transition-class]: https://github.com/muroc/hyper-text-slider/blob/master/doc/class-names.md#ht-transition--sg
+[time-classes]: https://github.com/muroc/hyper-text-slider/blob/master/doc/class-names.md#time-class-names
+[option-classes]: https://github.com/muroc/hyper-text-slider/blob/master/doc/class-names.md#option-class-names
+[ht-defaults]: https://github.com/muroc/hyper-text-slider/blob/master/doc/class-names.md#ht-defaults
+[css-api]: https://github.com/muroc/hyper-text-slider/blob/master/doc/class-names.md
 
 ```html
 //== slider-declaration ==//
 
-  <div id=my-slider class="hermes-slider hermes-defaults hermes-theme--black">
-    <div id=webpage class="hermes-theme--defaults">
+  <div id=my-slider class="ht-slider ht-defaults ht-theme--black">
+    <div id=webpage class="ht-theme--defaults">
       <p>This is a simple web page...
     </div>
     <div id=slideshow>
       <p>...which contains a nice
-       <a href=https://github.com/webfront-toolkit/hermes>CSS3 Slideshow</a>.
+       <a href=https://github.com/muroc/hyper-text-slider>CSS3 Slideshow</a>.
     </div>
     <div id=dependencies>
       <p>It was built using
         <a href=https://github.com/gulpjs/gulp class=nth1>gulp</a>,
         <a href=https://github.com/substack/node-browserify class=nth2>browserify</a>,
         <a href=https://github.com/sass/sass class=nth3>sass</a>,
-        and <a href=https://github.com/webfront-toolkit/hermes class=nth4>hermes</a>.
+        and <a href=https://github.com/muroc/hyper-text-slider class=nth4>hyper-text-slider</a>.
     </div>
     <div id=more>
       <p>For more info, check out
-       <a href=https://github.com/webfront-toolkit/hermes-node-example>Hermes
-       Node Tutorial</a>.
+       <a href=https://github.com/muroc/hyper-text-slider-node-tutorial>HyperText Slider Node Tutorial</a>.
     </div>
   </div>
 ```

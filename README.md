@@ -1,20 +1,20 @@
-[travis-image]: https://travis-ci.org/webfront-toolkit/hermes-node-example.svg?branch=master
-[travis-url]: https://travis-ci.org/webfront-toolkit/hermes-node-example
-[david-image]: https://david-dm.org/webfront-toolkit/hermes-node-example.svg
-[david-url]: https://david-dm.org/webfront-toolkit/hermes-node-example
-[david-image-dev]: https://david-dm.org/webfront-toolkit/hermes-node-example/dev-status.svg
-[david-url-dev]: https://david-dm.org/webfront-toolkit/hermes-node-example?type=dev
+[travis-image]: https://travis-ci.org/muroc/hyper-text-slider-node-tutorial.svg?branch=master
+[travis-url]: https://travis-ci.org/muroc/hyper-text-slider-node-tutorial
+[david-image]: https://david-dm.org/muroc/hyper-text-slider-node-tutorial.svg
+[david-url]: https://david-dm.org/muroc/hyper-text-slider-node-tutorial
+[david-image-dev]: https://david-dm.org/muroc/hyper-text-slider-node-tutorial/dev-status.svg
+[david-url-dev]: https://david-dm.org/muroc/hyper-text-slider-node-tutorial?type=dev
 
-# [Hermes][hermes] [Node][node] Example
+# [HyperText Slider][slider] [Node][node] Tutorial
 
 [![Build Status][travis-image]][travis-url]
 [![Dependency Status][david-image]][david-url]
 [![devDependency Status][david-image-dev]][david-url-dev]
 
-A tutorial and an example project of using [hermes slider][hermes]
-with [node][node] and [browserify][browserify].
+A tutorial and an example project of using [HyperText Slider][slider]
+with [Node][node] and [Browserify][browserify].
 
-[hermes]: https://github.com/webfront-toolkit/hermes
+[slider]: https://github.com/muroc/hyper-text-slider
 [node]: https://nodejs.org/
 [browserify]: https://github.com/substack/node-browserify
 
@@ -34,7 +34,7 @@ with [node][node] and [browserify][browserify].
 [js-module]: doc/3_script.js.md
 [html-page]: doc/4_index.html.md
 [stylesheet]: doc/5_style.scss.md
-[result]: https://webfront-toolkit.github.io/hermes-node-example
+[result]: https://muroc.github.io/hyper-text-slider-node-tutorial
 
 ## License
 

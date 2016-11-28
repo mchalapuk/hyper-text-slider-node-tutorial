@@ -2,13 +2,13 @@
 // There are inmates and there are convicts. A convict has a certain code. And he knows to show a
 // certain respect. An inmate, on the other hand, pulls the pin on his fellow man. Does the guards'
 // work for them... brings shame... to the game. So, which are you gonna be?
-module.exports = require('./lib/hermes');
+module.exports = require('./lib/hyper-text-slider');
 
 
-},{"./lib/hermes":16}],2:[function(require,module,exports){
+},{"./lib/hyper-text-slider":16}],2:[function(require,module,exports){
 /*
 
-   Copyright 2015 Maciej Chałapuk
+   Copyright 2016 Maciej Chałapuk
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ var check = require('../utils/check');
 module.exports = boot;
 
 /**
- * Default Hermes boot procedure.
+ * Default HyperText Slider boot procedure.
  *
  * For each element with ${link Layout.SLIDER} class name found in passed container
  * (typically document's `<body>`):
@@ -46,8 +46,8 @@ module.exports = boot;
  * If you are using browserify, you may want to call this function at some point...
  *
  * ```javascript
- * var hermes = require('hermes-slider');
- * hermes.boot(document.body);
+ * var htSlider = require('hyper-text-slider');
+ * htSlider.boot(document.body);
  * ```
  *
  * ...or even consider implementing bootup by yourself.
@@ -500,7 +500,7 @@ var check = require('../utils/check');
 /**
  * > **NOTE**
  * >
- * > Hermes JavaScript API should be used only when specific initialization or integration
+ * > HyperText Slider JavaScript API should be used only when specific initialization or integration
  * > with other parts of the website is required. In other (simpler) cases please consider
  * > using [declarative API](class-names.md).
  *
@@ -508,10 +508,10 @@ var check = require('../utils/check');
  *
  * ```javascript
  * // browserify is supported
- * var hermes = require('hermes-slider');
+ * var ht = require('hyper-text-slider');
  *
  * window.addEventListener('load', function() {
- *   var slider = new hermes.Slider(document.getElementById('my-slider'));
+ *   var slider = new ht.Slider(document.getElementById('my-slider'));
  *   slider.start();
  * });
  * ```
@@ -527,6 +527,7 @@ var Option = require('../enums/option');
 var Marker = require('../enums/marker');
 var Flag = require('../enums/flag');
 var Pattern = require('../enums/pattern');
+var Phase = require('../enums/phase');
 
 var EVENT_NAMES = [ 'slideChange' ];
 
@@ -803,7 +804,7 @@ function removeTempClasses(priv) {
 function addTempClasses(priv) {
   var currentSlide = priv.slides[priv.toIndex];
 
-  priv.tempClasses = (currentSlide.id !== null? [ 'hermes-slide-id-'+ currentSlide.id ]: [])
+  priv.tempClasses = (currentSlide.id !== null? [ 'ht-slide-id-'+ currentSlide.id ]: [])
     .concat(DOM.findClassNames(currentSlide, Pattern.TRANSITION))
     .concat(DOM.findClassNames(currentSlide, Pattern.THEME))
     ;
@@ -814,7 +815,7 @@ function addTempClasses(priv) {
 }
 
 function onPhaseChange(priv, phase) {
-  if (phase === 'hermes-after-transition' && priv.elem.classList.contains(Option.AUTOPLAY)) {
+  if (phase === Phase.AFTER_TRANSITION && priv.elem.classList.contains(Option.AUTOPLAY)) {
     moveToNext(priv);
   }
 }
@@ -898,7 +899,7 @@ function noop() {
  */
 
 
-},{"../enums/flag":8,"../enums/layout":9,"../enums/marker":10,"../enums/option":11,"../enums/pattern":12,"../utils/check":21,"../utils/dom":23,"./phaser":3,"./slide-change-event":4,"./upgrader":6}],6:[function(require,module,exports){
+},{"../enums/flag":8,"../enums/layout":9,"../enums/marker":10,"../enums/option":11,"../enums/pattern":12,"../enums/phase":13,"../utils/check":21,"../utils/dom":23,"./phaser":3,"./slide-change-event":4,"./upgrader":6}],6:[function(require,module,exports){
 /*!
 
    Copyright 2016 Maciej Chałapuk
@@ -943,15 +944,15 @@ var Selector = (function() {
 var themeGroups = {};
 themeGroups[Theme.DEFAULTS] = [
   Theme.WHITE,
-  Theme.DEFAULT_DOTS,
+  Theme.BASIC_DOTS,
   Theme.HOVER_OPAQUE_DOTS,
-  Theme.DEFAULT_ARROWS,
+  Theme.BASIC_ARROWS,
   Theme.HOVER_OPAQUE_ARROWS,
   Theme.RESPONSIVE_ARROWS,
 ];
-themeGroups[Theme.DEFAULT_CONTROLS] = [
-  Theme.DEFAULT_ARROWS,
-  Theme.DEFAULT_DOTS,
+themeGroups[Theme.BASIC_CONTROLS] = [
+  Theme.BASIC_ARROWS,
+  Theme.BASIC_DOTS,
 ];
 themeGroups[Theme.HOVER_VISIBLE_CONTROLS] = [
   Theme.HOVER_VISIBLE_ARROWS,
@@ -1038,7 +1039,7 @@ function upgradeSlides(priv) {
   priv.elem.addEventListener(feature.animationEventName, maybeUpgradeSlide, false);
 
   function maybeUpgradeSlide(evt) {
-    if (evt.animationName === 'hermesSlideInserted' &&
+    if (evt.animationName === 'htSlideInserted' &&
         evt.target.parentNode === priv.elem &&
         !evt.target.classList.contains(Layout.CONTROLS)) {
       upgradeSlide(priv, evt.target);
@@ -1152,7 +1153,7 @@ function noop() {
 },{"../enums/common":7,"../enums/flag":8,"../enums/layout":9,"../enums/option":11,"../enums/pattern":12,"../enums/theme":14,"../enums/transition":15,"../utils/check":21,"../utils/detect-features":22,"../utils/dom":23}],7:[function(require,module,exports){
 /*!
 
-   Copyright 2015 Maciej Chałapuk
+   Copyright 2016 Maciej Chałapuk
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -1198,11 +1199,11 @@ var Common = {
    * and invokes their ${link Slider.prototype.start} methods.
    *
    * This options can be set only on `<body>` element.
-   * It enabled using Hermes without any JavaScript programming.
+   * It enabled using HyperText Slider without any JavaScript programming.
    *
    * > ***WARNING***
    * >
-   * > When using Hermes via node and broserify, this option is ignored.
+   * > When using HyperText Slider via node and broserify, this option is ignored.
    *
    * @target document's `<body>`
    * @checked once
@@ -1212,7 +1213,7 @@ var Common = {
    *
    * @fqn Common.AUTOBOOT
    */
-  AUTOBOOT: 'hermes-autoboot',
+  AUTOBOOT: 'ht-autoboot',
 
   /**
    * Alias for ${link Layout.SLIDER}.
@@ -1223,7 +1224,7 @@ var Common = {
    *
    * @fqn Common.SLIDER_SHORT
    */
-  SLIDER_SHORT: 'hermes-slider',
+  SLIDER_SHORT: 'ht-slider',
 
   /**
    * Adds ${link Option.DEFAULTS} and ${link Theme.DEFAULTS} classes to the slider.
@@ -1234,7 +1235,7 @@ var Common = {
    *
    * @fqn Common.DEFAULTS
    */
-  DEFAULTS: 'hermes-defaults',
+  DEFAULTS: 'ht-defaults',
 };
 
 module.exports = Common;
@@ -1247,7 +1248,7 @@ module.exports = Common;
 },{}],8:[function(require,module,exports){
 /*!
 
-   Copyright 2015 Maciej Chałapuk
+   Copyright 2016 Maciej Chałapuk
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -1300,7 +1301,7 @@ module.exports = Flag;
 },{}],9:[function(require,module,exports){
 /*!
 
-   Copyright 2015 Maciej Chałapuk
+   Copyright 2016 Maciej Chałapuk
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -1345,7 +1346,7 @@ var Layout = {
    *
    * @fqn Layout.SLIDER
    */
-  SLIDER: 'hermes-layout--slider',
+  SLIDER: 'ht-layout--slider',
 
   /**
    * Identifies a slide.
@@ -1359,7 +1360,7 @@ var Layout = {
    *
    * @fqn Layout.SLIDE
    */
-  SLIDE: 'hermes-layout--slide',
+  SLIDE: 'ht-layout--slide',
 
   /**
    * Identifies background of a slide.
@@ -1374,7 +1375,7 @@ var Layout = {
    *
    * @fqn Layout.BACKGROUND
    */
-  BACKGROUND: 'hermes-layout--background',
+  BACKGROUND: 'ht-layout--background',
 
   /**
    * Identifies content of a slide.
@@ -1390,7 +1391,7 @@ var Layout = {
    *
    * @fqn Layout.CONTENT
    */
-  CONTENT: 'hermes-layout--content',
+  CONTENT: 'ht-layout--content',
 
   /**
    * Set during upgrade on all generated controls.
@@ -1404,7 +1405,7 @@ var Layout = {
    *
    * @fqn Layout.CONTROLS
    */
-  CONTROLS: 'hermes-layout--controls',
+  CONTROLS: 'ht-layout--controls',
 
   /**
    * Set during upgrade on generated arrow buttons.
@@ -1418,7 +1419,7 @@ var Layout = {
    *
    * @fqn Layout.ARROW
    */
-  ARROW: 'hermes-layout--arrow',
+  ARROW: 'ht-layout--arrow',
 
   /**
    * Set during upgrade on generated left arrow button.
@@ -1432,7 +1433,7 @@ var Layout = {
    *
    * @fqn Layout.ARROW_LEFT
    */
-  ARROW_LEFT: 'hermes-layout--arrow-left',
+  ARROW_LEFT: 'ht-layout--arrow-left',
 
   /**
    * Set during upgrade on generated right arrow button.
@@ -1446,7 +1447,7 @@ var Layout = {
    *
    * @fqn Layout.ARROW_RIGHT
    */
-  ARROW_RIGHT: 'hermes-layout--arrow-right',
+  ARROW_RIGHT: 'ht-layout--arrow-right',
 
   /**
    * Set during upgrade on container elements that contains dot buttons.
@@ -1460,7 +1461,7 @@ var Layout = {
    *
    * @fqn Layout.DOTS
    */
-  DOTS: 'hermes-layout--dots',
+  DOTS: 'ht-layout--dots',
 
   /**
    * Set during upgrade on each dot button element.
@@ -1474,7 +1475,7 @@ var Layout = {
    *
    * @fqn Layout.DOT
    */
-  DOT: 'hermes-layout--dot',
+  DOT: 'ht-layout--dot',
 };
 
 module.exports = Layout;
@@ -1487,7 +1488,7 @@ module.exports = Layout;
 },{}],10:[function(require,module,exports){
 /*!
 
-   Copyright 2015 Maciej Chałapuk
+   Copyright 2016 Maciej Chałapuk
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -1521,7 +1522,7 @@ var Marker = {
    *
    * @fqn Marker.SLIDE_FROM
    */
-  SLIDE_FROM: 'hermes-slide-from',
+  SLIDE_FROM: 'ht-slide-from',
 
   /**
    * Automatically set on currently active ${link Layout.SLIDE}.
@@ -1533,7 +1534,7 @@ var Marker = {
    *
    * @fqn Marker.SLIDE_TO
    */
-  SLIDE_TO: 'hermes-slide-to',
+  SLIDE_TO: 'ht-slide-to',
 };
 
 module.exports = Marker;
@@ -1588,7 +1589,7 @@ var Option = {
    *
    * @fqn Option.DEFAULTS
    */
-  DEFAULTS: 'hermes-option--defaults',
+  DEFAULTS: 'ht-option--defaults',
 
   /**
    * Automatically moves slider to next slide.
@@ -1601,7 +1602,7 @@ var Option = {
    *
    * @fqn Option.AUTOPLAY
    */
-  AUTOPLAY: 'hermes-option--autoplay',
+  AUTOPLAY: 'ht-option--autoplay',
 
   /**
    * Adds keyboard control to slider.
@@ -1615,7 +1616,7 @@ var Option = {
    *
    * @fqn Option.ARROW_KEYS
    */
-  ARROW_KEYS: 'hermes-option--arrow-keys',
+  ARROW_KEYS: 'ht-option--arrow-keys',
 };
 
 module.exports = Option;
@@ -1628,7 +1629,7 @@ module.exports = Option;
 },{}],12:[function(require,module,exports){
 /*!
 
-   Copyright 2015 Maciej Chałapuk
+   Copyright 2016 Maciej Chałapuk
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -1668,7 +1669,7 @@ var Pattern = {
    *
    * @fqn Pattern.TRANSITION
    */
-  TRANSITION: /hermes-transition--([^\s]+)/g,
+  TRANSITION: /ht-transition--([^\s]+)/g,
 
   /**
    * All themes used by the slider must match this regular expression.
@@ -1682,14 +1683,14 @@ var Pattern = {
    * this type are [checked continuously](#continuously), therefore they may be added/removed
    * on slides at runtime (client JavaScript).
    *
-   * Hermes provides very basic ${link Theme built-in themes}
+   * HyperText Slider provides very basic ${link Theme built-in themes}
    * (see [Adding Custom Themes](custom-themes.md)).
    *
    * @invariant Theme class name's of currently active slide is added to slider element.
    *
    * @fqn Pattern.THEME
    */
-  THEME: /hermes-theme--([^\s]+)/g,
+  THEME: /ht-theme--([^\s]+)/g,
 
   /**
    * Slider keeps class name with id of current slide on ${link Layout.SLIDER} element.
@@ -1701,7 +1702,7 @@ var Pattern = {
    *
    * @fqn Pattern.SLIDE_ID
    */
-  SLIDE_ID: /hermes-slide-id-([^\s]+)/,
+  SLIDE_ID: /ht-slide-id-([^\s]+)/,
 };
 
 module.exports = Pattern;
@@ -1714,7 +1715,7 @@ module.exports = Pattern;
 },{}],13:[function(require,module,exports){
 /*!
 
-   Copyright 2015 Maciej Chałapuk
+   Copyright 2016 Maciej Chałapuk
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -1749,21 +1750,21 @@ var Phase = {
    *
    * @fqn Phase.BEFORE_TRANSITION
    */
-  BEFORE_TRANSITION: 'hermes-before-transition',
+  BEFORE_TRANSITION: 'ht-before-transition',
 
   /**
    * Set on slider element while transition of ${link Layout.CONTENT} element is run.
    *
    * @fqn Phase.DURING_TRANSITION
    */
-  DURING_TRANSITION: 'hermes-during-transition',
+  DURING_TRANSITION: 'ht-during-transition',
 
   /**
    * Set on slider element after transition of ${link Layout.CONTENT} element ends.
    *
    * @fqn Phase.AFTER_TRANSITION
    */
-  AFTER_TRANSITION: 'hermes-after-transition',
+  AFTER_TRANSITION: 'ht-after-transition',
 };
 
 module.exports = Phase;
@@ -1816,7 +1817,7 @@ var Theme = {
    * @default true
    * @fqn Theme.WHITE
    */
-  WHITE: 'hermes-theme--white',
+  WHITE: 'ht-theme--white',
 
   /**
    * Black background, white foreground elements (texts, dots, arrows).
@@ -1824,7 +1825,7 @@ var Theme = {
    * @default false
    * @fqn Theme.BLACK
    */
-  BLACK: 'hermes-theme--black',
+  BLACK: 'ht-theme--black',
 
   /**
    * Shows dot button for each slide.
@@ -1835,9 +1836,9 @@ var Theme = {
    * with this one.
    *
    * @default true
-   * @fqn Theme.DEFAULT_DOTS
+   * @fqn Theme.BASIC_DOTS
    */
-  DEFAULT_DOTS: 'hermes-theme--default-dots',
+  BASIC_DOTS: 'ht-theme--basic-dots',
 
   /**
    * Adds hover-dependent visibility change to dots.
@@ -1847,12 +1848,12 @@ var Theme = {
    * > **NOTE**
    * >
    * > This class does not provide visual styles for arrows. It must be used in combination
-   * > with ${link Theme.DEFAULT_DOTS} or custom theme that defines dot visuals.
+   * > with ${link Theme.BASIC_DOTS} or custom theme that defines dot visuals.
    *
    * @default false
    * @fqn Theme.HOVER_VISIBLE_DOTS
    */
-  HOVER_VISIBLE_DOTS: 'hermes-theme--hover-visible-dots',
+  HOVER_VISIBLE_DOTS: 'ht-theme--hover-visible-dots',
 
   /**
    * Adds hover-dependent opacity change to dots.
@@ -1862,24 +1863,24 @@ var Theme = {
    * > **NOTE**
    * >
    * > This class does not provide visual styles for dots. It must be used in combination
-   * > with ${link Theme.DEFAULT_DOTS} or custom theme that defines dot visuals.
+   * > with ${link Theme.BASIC_DOTS} or custom theme that defines dot visuals.
    *
    * @default true
    * @fqn Theme.HOVER_OPAQUE_DOTS
    */
-  HOVER_OPAQUE_DOTS: 'hermes-theme--hover-opaque-dots',
+  HOVER_OPAQUE_DOTS: 'ht-theme--hover-opaque-dots',
 
   /**
-   * Shows default side arrow buttons.
+   * Shows basic side arrow buttons.
    *
    * This theme provides basic arrow visuals. In case different styling of arrows is needed, either
    * extend this theme class or create your own from scratch. Extending this class may be
    * prefereable if you also want to use ${link Theme.RESPONSIVE_ARROWS}.
    *
    * @default true
-   * @fqn Theme.DEFAULT_ARROWS
+   * @fqn Theme.BASIC_ARROWS
    */
-  DEFAULT_ARROWS: 'hermes-theme--default-arrows',
+  BASIC_ARROWS: 'ht-theme--basic-arrows',
 
   /**
    * Adds screen responsiveness to slider arrows.
@@ -1893,7 +1894,7 @@ var Theme = {
    * > **NOTE**
    * >
    * > This class does not provide visual styles for arrows. It must be used in combination
-   * > with ${link Theme.DEFAULT_ARROWS}.
+   * > with ${link Theme.BASIC_ARROWS}.
    *
    * @see [Screen Responsiveness](responsiveness.md)
    * @see Slider.breakpointNarrowToNormal
@@ -1902,7 +1903,7 @@ var Theme = {
    * @default true
    * @fqn Theme.RESPONSIVE_ARROWS
    */
-  RESPONSIVE_ARROWS: 'hermes-theme--responsive-arrows',
+  RESPONSIVE_ARROWS: 'ht-theme--responsive-arrows',
 
   /**
    * Adds hover-dependent visibility change to arrows.
@@ -1912,12 +1913,12 @@ var Theme = {
    * > **NOTE**
    * >
    * > This class does not provide visual styles for arrows. It must be used in combination
-   * > with ${link Theme.DEFAULT_ARROWS} or custom theme that defines arrow visuals.
+   * > with ${link Theme.BASIC_ARROWS} or custom theme that defines arrow visuals.
    *
    * @default false
    * @fqn Theme.HOVER_VISIBLE_ARROWS
    */
-  HOVER_VISIBLE_ARROWS: 'hermes-theme--hover-visible-arrows',
+  HOVER_VISIBLE_ARROWS: 'ht-theme--hover-visible-arrows',
 
   /**
    * Adds hover-dependent opacity change to arrows.
@@ -1927,23 +1928,23 @@ var Theme = {
    * > **NOTE**
    * >
    * > This class does not provide visual styles for arrows. It must be used in combination
-   * > with ${link Theme.DEFAULT_ARROWS} or custom theme that defines arrow visuals.
+   * > with ${link Theme.BASIC_ARROWS} or custom theme that defines arrow visuals.
    *
    * @default true
    * @fqn Theme.HOVER_OPAQUE_ARROWS
    */
-  HOVER_OPAQUE_ARROWS: 'hermes-theme--hover-opaque-arrows',
+  HOVER_OPAQUE_ARROWS: 'ht-theme--hover-opaque-arrows',
 
   /**
    * Adds
-   * ${link Theme.DEFAULT_ARROWS},
-   * ${link Theme.DEFAULT_DOTS}
+   * ${link Theme.BASIC_ARROWS},
+   * ${link Theme.BASIC_DOTS}
    * classes to the slide.
    *
    * @default false
-   * @fqn Theme.DEFAULT_CONTROLS
+   * @fqn Theme.BASIC_CONTROLS
    */
-  DEFAULT_CONTROLS: 'hermes-theme--default-controls',
+  BASIC_CONTROLS: 'ht-theme--basic-controls',
 
   /**
    * Adds
@@ -1954,7 +1955,7 @@ var Theme = {
    * @default false
    * @fqn Theme.HOVER_VISIBLE_CONTROLS
    */
-  HOVER_VISIBLE_CONTROLS: 'hermes-theme--hover-visible-controls',
+  HOVER_VISIBLE_CONTROLS: 'ht-theme--hover-visible-controls',
 
   /**
    * Adds
@@ -1965,20 +1966,22 @@ var Theme = {
    * @default false
    * @fqn Theme.HOVER_OPAQUE_CONTROLS
    */
-  HOVER_OPAQUE_CONTROLS: 'hermes-theme--hover-opaque-controls',
+  HOVER_OPAQUE_CONTROLS: 'ht-theme--hover-opaque-controls',
 
   /**
    * Adds
-   * ${link Theme.DEFAULT_ARROWS},
-   * ${link Theme.DEFAULT_DOTS}.
+   * ${link Theme.BASIC_ARROWS},
+   * ${link Theme.BASIC_DOTS}.
    * ${link Theme.HOVER_OPAQUE_ARROWS},
    * ${link Theme.HOVER_OPAQUE_DOTS}
+   * ${link Theme.RESPONSIVE_ARROWS},
+   * ${link Theme.WHITE}
    * classes to the slide.
    *
    * @default false
    * @fqn Theme.DEFAULTS
    */
-  DEFAULTS: 'hermes-theme--defaults',
+  DEFAULTS: 'ht-theme--defaults',
 };
 
 module.exports = Theme;
@@ -2030,14 +2033,14 @@ var Transition = {
    *
    * @fqn Transition.ZOOM_OUT_IN
    */
-  ZOOM_OUT_IN: 'hermes-transition--zoom-out-in',
+  ZOOM_OUT_IN: 'ht-transition--zoom-out-in',
 
   /**
    * Delicate background zoom in when slide appears, zoom out when it disappears.
    *
    * @fqn Transition.BG_ZOOM_IN_OUT
    */
-  BG_ZOOM_IN_OUT: 'hermes-transition--bg-zoom-in-out',
+  BG_ZOOM_IN_OUT: 'ht-transition--bg-zoom-in-out',
 };
 
 module.exports = Transition;
@@ -2050,7 +2053,7 @@ module.exports = Transition;
 },{}],16:[function(require,module,exports){
 /*
 
-   Copyright 2015 Maciej Chałapuk
+   Copyright 2016 Maciej Chałapuk
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -2108,7 +2111,7 @@ module.exports = {
  * which contains ES5 code that can be run in not-so-modern browsers.
  * It is to be used only when programming in vanilla-browser style.
  * When using nodejs-based javascript preprocessor, it's better to load
- * hermes module and polyfills with `require()` function.
+ * `hyper-text-slider` module and polyfills with `require()` function.
  */
 Object.values = require('./polyfills/values');
 require('./polyfills/class-list')(window.Element);
@@ -3968,6 +3971,7 @@ module.exports.defensive = defensive.newCheck.bind(defensive);
 module.exports.addNoop = noopRegistry.add.bind(noopRegistry);
 module.exports.addAssertion = assertionRegistry.add.bind(assertionRegistry);
 module.exports.addOperator = operatorRegistry.add.bind(operatorRegistry);
+module.exports.default = module.exports;
 
 function throwContractError(context) {
   var error = new Error(context._message);
@@ -3983,11 +3987,11 @@ function throwContractError(context) {
 },{"./lib/built-ins/assertions":26,"./lib/built-ins/noops":31,"./lib/built-ins/operators":32,"./lib/check-factory":33,"./lib/registry/assertion":46,"./lib/registry/noop":47,"./lib/registry/operator":48}],51:[function(require,module,exports){
 'use strict';
 
-require('hermes-slider/lib/polyfills');
-var hermes = require('hermes-slider');
+require('hyper-text-slider/lib/polyfills');
+var htSlider = require('hyper-text-slider');
 
 window.addEventListener('load', function() {
-  hermes.boot(document.body);
+  htSlider.boot(document.body);
 });
 window.WebFontConfig = {
   google: { families: [ 'Roboto:thin' ] },
@@ -4005,4 +4009,4 @@ window.WebFontConfig = {
 }());
 document.documentElement.classList.add('js');
 
-},{"hermes-slider":1,"hermes-slider/lib/polyfills":17}]},{},[51]);
+},{"hyper-text-slider":1,"hyper-text-slider/lib/polyfills":17}]},{},[51]);

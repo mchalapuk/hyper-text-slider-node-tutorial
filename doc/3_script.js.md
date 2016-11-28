@@ -7,35 +7,35 @@
 ## 3.1. Polyfills
 
 In order to support older browsers, polyfills that enable technologied required
-by hermes must be loaded. If you don't use any polyfill loader in your project,
-use `polyfills.js` file provided by hermes.
+by the slider mechanism must be loaded. If you don't use any polyfill loader
+in your project, use `polyfills.js` file provided by HyperText Slider.
 
 ```js
 'use strict';
 
-require('hermes-slider/lib/polyfills');
+require('hyper-text-slider/lib/polyfills');
 ```
 
-## 3.2. Booting Hermes
+## 3.2. Booting HyperText Slider
 
-[Hermes' scripting API][js-api] is quite rich, but all we need is upgrading
+[Slider's scripting API][js-api] is quite rich, but all we need is upgrading
 the slider, which will be declared on our web page.
 
-[js-api]: https://github.com/webfront-toolkit/hermes/blob/master/doc/javascript-api.md
+[js-api]: https://github.com/muroc/hyper-text-slider/blob/master/doc/javascript-api.md
 
 ```js
-var hermes = require('hermes-slider');
+var htSlider = require('hyper-text-slider');
 
 window.addEventListener('load', function() {
-  hermes.boot(document.body);
+  htSlider.boot(document.body);
 });
 ```
 
-Above script loads [hermes][hermes] module and call [boot function][boot]
-after page loads.
+Above script loads [`hyper-text-slider`][slider] module and calls [boot
+function][boot] after page loads.
 
-[hermes]: https://github.com/webfront-toolkit/hermes
-[boot]: https://github.com/webfront-toolkit/hermes/blob/master/doc/javascript-api.md#bootcontainerelement
+[slider]: https://github.com/muroc/hyper-text-slider
+[boot]: https://github.com/muroc/hyper-text-slider/blob/master/doc/javascript-api.md#bootcontainerelement
 
 ## 3.3. Loading Fonts
 

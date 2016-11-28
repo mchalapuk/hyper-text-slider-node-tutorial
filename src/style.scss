@@ -1,4 +1,4 @@
-@import 'node_modules/hermes-slider/lib/_hermes.scss';
+@import 'node_modules/hyper-text-slider/lib/_slider.scss';
 body,
 html {
   height: 100%;
@@ -20,17 +20,17 @@ body {
   text-shadow: #333 1px 1px 1px;
 }
 #slideshow {
-  .hermes-layout--background {
+  .ht-layout--background {
     background-image: url('images/big-ben.jpg');
   }
 }
 #dependencies {
-  .hermes-layout--background {
+  .ht-layout--background {
     background-image: url('images/css-on-macbook-pro.jpg');
   }
 }
 #more {
-  .hermes-layout--background {
+  .ht-layout--background {
     background-image: url('images/keyboard.jpg');
   }
 }
@@ -41,7 +41,7 @@ body {
   0% { color: #222; }
   100% { color: #aa2; }
 }
-#dependencies.hermes-slide-to {
+#dependencies.ht-slide-to {
   a {
     animation-name: blink;
     animation-timing-function: ease-in-out;
