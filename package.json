@@ -1,6 +1,6 @@
 {
   "name": "hyper-text-slider-node-tutorial",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Tutotial and example page using hyper-text-slider via nodejs and browserify.",
   "main": "index.html",
   "keywords": [
