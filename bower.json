@@ -1,0 +1,16 @@
+{
+  "name": "hyper-text-slider-node-tutorial",
+  "version": "0.2.5",
+  "authors": [
+    "Maciej Chałapuk <maciej@chalapuk.pl>"
+  ],
+  "main": "./dist/index.html",
+  "license": "MIT",
+  "ignore": [
+    "node_modules",
+    "bower_components",
+    ".gitignore"
+  ],
+  "dependencies": {
+  }
+}
