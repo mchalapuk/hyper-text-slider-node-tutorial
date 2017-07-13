@@ -66,7 +66,6 @@ cd -
 ```
 
 <br>
-Next Page &nbsp;&gt;&nbsp; [2. Build Configuration][gulpfile]
+Next Page &nbsp;&gt;&nbsp; [2. Build Configuration](gulpfile.js.md)
 
-[gulpfile]: 2_gulpfile.js.md
 
